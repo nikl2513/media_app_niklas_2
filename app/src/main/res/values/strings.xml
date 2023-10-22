@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">media app niklas 2</string>
+    <string name="tilmeld">TILMELD DIG NU</string>
+    <string name="logind">LOG IND</string>
 </resources>
