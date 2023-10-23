@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Loginactivity()
                 }
             }
         }
@@ -39,8 +39,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun loginPreview() {
     MediaAppNiklas2Theme {
-        Greeting("Android")
+        Loginactivity()
     }
+
 }
