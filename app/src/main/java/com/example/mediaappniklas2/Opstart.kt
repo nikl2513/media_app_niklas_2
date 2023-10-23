@@ -45,8 +45,8 @@ fun OpstartMedButtonOgBaggrund(
         }
         Spacer(modifier = Modifier.height(25.dp))
         Button(onClick = { /*TODO*/ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-            shape = ButtonDefaults.shape.){
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue))
+            {
             Text(stringResource(id = R.string.logind))
         }
         Spacer(modifier = Modifier.height(150.dp))
