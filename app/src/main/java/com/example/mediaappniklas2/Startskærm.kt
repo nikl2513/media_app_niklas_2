@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -44,7 +45,9 @@ fun OpstartStartskærm() {
 }
 @Preview
 @Composable
-fun MedieKnapper(modifier: Modifier = Modifier .fillMaxSize() .wrapContentSize(Alignment.Center)){
+fun MedieKnapper(modifier: Modifier = Modifier
+    .fillMaxSize()
+    .wrapContentSize(Alignment.Center)){
     MediaAppNiklas2Theme {
         Column {
             Row {
@@ -121,6 +124,28 @@ fun Topapp(){
     }
 
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+fun Filmlist(){
+    Text(text = "BEDSTE ANMELDELSER",
+        color = Color.White)
+
+    LazyRow{
+
+
+
+
+    }
+
+
+
+
+
+}
+
+
 
 
 
