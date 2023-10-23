@@ -133,16 +133,16 @@ fun Topapp(){
 @Preview
 @Composable
 fun Filmlist(){
-    Column{
+    Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
 
 
         Text(text = "BEDSTE ANMELDELSER", color = Color.White)
 
         Row {
             Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-            Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.width(10.dp))
             Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-            Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.width(10.dp))
             Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
         }
     }
