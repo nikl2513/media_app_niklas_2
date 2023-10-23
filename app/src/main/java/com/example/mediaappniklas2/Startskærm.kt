@@ -16,10 +16,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
-
+@Composable
+fun OpstartStartskærm() {
+    MedieKnapper()
+}
 @Preview
 @Composable
-fun medieKnapper(){
+fun MedieKnapper(){
     MediaAppNiklas2Theme {
         Column {
             Row {
