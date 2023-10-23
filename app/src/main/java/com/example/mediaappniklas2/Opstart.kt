@@ -52,7 +52,7 @@ fun OpstartMedButtonOgBaggrund(
     Image(painter = painterResource(id = R.drawable.background1), contentDescription = "", modifier.fillMaxSize(), contentScale = ContentScale.Crop)
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
-        Image(painter = painterResource(id = R.drawable.logotext), contentDescription = "", modifier = Modifier .size(300.dp))
+        Image(painter = painterResource(id = R.drawable.logotext2), contentDescription = "", modifier = Modifier .size(300.dp))
         Button(
             onClick = { /*TODO*/ },
             shape = RoundedCornerShape(5.dp),
