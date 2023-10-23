@@ -39,15 +39,17 @@ import com.example.mediaappniklas2.datalayer.Movie
 import com.example.mediaappniklas2.datalayer.getMovieData
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
-
+@Preview
 @Composable
 fun OpstartStartskærm() {
-    MedieKnapper()
-    Spacer(modifier = Modifier.height(1000.dp))
-    Topapp()
-
+    Column (modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
+        Topapp()
+        Spacer(modifier = Modifier.height(100.dp))
+        MedieKnapper()
+        Spacer(modifier = Modifier.height(20.dp))
+        Filmlist()
+    }
 }
-@Preview
 @Composable
 fun MedieKnapper(modifier: Modifier = Modifier
     .fillMaxSize()
@@ -104,33 +106,33 @@ fun MedieKnapper(modifier: Modifier = Modifier
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 fun Topapp(){
-    TopAppBar(title = { /*TODO*/ })
-    Row {
-        IconButton(onClick = {/*TODO*/ }) {
-            Icon(
-                imageVector = Icons.Default.List,
-                contentDescription = null
-            ) }
+        Row {
+            IconButton(onClick = {/*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.List,
+                    contentDescription = null
+                )
+            }
 
-        Spacer(modifier = Modifier.width(120.dp))
-        Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
-        Spacer(modifier = Modifier.width(120.dp))
-        IconButton(onClick = {/*TODO*/ }) {
-            Icon(
-                imageVector = Icons.Default.AccountCircle,
-                contentDescription = null
-            ) }
+            Spacer(modifier = Modifier.width(120.dp))
+            Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
+            Spacer(modifier = Modifier.width(120.dp))
+            IconButton(onClick = {/*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = null
+                )
+            }
 
 
-    }
+        }
+
 
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 fun Filmlist(){
     Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
