@@ -84,7 +84,7 @@ fun Medieknapper(){
                         , fontSize = 10.sp)
                 }
                 Button(onClick = { /*TODO*/ },Modifier.size(85.dp,40.dp)) {
-                    Text(text = "Appel tv"
+                    Text(text = "Apple tv"
                         , fontSize = 10.sp)
                 }
                 Button(onClick = { /*TODO*/ },Modifier.size(85.dp,40.dp)) {
@@ -93,7 +93,6 @@ fun Medieknapper(){
                 }
 
             }
-
 
         }
 
