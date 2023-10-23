@@ -1,6 +1,7 @@
 package com.example.mediaappniklas2
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -105,8 +108,14 @@ fun Topapp(){
                 contentDescription = null
             ) }
 
-        Spacer(modifier = Modifier.width(100.dp))
-
+        Spacer(modifier = Modifier.width(120.dp))
+        Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
+        Spacer(modifier = Modifier.width(120.dp))
+        IconButton(onClick = {/*TODO*/ }) {
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = null
+            ) }
 
 
     }
