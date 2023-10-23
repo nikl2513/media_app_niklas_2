@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -33,12 +34,14 @@ fun MedieKnapper(modifier: Modifier = Modifier .fillMaxSize() .wrapContentSize(A
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
                     Text(text = "Netflix", fontSize = 10.sp, textAlign = TextAlign.Center)
                 }
+                Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Magenta)) {
                     Text(text = "Viaplay"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
+                Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "HBO"
@@ -55,12 +58,14 @@ fun MedieKnapper(modifier: Modifier = Modifier .fillMaxSize() .wrapContentSize(A
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
+                Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black)) {
                     Text(text = "Apple tv"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
+                Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp)) {
                     Text(text = "Prime"
                         , fontSize = 10.sp
