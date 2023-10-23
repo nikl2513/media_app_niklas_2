@@ -2,6 +2,7 @@ package com.example.mediaappniklas2
 
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,15 +35,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
-import com.example.mediaappniklas2.datalayer.Movie
-import com.example.mediaappniklas2.datalayer.getMovieData
+import com.example.mediaappniklas2.ui.theme.BackgroundBlue
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
 @Preview
 @Composable
-fun OpstartStartskærm() {
-    Column (modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
+fun OpstartStartskærm(modifier: Modifier = Modifier
+    .background(BackgroundBlue)
+    .fillMaxSize()
+    .wrapContentSize(Alignment.TopCenter)) {
+    Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally){
         Topapp()
         Spacer(modifier = Modifier.height(100.dp))
         MedieKnapper()
@@ -51,9 +53,7 @@ fun OpstartStartskærm() {
     }
 }
 @Composable
-fun MedieKnapper(modifier: Modifier = Modifier
-    .fillMaxSize()
-    .wrapContentSize(Alignment.Center)){
+fun MedieKnapper(){
     MediaAppNiklas2Theme {
         Column {
             Row {
@@ -108,7 +108,7 @@ fun MedieKnapper(modifier: Modifier = Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Topapp(){
-        Row {
+        Row() {
             IconButton(onClick = {/*TODO*/ }) {
                 Icon(
                     imageVector = Icons.Default.List,
