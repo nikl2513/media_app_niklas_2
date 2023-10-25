@@ -139,6 +139,7 @@ fun Filmlist(){
 
 
         Text(text = "BEDSTE ANMELDELSER", color = Color.White)
+        Spacer(modifier = Modifier.height(10.dp))
 
         Row {
             Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
