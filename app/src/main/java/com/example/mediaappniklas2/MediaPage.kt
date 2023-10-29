@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.ui.theme
+package com.example.mediaappniklas2
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -11,11 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
-import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.Movie
 import com.example.mediaappniklas2.datalayer.getMovieData
 
