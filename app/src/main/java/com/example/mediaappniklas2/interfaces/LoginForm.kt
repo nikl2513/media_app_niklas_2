@@ -228,14 +228,7 @@ fun PasswordField(
 
 
 
-@Preview(showBackground = true, device = "id:Nexus One", showSystemUi = true)
-@Composable
-fun loginPreview() {
-    MediaAppNiklas2Theme {
-        LoginForm()
-    }
 
-}
 @Preview(showBackground = true, device = "id:Nexus One", showSystemUi = true)
 @Composable
 fun loginPreviewdark() {
