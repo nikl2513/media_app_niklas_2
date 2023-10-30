@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2
+package com.example.mediaappniklas2.presentation.mediapage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.Movie
 import com.example.mediaappniklas2.datalayer.getMovieData
 
