@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
@@ -38,6 +39,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mediaappniklas2.ui.theme.BackgroundBlue
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
+private data class Film(
+    val filmName: String,
+    val description: String,
+    val imdb: Int,
+    val genre: String,
+    val image: String
+
+)
+
+private val filmList = listOf(
+    Film("Batman Begins","Batman 1",8,"Action","batman"),
+    Film("Batman Begins","Batman 1",8,"Action","batman"),
+    Film("Batman Begins","Batman 1",8,"Action","batman"),
+    Film("Batman Begins","Batman 1",8,"Action","batman"),
+    Film("Batman Begins","Batman 1",8,"Action","batman")
+)
 
 @Preview
 @Composable
@@ -52,9 +69,8 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         Spacer(modifier = Modifier.height(75.dp))
         MedieKnapper()
         Spacer(modifier = Modifier.height(30.dp))
-        Filmlist("BEDSTE ANDMELSER")
-        Spacer(modifier = Modifier.height(30.dp))
-        Filmlist("DÅRLIGE FILM")
+        verticalList()
+
 
     }
 }
@@ -135,15 +151,28 @@ fun Topapp(){
 
         }
 
+}
+@Composable
+private fun MovieItem(film : Film, imageId : Int = R.drawable.batman) {
+    Image(painter = painterResource(id = imageId), contentDescription = "")
+}
+@Composable
+private fun verticalList() {
+    LazyRow{
+        items(filmList){film ->
+            MovieItem(film = film)
+
+        }
+    }
 
 }
+
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Filmlist(name: String){
-
-
-
 
     Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
 
@@ -157,6 +186,7 @@ fun Filmlist(name: String){
             Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
             Spacer(modifier = Modifier.width(10.dp))
             Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
+
         }
     }
 }
