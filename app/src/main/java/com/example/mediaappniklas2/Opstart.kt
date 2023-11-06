@@ -42,17 +42,25 @@ fun Opstartapp() {
 }
 
 @Composable
-fun OpstartMedButtonOgBaggrund(
-    modifier: Modifier = Modifier
+fun OpstartMedButtonOgBaggrund(modifier: Modifier = Modifier
         .fillMaxSize()
         .wrapContentSize(
             Alignment.BottomCenter
         )
 ) {
-    Image(painter = painterResource(id = R.drawable.background1), contentDescription = "", modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+    Image(
+        painter = painterResource(id = R.drawable.background1),
+        contentDescription = "",
+        modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop
+    )
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
-        Image(painter = painterResource(id = R.drawable.logotext2), contentDescription = "", modifier = Modifier .size(300.dp))
+        Image(
+            painter = painterResource(id = R.drawable.logotext2),
+            contentDescription = "",
+            modifier = Modifier.size(300.dp)
+        )
         Button(
             onClick = { /*TODO*/ },
             shape = RoundedCornerShape(5.dp),
@@ -64,13 +72,15 @@ fun OpstartMedButtonOgBaggrund(
             Text(stringResource(id = R.string.tilmeld), fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(30.dp))
-        Button(onClick = { /*TODO*/ },
+        Button(
+            onClick = { /*TODO*/ },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
                 .height(50.dp)
-                .width(300.dp))
-            {
+                .width(300.dp)
+        )
+        {
             Text(stringResource(id = R.string.logind), fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(100.dp))
