@@ -37,16 +37,23 @@ import com.example.mediaappniklas2.R
 
 @Preview
 @Composable
-fun Opstartapp() {
-    OpstartMedButtonOgBaggrund()
+fun Opstartapp(onNavigateToTilmeld: (String) -> Unit, onNavigateToLogInd: (String) -> Unit) {
+    OpstartMedButtonOgBaggrund(
+        onNavigateToTilmeld = onNavigateToTilmeld,
+        onNavigateToLogInd = onNavigateToLogInd
+    )
 }
 
 @Composable
-fun OpstartMedButtonOgBaggrund(modifier: Modifier = Modifier
+fun OpstartMedButtonOgBaggrund(
+    modifier: Modifier = Modifier
         .fillMaxSize()
         .wrapContentSize(
             Alignment.BottomCenter
-        )
+        ),
+    onNavigateToTilmeld: (String) -> Unit,
+    onNavigateToLogInd: (String) -> Unit
+
 ) {
     Image(
         painter = painterResource(id = R.drawable.background1),
@@ -62,7 +69,7 @@ fun OpstartMedButtonOgBaggrund(modifier: Modifier = Modifier
             modifier = Modifier.size(300.dp)
         )
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onNavigateToTilmeld },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
@@ -73,7 +80,7 @@ fun OpstartMedButtonOgBaggrund(modifier: Modifier = Modifier
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onNavigateToLogInd },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
