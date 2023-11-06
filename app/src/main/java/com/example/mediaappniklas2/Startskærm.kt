@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -46,10 +47,15 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     .wrapContentSize(Alignment.TopCenter)) {
     Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally){
         Topapp()
-        Spacer(modifier = Modifier.height(100.dp))
-        MedieKnapper()
         Spacer(modifier = Modifier.height(20.dp))
-        Filmlist()
+        Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
+        Spacer(modifier = Modifier.height(75.dp))
+        MedieKnapper()
+        Spacer(modifier = Modifier.height(30.dp))
+        Filmlist("BEDSTE ANDMELSER")
+        Spacer(modifier = Modifier.height(30.dp))
+        Filmlist("DÅRLIGE FILM")
+
     }
 }
 @Composable
@@ -134,11 +140,15 @@ fun Topapp(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Filmlist(){
+fun Filmlist(name: String){
+
+
+
+
     Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
 
 
-        Text(text = "BEDSTE ANMELDELSER", color = Color.White)
+        Text(text = "$name", color = Color.White)
         Spacer(modifier = Modifier.height(10.dp))
 
         Row {
@@ -150,6 +160,10 @@ fun Filmlist(){
         }
     }
 }
+
+
+
+
 
 
 
