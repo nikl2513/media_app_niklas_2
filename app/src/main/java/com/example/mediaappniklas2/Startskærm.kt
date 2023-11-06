@@ -160,6 +160,7 @@ private fun MovieItem(film : Film, imageId : Int = R.drawable.batman) {
 private fun verticalList() {
     LazyRow{
         items(filmList){film ->
+            Spacer(modifier = Modifier.width(10.dp))
             MovieItem(film = film)
 
         }
