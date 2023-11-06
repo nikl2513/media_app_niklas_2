@@ -21,8 +21,8 @@ import com.example.mediaappniklas2.datalayer.getMovieData
 
 @Preview
 @Composable
-fun MediaPageAPP(){
-    TopmenuBar()
+fun MediaPageAPP(onNavigateBack: (String) -> Unit){
+    TopmenuBar(onNavigateBack = onNavigateBack)
     MediaPage()
 }
 
@@ -31,13 +31,14 @@ fun TopmenuBar(modifier: Modifier= Modifier
     .fillMaxSize()
     .wrapContentSize(
         Alignment.TopStart
-    )
+    ),
+               onNavigateBack: (String) -> Unit
 ){
     Row (modifier = modifier,
 
 
         ) {
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {onNavigateBack}) {
             Text(stringResource(R.string.arrow))
         }
 

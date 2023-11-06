@@ -69,7 +69,7 @@ fun OpstartMedButtonOgBaggrund(
             modifier = Modifier.size(300.dp)
         )
         Button(
-            onClick = { onNavigateToTilmeld },
+            onClick = {onNavigateToTilmeld},
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
