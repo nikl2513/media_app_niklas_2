@@ -32,20 +32,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.mediaappniklas2.Greeting
 import com.example.mediaappniklas2.R
+import com.example.mediaappniklas2.navcontroller.NavHost
+import com.example.mediaappniklas2.navcontroller.Screen
 
-@Preview(showBackground = true)
+/**@Preview(showBackground = true)
 @Composable
 fun Opstartapp() {
     Surface{
-        OpstartMedButtonOgBaggrund(
-            onNavigateToTilmeld = {},
-            onNavigateToLogInd = {}
-        )
+        OpstartMedButtonOgBaggrund()
     }
 
-}
+}**/
 
 @Composable
 fun OpstartMedButtonOgBaggrund(
@@ -54,9 +54,7 @@ fun OpstartMedButtonOgBaggrund(
         .wrapContentSize(
             Alignment.BottomCenter
         ),
-    onNavigateToTilmeld: (String) -> Unit,
-    onNavigateToLogInd: (String) -> Unit
-
+    navController: NavController
 ) {
     Image(
         painter = painterResource(id = R.drawable.background1),
@@ -72,7 +70,7 @@ fun OpstartMedButtonOgBaggrund(
             modifier = Modifier.size(300.dp)
         )
         Button(
-            onClick = {onNavigateToTilmeld},
+            onClick = {navController.navigate(Screen.Tilmeld.route)},
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
@@ -83,7 +81,7 @@ fun OpstartMedButtonOgBaggrund(
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-            onClick = { onNavigateToLogInd },
+            onClick = { navController.navigate(Screen.Loginform.route) },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier

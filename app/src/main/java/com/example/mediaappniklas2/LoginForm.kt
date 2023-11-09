@@ -50,17 +50,24 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.mediaappniklas2.MainActivity
 import com.example.mediaappniklas2.R
+import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
 @Composable
-fun LoginForm(onNavigateToStarskærm: (String) -> Unit){
+fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
     Surface {
 
         var credentials by remember { mutableStateOf(Credentials()) }
         val context = LocalContext.current
-
+        Image(
+            painter = painterResource(id = R.drawable.background1),
+            contentDescription = "",
+            modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -68,6 +75,7 @@ fun LoginForm(onNavigateToStarskærm: (String) -> Unit){
                 .fillMaxSize()
                 .padding(horizontal = 30.dp)
             ) {
+            Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
             LoginField(
                 value = credentials.login,
                 onChange = {data -> credentials = credentials.copy(login = data) },
@@ -88,7 +96,7 @@ fun LoginForm(onNavigateToStarskærm: (String) -> Unit){
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { onNavigateToStarskærm},
+                onClick = {navController.navigate(Screen.Opstart.route)},
                 enabled = credentials.isNotEmpty(),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.fillMaxWidth()
