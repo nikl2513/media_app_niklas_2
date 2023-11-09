@@ -96,7 +96,7 @@ fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = {navController.navigate(Screen.Opstart.route)},
+                onClick = {navController.navigate(Screen.Startskaerm.route)},
                 enabled = credentials.isNotEmpty(),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.fillMaxWidth()

@@ -36,22 +36,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.BackgroundBlue
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
-@Preview
 @Composable
 fun OpstartStartskærm(modifier: Modifier = Modifier
     .background(BackgroundBlue)
     .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter)) {
+    .wrapContentSize(Alignment.TopCenter),
+                      navController: NavController) {
     Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally){
         Topapp()
         Spacer(modifier = Modifier.height(20.dp))
         Text(text = "DIN DAGLIGE ANBEFALING",color = Color.White)
         Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
         Spacer(modifier = Modifier.height(55.dp))
-        MedieKnapper()
+        MedieKnapper(navController = navController)
         Spacer(modifier = Modifier.height(35.dp))
         Filmlist("BEDSTE ANDMELSER")
         Spacer(modifier = Modifier.height(35.dp))
@@ -59,23 +61,23 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     }
 }
 @Composable
-fun MedieKnapper(){
+fun MedieKnapper(navController: NavController){
     MediaAppNiklas2Theme {
         Column {
             Row {
-                Button(onClick = { /*TODO*/ }, Modifier.size(90.dp,45.dp),
+                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(90.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
                     Text(text = "Netflix", fontSize = 10.sp, textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { /*TODO*/ }, Modifier.size(90.dp,45.dp),
+                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(90.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Magenta)) {
                     Text(text = "Viaplay"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { /*TODO*/ }, Modifier.size(90.dp,45.dp),
+                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(90.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "HBO"
                         , fontSize = 10.sp
@@ -85,21 +87,21 @@ fun MedieKnapper(){
             }
             Spacer(modifier = Modifier.height(5.dp))
             Row {
-                Button(onClick = { /*TODO*/ }, Modifier.size(90.dp,45.dp),
+                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(90.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)) {
                     Text(text = "Disney+"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { /*TODO*/ }, Modifier.size(90.dp,45.dp),
+                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(90.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black)) {
                     Text(text = "Apple tv"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { /*TODO*/ }, Modifier.size(90.dp,45.dp)) {
+                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(90.dp,45.dp)) {
                     Text(text = "Prime"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)

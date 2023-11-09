@@ -15,14 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.datalayer.Movie
 import com.example.mediaappniklas2.datalayer.getMovieData
+import com.example.mediaappniklas2.navcontroller.Screen
 
-@Preview
+
 @Composable
-fun MediaPageAPP(onNavigateBack: (String) -> Unit){
-    TopmenuBar(onNavigateBack = onNavigateBack)
+fun MediaPageAPP(navController: NavController){
+    TopmenuBar(navController = navController)
     MediaPage()
 }
 
@@ -32,13 +34,13 @@ fun TopmenuBar(modifier: Modifier= Modifier
     .wrapContentSize(
         Alignment.TopStart
     ),
-               onNavigateBack: (String) -> Unit
+               navController: NavController
 ){
     Row (modifier = modifier,
 
 
         ) {
-        Button(onClick = {onNavigateBack}) {
+        Button(onClick = {navController.navigate(Screen.Startskaerm.route)}) {
             Text(stringResource(R.string.arrow))
         }
 
