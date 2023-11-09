@@ -88,7 +88,7 @@ fun LoginForm(){
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { checkCredentials(credentials, context)},
+                onClick = { checkCredentials(credentials, context), },
                 enabled = credentials.isNotEmpty(),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.fillMaxWidth()
