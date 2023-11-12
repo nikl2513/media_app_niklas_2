@@ -71,21 +71,22 @@ fun OpstartStartskærm(
             Spacer(modifier = Modifier.height(35.dp))
             Row {
                 Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
-                Spacer(modifier = Modifier.height(55.dp))
             }
+            Spacer(modifier = Modifier.height(25.dp))
+
         }
         item {
             Text(text = "Tjenester", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             MedieKnapper()
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(25.dp))
         }
         item {
             Text(text = "Anbefalede", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             verticalList()
             Spacer(modifier = Modifier.height(25.dp))
-            Text(text = "Action", color = Color.White, fontSize = 20.sp)
+            Text(text = "Nyt og spændende", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             verticalList()
             Spacer(modifier = Modifier.height(25.dp))
@@ -103,12 +104,12 @@ fun MedieKnapper(){
         Column {
             Row {
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "Netflix", fontSize = 10.sp, textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Magenta)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "Viaplay"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
@@ -125,20 +126,21 @@ fun MedieKnapper(){
             Spacer(modifier = Modifier.height(5.dp))
             Row {
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "Disney+"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "Apple tv"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp)) {
+                Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
                     Text(text = "Prime"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
