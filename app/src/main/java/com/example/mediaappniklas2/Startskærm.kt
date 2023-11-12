@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -58,30 +59,44 @@ private val filmList = listOf(
 
 @Preview
 @Composable
-fun OpstartStartskærm(modifier: Modifier = Modifier
-    .background(BackgroundBlue)
-    .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter)) {
-    Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally){
-        Topapp()
-        Spacer(modifier = Modifier.height(35.dp))
-        Row {
-            Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
-
+fun OpstartStartskærm(
+    modifier: Modifier = Modifier
+        .background(BackgroundBlue)
+        .fillMaxSize()
+        .wrapContentSize(Alignment.TopCenter)
+) {
+    LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        item {
+            Topapp()
+            Spacer(modifier = Modifier.height(35.dp))
+            Row {
+                Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
+                Spacer(modifier = Modifier.height(55.dp))
+            }
         }
-        Spacer(modifier = Modifier.height(55.dp))
-        Text(text = "Tjenester",color = Color.White,fontSize = 15.sp)
-        MedieKnapper()
-        Spacer(modifier = Modifier.height(30.dp))
-        Text(text = "Anbefalede",color = Color.White,fontSize = 15.sp)
-        Spacer(modifier = Modifier.height(10.dp))
-        verticalList()
-        Spacer(modifier = Modifier.height(30.dp))
-        Text(text = "Action",color = Color.White,fontSize = 15.sp)
-        Spacer(modifier = Modifier.height(10.dp))
-        verticalList()
+        item {
+            Text(text = "Tjenester", color = Color.White, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(10.dp))
+            MedieKnapper()
+            Spacer(modifier = Modifier.height(30.dp))
+        }
+        item {
+            Text(text = "Anbefalede", color = Color.White, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(10.dp))
+            verticalList()
+            Spacer(modifier = Modifier.height(25.dp))
+            Text(text = "Action", color = Color.White, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(10.dp))
+            verticalList()
+            Spacer(modifier = Modifier.height(25.dp))
+            Text(text = "Action", color = Color.White, fontSize = 20.sp)
+            Spacer(modifier = Modifier.height(10.dp))
+            verticalList()
+        }
     }
 }
+
+
 @Composable
 fun MedieKnapper(){
     MediaAppNiklas2Theme {
