@@ -44,16 +44,16 @@ private data class Film(
     val description: String,
     val imdb: Int,
     val genre: String,
-    val image: String
+    val image: Int
 
 )
 
 private val filmList = listOf(
-    Film("Batman Begins","Batman 1",8,"Action","batman"),
-    Film("Batman Begins","Batman 1",8,"Action","batman"),
-    Film("Batman Begins","Batman 1",8,"Action","batman"),
-    Film("Batman Begins","Batman 1",8,"Action","batman"),
-    Film("Batman Begins","Batman 1",8,"Action","batman")
+    Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman),
+    Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
+    Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
+    Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
+    Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman)
 )
 
 @Preview
@@ -64,14 +64,22 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     .wrapContentSize(Alignment.TopCenter)) {
     Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally){
         Topapp()
-        Spacer(modifier = Modifier.height(20.dp))
-        Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
-        Spacer(modifier = Modifier.height(75.dp))
+        Spacer(modifier = Modifier.height(35.dp))
+        Row {
+            Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
+
+        }
+        Spacer(modifier = Modifier.height(55.dp))
+        Text(text = "Tjenester",color = Color.White,fontSize = 15.sp)
         MedieKnapper()
         Spacer(modifier = Modifier.height(30.dp))
+        Text(text = "Anbefalede",color = Color.White,fontSize = 15.sp)
+        Spacer(modifier = Modifier.height(10.dp))
         verticalList()
-
-
+        Spacer(modifier = Modifier.height(30.dp))
+        Text(text = "Action",color = Color.White,fontSize = 15.sp)
+        Spacer(modifier = Modifier.height(10.dp))
+        verticalList()
     }
 }
 @Composable
@@ -153,44 +161,47 @@ fun Topapp(){
 
 }
 @Composable
-private fun MovieItem(film : Film, imageId : Int = R.drawable.batman) {
-    Image(painter = painterResource(id = imageId), contentDescription = "")
+private fun MovieItem(film : Film) {
+     val imageidd: Int = film.image
+    Image(painter = painterResource(id = imageidd), contentDescription = "")
 }
+
 @Composable
 private fun verticalList() {
-    LazyRow{
-        items(filmList){film ->
-            Spacer(modifier = Modifier.width(10.dp))
-            MovieItem(film = film)
-
-        }
-    }
-
-}
-
-
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Filmlist(name: String){
-
-    Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally){
-
-
-        Text(text = "$name", color = Color.White)
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Row {
-            Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-            Spacer(modifier = Modifier.width(10.dp))
-            Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-            Spacer(modifier = Modifier.width(10.dp))
-            Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-
+    LazyRow {
+        items(filmList) { film ->
+            if (0 < film.imdb) {
+                Spacer(modifier = Modifier.width(10.dp))
+                MovieItem(film = film)
+            }
         }
     }
 }
+
+
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun Filmlist(name: String) {
+
+        Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+
+
+            Text(text = "$name", color = Color.White)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row {
+                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
+                Spacer(modifier = Modifier.width(10.dp))
+                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
+                Spacer(modifier = Modifier.width(10.dp))
+                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
+
+            }
+        }
+    }
+
 
 
 
