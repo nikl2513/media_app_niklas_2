@@ -4,7 +4,6 @@ import android.graphics.drawable.Icon
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -85,6 +84,7 @@ fun OpstartStartskærm(
 
         }
         item {
+            Text(text = "Tjenester", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             MedieKnapper()
             Spacer(modifier = Modifier.height(25.dp))
@@ -104,6 +104,7 @@ fun OpstartStartskærm(
         }
     }
 }
+
 
 @Composable
 fun MedieKnapper(){
@@ -189,8 +190,8 @@ fun Topapp(){
 @Composable
 private fun MovieItem(film : Film) {
      val imageidd: Int = film.image
-    Image(painter = painterResource(id = imageidd), contentDescription = "")
-    "dsd"
+    Image(modifier = Modifier.clickable { /*TODO*/ },painter = painterResource(id = imageidd), contentDescription = "")
+
 }
 
 @Composable
@@ -208,26 +209,6 @@ private fun verticalList() {
 
 
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun Filmlist(name: String) {
-
-        Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-
-
-            Text(text = "$name", color = Color.White)
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Row {
-                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-                Spacer(modifier = Modifier.width(10.dp))
-                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-                Spacer(modifier = Modifier.width(10.dp))
-                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-
-            }
-        }
-    }
 
 
 
