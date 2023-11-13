@@ -2,6 +2,13 @@ package com.example.mediaappniklas2.datalayer.remote
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
+
+/**
+ * @author s215698
+ * This function requests a Json string from an API using the okhttp3 liberary to get a json string response
+ * This response contains a list of films from the API database.
+ *
+ */
 fun getMovieListAPIAcess() : String?{
     val url = "https://moviesdatabase.p.rapidapi.com/titles?startYear=1990&titleType=movie&endYear=2023&limit=3"
 
