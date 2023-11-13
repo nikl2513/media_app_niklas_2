@@ -1,10 +1,9 @@
 package com.example.mediaappniklas2
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.mediaappniklas2.interfaces.LoginForm
+import com.example.mediaappniklas2.navcontroller.NavHost
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
 class LoginActivity : ComponentActivity() {
@@ -13,7 +12,7 @@ class LoginActivity : ComponentActivity() {
 
         setContent{
             MediaAppNiklas2Theme{
-                LoginForm()
+                NavHost()
             }
         }
     }
