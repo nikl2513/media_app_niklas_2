@@ -3,6 +3,7 @@ package com.example.mediaappniklas2
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -180,8 +181,8 @@ fun Topapp(){
 @Composable
 private fun MovieItem(film : Film) {
      val imageidd: Int = film.image
-    Image(painter = painterResource(id = imageidd), contentDescription = "")
-    "dsd"
+    Image(modifier = Modifier.clickable { /*TODO*/ },painter = painterResource(id = imageidd), contentDescription = "")
+
 }
 
 @Composable
@@ -199,26 +200,6 @@ private fun verticalList() {
 
 
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun Filmlist(name: String) {
-
-        Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-
-
-            Text(text = "$name", color = Color.White)
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Row {
-                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-                Spacer(modifier = Modifier.width(10.dp))
-                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-                Spacer(modifier = Modifier.width(10.dp))
-                Image(painter = painterResource(id = R.drawable.batman), contentDescription = "")
-
-            }
-        }
-    }
 
 
 
