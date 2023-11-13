@@ -1,6 +1,7 @@
 package com.example.mediaappniklas2
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -70,9 +72,7 @@ fun OpstartStartskærm(
         item {
             Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            Row {
-                Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
-            }
+            Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
             Spacer(modifier = Modifier.height(25.dp))
 
         }
@@ -106,7 +106,9 @@ fun MedieKnapper(){
             Row {
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
-                    Text(text = "Netflix", fontSize = 10.sp, textAlign = TextAlign.Center)
+                    Text(text = "Netflix",
+                        fontSize = 10.sp,
+                        textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
