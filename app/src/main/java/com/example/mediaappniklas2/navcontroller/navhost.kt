@@ -31,11 +31,3 @@ fun NavHost() {
         }
     }
 }
-
-private enum class Routes(val path: String) {
-    MEDIA_PAGE("MediaPage"),
-    OPSTART("Opstart"),
-    TILMELD("Tilmeld"),
-    STARTSKAERM("Startskærm"),
-    LOGINFORM("LoginForm")
-}
