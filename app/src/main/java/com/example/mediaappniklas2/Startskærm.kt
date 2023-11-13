@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -33,6 +35,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -65,7 +68,7 @@ private val filmList = listOf(
 @Composable
 fun OpstartStartskærm(
     modifier: Modifier = Modifier
-        .background(BackgroundBlue)
+        .background(Color.DarkGray)
         .fillMaxSize()
         .wrapContentSize(Alignment.TopCenter)
 ) {
@@ -73,7 +76,11 @@ fun OpstartStartskærm(
         item {
             Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            Image(painter = painterResource(id = R.drawable.mand), contentDescription = "")
+            Box(modifier.size(390.dp,210.dp) .background(Color.DarkGray) .clip(shape = RoundedCornerShape(20.dp))){
+                Image(painter = painterResource(id = R.drawable.mand), contentDescription = "", modifier
+                    .fillMaxSize(),
+                    contentScale = ContentScale.Crop)
+            }
             Spacer(modifier = Modifier.height(25.dp))
 
         }
@@ -104,21 +111,21 @@ fun MedieKnapper(){
         Column {
             Row {
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Netflix",
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Viaplay"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "HBO"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
@@ -128,21 +135,21 @@ fun MedieKnapper(){
             Spacer(modifier = Modifier.height(5.dp))
             Row {
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Disney+"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Apple tv"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = { /*TODO*/ }, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.DarkGray)) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Prime"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
