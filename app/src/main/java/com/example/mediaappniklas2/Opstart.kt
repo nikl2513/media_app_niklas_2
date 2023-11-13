@@ -40,9 +40,9 @@ import com.example.mediaappniklas2.navcontroller.Screen
 
 /**@Preview(showBackground = true)
 @Composable
-fun Opstartapp() {
+fun Opstartapp(navController: NavController) {
     Surface{
-        OpstartMedButtonOgBaggrund()
+        OpstartMedButtonOgBaggrund(navController)
     }
 
 }**/
