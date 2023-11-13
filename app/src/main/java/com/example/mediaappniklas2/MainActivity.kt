@@ -73,11 +73,3 @@ fun loginPreview() {
     }
 
 }
-@Preview(showBackground = true, device = "id:Nexus One", showSystemUi = true)
-@Composable
-fun loginPreviewdark() {
-    MediaAppNiklas2Theme(darkTheme = true) {
-        Greeting(name = "hello")
-    }
-
-}
