@@ -62,13 +62,14 @@ private val filmList = listOf(
     Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman)
 )
 
-@Preview
+
 @Composable
 fun OpstartStartskærm(
     modifier: Modifier = Modifier
         .background(BackgroundBlue)
         .fillMaxSize()
-        .wrapContentSize(Alignment.TopCenter)
+        .wrapContentSize(Alignment.TopCenter),
+    navController: NavController
 ) {
     LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
@@ -81,21 +82,21 @@ fun OpstartStartskærm(
         item {
             Text(text = "Tjenester", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            MedieKnapper()
+            MedieKnapper(navController)
             Spacer(modifier = Modifier.height(25.dp))
         }
         item {
             Text(text = "Anbefalede", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList()
+            verticalList(navController)
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "Nyt og spændende", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList()
+            verticalList(navController)
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "Action", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList()
+            verticalList(navController)
         }
     }
 }
@@ -178,19 +179,19 @@ fun Topapp(){
 
 }
 @Composable
-private fun MovieItem(film : Film) {
+private fun MovieItem(film : Film, navController: NavController) {
      val imageidd: Int = film.image
-    Image(modifier = Modifier.clickable { /*TODO*/ },painter = painterResource(id = imageidd), contentDescription = "")
+    Image(modifier = Modifier.clickable {navController.navigate(Screen.MediaPage.route)},painter = painterResource(id = imageidd), contentDescription = "")
 
 }
 
 @Composable
-private fun verticalList() {
+private fun verticalList(navController: NavController) {
     LazyRow {
         items(filmList) { film ->
             if (0 < film.imdb) {
                 Spacer(modifier = Modifier.width(10.dp))
-                MovieItem(film = film)
+                MovieItem(film = film, navController)
             }
         }
     }
