@@ -181,6 +181,7 @@ fun Topapp(){
 private fun MovieItem(film : Film) {
      val imageidd: Int = film.image
     Image(painter = painterResource(id = imageidd), contentDescription = "")
+    "dsd"
 }
 
 @Composable
