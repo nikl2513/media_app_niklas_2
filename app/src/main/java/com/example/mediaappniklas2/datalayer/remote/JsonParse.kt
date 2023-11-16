@@ -2,7 +2,7 @@ package com.example.mediaappniklas2.datalayer.remote
 
 import org.json.JSONObject
 
-class JsonParse {
+
     /**
      * @author s215698
      * This classed will contain functions that proccess the Json string returned by the API as it was hard to de serialize through a library
@@ -37,4 +37,3 @@ class JsonParse {
 
 
 
-}
