@@ -75,7 +75,7 @@ fun OpstartStartskærm(
         item {
             Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            Box(modifier.size(390.dp,210.dp) .background(Color.DarkGray) .clip(shape = RoundedCornerShape(20.dp))){
+            Box(modifier.size(390.dp,210.dp) .background(Color.DarkGray) .clip(shape = RoundedCornerShape(10.dp))){
                 Image(painter = painterResource(id = R.drawable.mand), contentDescription = "", modifier
                     .fillMaxSize(),
                     contentScale = ContentScale.Crop)
