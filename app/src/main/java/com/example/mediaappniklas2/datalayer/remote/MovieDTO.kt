@@ -12,17 +12,53 @@ import com.google.gson.annotations.SerializedName
  * These objects are used by the viewmodel to tell it what to show.
  */
 data class MovieDTO(
-        @SerializedName("title")
-        val Title : String,
+        @SerializedName("_id")
+        val id: String,
 
-        @SerializedName("")
-        val releasedate : String,
+        @SerializedName("titleText")
+        val titleText : TitleText,
 
-        val imageRef : String
+        @SerializedName("releaseYear")
+        val releaseYear : ReleaseYear,
+
+        @SerializedName("primaryImage")
+        val imageRef : ImageRef
 )
 
+data class MovieData(
+        val title: String,
+        val releasedate: String,
+        val imageRef: String
+)
+
+fun convertToMovieData(movieDTO: MovieDTO): MovieData {
+        val title = movieDTO.titleText.text
+        val releasedate = "${movieDTO.releaseYear.year}" // Assuming you want the release year as a String
+        val imageRef = movieDTO.imageRef.url
+        return MovieData(title, releasedate, imageRef)
+}
 data class MovieApiResponse(
         val results : List<MovieDTO>
+)
+
+data class ImageRef(
+        val id: String,
+        val width: Int,
+        val height: Int,
+        val url: String,
+        val caption: Caption
+)
+
+data class Caption(
+        val plainText: String
+)
+
+data class TitleText(
+        val text: String
+)
+
+data class ReleaseYear(
+        val year: Int
 )
 
 

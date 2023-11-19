@@ -1,7 +1,5 @@
 package com.example.mediaappniklas2.datalayer.remote
 
-import org.json.JSONObject
-
 
     /**
      * @author s215698
@@ -11,6 +9,7 @@ import org.json.JSONObject
      *These 3 values are then passed into an object of the type movieDTO which is a dataclass
      * These data class objects are then added to a List<MovieDTO> which is then returned.
      */
+  /*
     fun jsonStringToDataClass( body : String) : List<MovieDTO>{
         val jsonObject = JSONObject(body)
 
@@ -37,3 +36,4 @@ import org.json.JSONObject
 
 
 
+*/

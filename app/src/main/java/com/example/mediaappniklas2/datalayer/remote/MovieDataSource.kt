@@ -29,3 +29,8 @@ fun getMovieListAPIAcess() : String?{
     return body
 
 }
+
+fun main() {
+    val res : String? = getMovieListAPIAcess()
+    logger.info(res)
+}

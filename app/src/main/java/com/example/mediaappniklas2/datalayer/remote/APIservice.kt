@@ -1,5 +1,6 @@
 package com.example.mediaappniklas2.datalayer.remote
 
+import com.google.gson.Gson
 import org.slf4j.LoggerFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,15 +14,10 @@ interface MovieApiService {
         "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com"
     )
     @GET("titles?titleType=movie&limit=50")
-    suspend fun fetchMovies(
+     fun fetchMovies(
         @Query("startYear") startYear: Int,
         @Query("endYear") endYear: Int
     ): MovieApiResponse
-    @GET("titles?titleType=movie&limit=50")
-    suspend fun testMovies(
-        @Query("startYear") startYear: Int,
-        @Query("endYear") endYear: Int
-    ) : Any
 
 }
 
@@ -38,18 +34,17 @@ object RetrofitClient{
     }
 }
 val logger = LoggerFactory.getLogger("APIserviceKt")
-suspend fun main() {
+ fun main() {
     try {
         // Replace startYear and endYear with your desired values
 
-       // val response = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
-        val res = RetrofitClient.movieApiService.testMovies(1990,2023)
-        logger.info("Json",res)
+       val response = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+
         // Convert the response object to a JSON string
-      //  val jsonResponse = Gson().toJson(response)
+      val jsonResponse = Gson().toJson(response)
 
         // Log the JSON response
-        //logger.info("JSON Response", jsonResponse)
+        logger.info("JSON Response", jsonResponse)
     } catch (e: Exception) {
         logger.error("Error", "Error fetching movies", e)
     }
