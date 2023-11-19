@@ -1,5 +1,7 @@
 package com.example.mediaappniklas2.datalayer.remote
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * @author s215698
  * This is a data class that contains the information about a movie that is needed to display it in
@@ -10,11 +12,18 @@ package com.example.mediaappniklas2.datalayer.remote
  * These objects are used by the viewmodel to tell it what to show.
  */
 data class MovieDTO(
-        var Title : String,
-        var releasedate : String,
-        var imageRef : String
+        @SerializedName("title")
+        val Title : String,
+
+        @SerializedName("")
+        val releasedate : String,
+
+        val imageRef : String
 )
 
+data class MovieApiResponse(
+        val results : List<MovieDTO>
+)
 
 
 
