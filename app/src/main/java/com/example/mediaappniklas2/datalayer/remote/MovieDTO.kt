@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * @author s215698
- * This is a data class that contains the information about a movie that is needed to display it in
+ * The following  data classes that contains the information about a movie that is needed to display it in
  * the app.
  * Title: this is the Title of the movie
  * Release date: When the movie was released
@@ -34,7 +34,7 @@ data class MovieData(
 fun convertToMovieData(movieDTO: MovieDTO): MovieData {
         val title = movieDTO.titleText.text
         val releasedate = "${movieDTO.releaseYear.year}" // Assuming you want the release year as a String
-        val imageRef = movieDTO.imageRef.url
+        val imageRef = movieDTO.imageRef?.url ?: "defaultImageUrl"
         return MovieData(title, releasedate, imageRef)
 }
 data class MovieApiResponse(

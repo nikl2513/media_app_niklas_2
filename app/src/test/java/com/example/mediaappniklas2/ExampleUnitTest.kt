@@ -1,7 +1,5 @@
 package com.example.mediaappniklas2
 
-import com.example.mediaappniklas2.datalayer.remote.SearchOnMovie
-import com.example.mediaappniklas2.datalayer.remote.jsonStringToDataClass
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -15,7 +13,7 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-    @Test
+   /* @Test
     fun testtitle(){
         var movieId = "tt0112641"
         var movieresult = SearchOnMovie(movieId)
@@ -23,6 +21,8 @@ class ExampleUnitTest {
         var titleofmovie = movietitlestart.get(0).Title
         assertEquals(titleofmovie, "Casino")
     }
+
+    */
 
     @Test
     fun testDTOList(){

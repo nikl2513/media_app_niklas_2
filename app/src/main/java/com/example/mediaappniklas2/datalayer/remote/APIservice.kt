@@ -1,7 +1,8 @@
 package com.example.mediaappniklas2.datalayer.remote
 
-import com.google.gson.Gson
 import org.slf4j.LoggerFactory
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -17,7 +18,7 @@ interface MovieApiService {
      fun fetchMovies(
         @Query("startYear") startYear: Int,
         @Query("endYear") endYear: Int
-    ): MovieApiResponse
+    ): Call<MovieApiResponse>
 
 }
 
@@ -38,17 +39,29 @@ val logger = LoggerFactory.getLogger("APIserviceKt")
     try {
         // Replace startYear and endYear with your desired values
 
-       val response = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+        val response : Response<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023).execute()
+        if(response.isSuccessful){
+            val movieApiResponse : MovieApiResponse? = response.body()
+            if(movieApiResponse != null){
+                val resultsList : List<MovieDTO> = movieApiResponse.results
 
-        // Convert the response object to a JSON string
-      val jsonResponse = Gson().toJson(response)
+                logger.info("123",resultsList)
+                val movieDataList : List<MovieData> = resultsList.map { convertToMovieData(it) }
+                val firstmovietitle : String = movieDataList[0].title
+                val lastmovietitle : String = movieDataList.last().title
+                logger.info("First movie Title: $firstmovietitle")
+                logger.info("Last movie Title: $lastmovietitle")
+            }
+        }
+        logger.info("",response)
+     //   val resultslist : List<MovieDTO> = response.javaClass
 
-        // Log the JSON response
-        logger.info("JSON Response", jsonResponse)
+      //  logger.info("",resultslist)
     } catch (e: Exception) {
         logger.error("Error", "Error fetching movies", e)
     }
 }
+
 
 
 /**
