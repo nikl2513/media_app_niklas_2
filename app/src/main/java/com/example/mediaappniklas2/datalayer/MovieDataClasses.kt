@@ -40,6 +40,9 @@ fun convertToMovieData(movieDTO: MovieDTO): MovieData {
 data class MovieApiResponse(
         val results : List<MovieDTO>
 )
+data class ApiSearchResponse(
+        val result : MovieDTO
+)
 
 data class ImageRef(
         val id: String,

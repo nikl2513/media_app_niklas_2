@@ -14,6 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import retrofit2.Call
 
 @RunWith(JUnit4::class)
 class MovieApiServiceTest {
@@ -43,7 +44,7 @@ class MovieApiServiceTest {
         mockWebServer.enqueue(mockResponse)
 
 
-        val call = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+        val call: Call<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
         val apiResponse = call.execute()
         assert(apiResponse.isSuccessful)
         val movieApiResponse: MovieApiResponse? = apiResponse.body()
@@ -55,11 +56,34 @@ class MovieApiServiceTest {
             val firstmovietitle: String = movieDataList.first().title
             val lastmovietitle: String = movieDataList.last().title
             assertEquals("The Flash", firstmovietitle)
-            assertEquals("The Out-Laws",lastmovietitle)
+            assertEquals("The Out-Laws", lastmovietitle)
 
         }
 
 
     }
 
-}
+
+
+        @Test
+        fun searchMovie() {
+            val searchWord = "the big short" // Use the unencoded search word
+            val call: Call<MovieApiResponse> =
+                RetrofitClient.movieApiService.searchmovies(searchWord)
+            val searchResponse = call.execute()
+            val searchApiResponse = searchResponse.body()
+
+            if (searchApiResponse != null) {
+                val searchResultList: List<MovieDTO> = searchApiResponse.results
+
+                if (searchResultList.isNotEmpty()) {
+                    val movieData: List<MovieData> = searchResultList.map { convertToMovieData(it) }
+                    val movieTitle: String = movieData.first().title
+                    assertEquals("the big short", movieTitle)
+                }
+            }
+        }
+
+
+    }
+
