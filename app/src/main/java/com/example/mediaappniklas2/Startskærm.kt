@@ -60,7 +60,10 @@ private val filmList = listOf(
     Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
     Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
     Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
-    Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman)
+    Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman),
+    Film("The Mandalorian", "The Mandalorian series", 9,"Action", R.drawable.mand),
+    Film("The Mandalorian", "The Mandalorian series", 9,"Action", R.drawable.mand),
+    Film("The Mandalorian", "The Mandalorian series", 9,"Action", R.drawable.mand)
 )
 
 @Preview
@@ -75,11 +78,7 @@ fun OpstartStartskærm(
         item {
             Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            Box(modifier.size(390.dp,210.dp) .background(Color.DarkGray) .clip(shape = RoundedCornerShape(10.dp))){
-                Image(painter = painterResource(id = R.drawable.mand), contentDescription = "", modifier
-                    .fillMaxSize(),
-                    contentScale = ContentScale.Crop)
-            }
+            verticalListTopHighlight()
             Spacer(modifier = Modifier.height(25.dp))
 
         }
@@ -206,6 +205,34 @@ private fun verticalList() {
     }
 }
 
+@Composable
+private fun verticalListTopHighlight(
+    modifier: Modifier = Modifier
+    .background(Color.DarkGray)
+    .fillMaxSize()
+    .wrapContentSize(Alignment.TopCenter)) {
+    LazyRow(modifier = modifier) {
+        items(filmList) { film ->
+            if (8 < film.imdb) {
+                Spacer(modifier = Modifier.width(10.dp))
+                Box(
+                    modifier
+                        .size(360.dp, 190.dp)
+                        .background(Color.DarkGray)
+                        .clip(shape = RoundedCornerShape(10.dp))
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.mand),
+                        contentDescription = "",
+                        modifier
+                            .fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
+        }
+    }
+}
 
 
 
