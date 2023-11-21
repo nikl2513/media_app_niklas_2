@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.datalayer.remote
+package com.example.mediaappniklas2.datalayer
 
 import com.google.gson.annotations.SerializedName
 

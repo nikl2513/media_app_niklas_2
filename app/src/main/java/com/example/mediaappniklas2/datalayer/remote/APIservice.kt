@@ -1,5 +1,9 @@
 package com.example.mediaappniklas2.datalayer.remote
 
+import com.example.mediaappniklas2.datalayer.MovieApiResponse
+import com.example.mediaappniklas2.datalayer.MovieDTO
+import com.example.mediaappniklas2.datalayer.MovieData
+import com.example.mediaappniklas2.datalayer.convertToMovieData
 import org.slf4j.LoggerFactory
 import retrofit2.Call
 import retrofit2.Response
@@ -45,7 +49,7 @@ val logger = LoggerFactory.getLogger("APIserviceKt")
             if(movieApiResponse != null){
                 val resultsList : List<MovieDTO> = movieApiResponse.results
 
-                logger.info("123",resultsList)
+                logger.info("123: $resultsList",resultsList)
                 val movieDataList : List<MovieData> = resultsList.map { convertToMovieData(it) }
                 val firstmovietitle : String = movieDataList[0].title
                 val lastmovietitle : String = movieDataList.last().title

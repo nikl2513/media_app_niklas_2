@@ -1,12 +1,20 @@
 package com.example.mediaappniklas2.remote
 
+import com.example.mediaappniklas2.datalayer.MovieApiResponse
+import com.example.mediaappniklas2.datalayer.MovieDTO
+import com.example.mediaappniklas2.datalayer.MovieData
+import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.MovieApiService
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+
 @RunWith(JUnit4::class)
 class MovieApiServiceTest {
 
@@ -24,36 +32,34 @@ class MovieApiServiceTest {
         mockWebServer.shutdown()
     }
 
-    //@Test
-    //@Throws(IOException::class, InterruptedException::class)
-    /*
+    @Test
     fun fetchMovies_SuccessResponse() {
-        // Set up a mock response with a sample JSON payload
+
         val mockResponse = MockResponse()
             .setResponseCode(200)
             .setBody("{ \"results\": [{ \"title\": \"The Flash\", \"releasedate\": \"2022-01-01\", \"imageRef\": \"path/to/image.jpg\" }] }")
 
-        // Enqueue the mock response
+
         mockWebServer.enqueue(mockResponse)
 
-        // Call the function you want to test
-        val response = runBlocking {
-            movieApiService.fetchMovies(1990, 2023)
+
+        val call = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+        val apiResponse = call.execute()
+        assert(apiResponse.isSuccessful)
+        val movieApiResponse: MovieApiResponse? = apiResponse.body()
+        if (movieApiResponse != null) {
+            val resultsList: List<MovieDTO> = movieApiResponse.results
+
+
+            val movieDataList: List<MovieData> = resultsList.map { convertToMovieData(it) }
+            val firstmovietitle: String = movieDataList.first().title
+            val lastmovietitle: String = movieDataList.last().title
+            assertEquals("The Flash", firstmovietitle)
+            assertEquals("The Out-Laws",lastmovietitle)
+
         }
 
 
-
-        // Assert that the response is not null and contains the expected data
-        assertNotNull(response)
-        assertNotNull(response.results)
-        assertFalse(response.results.isEmpty())
-        assertEquals("The Flash", response.results.first().title)
-
-        // Print the actual JSON response
-
     }
 
-     */
-
-    // You can add more test cases to cover various scenarios (e.g., error responses, edge cases)
 }
