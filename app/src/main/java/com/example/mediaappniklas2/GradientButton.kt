@@ -61,7 +61,9 @@ fun GradientButton(modifier: Modifier = Modifier){
         }
         Button(
             onClick = { buttonColorN.value = Color.White},
-            colors = ButtonDefaults.buttonColors(buttonColorN.value)
+            colors = ButtonDefaults.buttonColors(buttonColorN.value),
+            enabled = true
+
         ) {
            Text(text = "Netflix", color = Color.LightGray)
         }
