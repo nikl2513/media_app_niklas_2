@@ -1,10 +1,21 @@
 package com.example.mediaappniklas2.datalayer
 
-fun trending(movielist: List<MovieData>){
+class RecommendationModels {
+    fun trending(movielist: List<MovieData>){
 
 
+    }
 
 
+    fun forYouPage(movielist: List<MovieData>){
+
+    }
+
+
+    fun mustWatchMovies(movielist: List<MovieData>){
+
+    }
 }
+
 
 

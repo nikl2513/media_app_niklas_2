@@ -6,7 +6,6 @@ import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.datalayer.convertToMovieData
 import org.slf4j.LoggerFactory
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -28,9 +27,11 @@ interface MovieApiService {
         "X-RapidAPI-Key:254e2c3adfmsh3da535182efaf51p108f81jsn69df13326d34",
         "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com"
     )
-    @GET("titles/search/title/{title}?exact=true&titleType=movie")
+    @GET("titles/search/title/{title}")
     fun searchmovies(
-        @Path("title") title : String
+        @Path("title") title : String,
+        @Query("exact") exact: Boolean = true,
+    @Query("titleType") titleType: String = "movie"
     ) : Call<MovieApiResponse>
 }
 
@@ -50,26 +51,27 @@ object RetrofitClient{
 val logger = LoggerFactory.getLogger("APIserviceKt")
  fun main() {
     try {
-        // Replace startYear and endYear with your desired values
+        val searchWord =  "The Wolf of Wall Street"
+        val call: Call<MovieApiResponse> =
+            RetrofitClient.movieApiService.searchmovies(searchWord)
+        val searchResponse = call.execute()
+        val searchApiResponse = searchResponse.body()
 
-        val response : Response<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023).execute()
-        if(response.isSuccessful){
-            val movieApiResponse : MovieApiResponse? = response.body()
-            if(movieApiResponse != null){
-                val resultsList : List<MovieDTO> = movieApiResponse.results
+        if (searchApiResponse != null) {
+            val searchResultList: List<MovieDTO> = searchApiResponse.results
+            logger.info("Response Body: $searchApiResponse")
+            logger.info("Search Result List: $searchResultList")
 
-                logger.info("123: $resultsList",resultsList)
-                val movieDataList : List<MovieData> = resultsList.map { convertToMovieData(it) }
-                val firstmovietitle : String = movieDataList[0].title
-                val lastmovietitle : String = movieDataList.last().title
-                logger.info("First movie Title: $firstmovietitle")
-                logger.info("Last movie Title: $lastmovietitle")
+
+            if (searchResultList.isNotEmpty()) {
+                val movieData: List<MovieData> = searchResultList.map { convertToMovieData(it) }
+                val movieTitle: String = movieData.first().title
+                logger.info("$movieTitle")
+                if(movieTitle == ""){
+                    logger.error("no result found")
+                }
             }
         }
-        logger.info("",response)
-     //   val resultslist : List<MovieDTO> = response.javaClass
-
-      //  logger.info("",resultslist)
     } catch (e: Exception) {
         logger.error("Error", "Error fetching movies", e)
     }
