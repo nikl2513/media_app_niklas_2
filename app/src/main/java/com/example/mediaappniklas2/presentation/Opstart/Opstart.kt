@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2
+package com.example.mediaappniklas2.presentation.Opstart
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -19,19 +19,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.mediaappniklas2.navcontroller.Screen
+import com.example.mediaappniklas2.R
 
-/**@Preview(showBackground = true)
+@Preview
 @Composable
-fun Opstartapp(navController: NavController) {
-    Surface{
-        OpstartMedButtonOgBaggrund(navController)
-    }
-
-}**/
+fun Opstartapp() {
+    OpstartMedButtonOgBaggrund()
+}
 
 @Composable
 fun OpstartMedButtonOgBaggrund(
@@ -39,24 +36,14 @@ fun OpstartMedButtonOgBaggrund(
         .fillMaxSize()
         .wrapContentSize(
             Alignment.BottomCenter
-        ),
-    navController: NavController
+        )
 ) {
-    Image(
-        painter = painterResource(id = R.drawable.background1),
-        contentDescription = "",
-        modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop
-    )
+    Image(painter = painterResource(id = R.drawable.background1), contentDescription = "", modifier.fillMaxSize(), contentScale = ContentScale.Crop)
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
-        Image(
-            painter = painterResource(id = R.drawable.logotext2),
-            contentDescription = "",
-            modifier = Modifier.size(300.dp)
-        )
+        Image(painter = painterResource(id = R.drawable.logotext2), contentDescription = "", modifier = Modifier .size(300.dp))
         Button(
-            onClick = {navController.navigate(Screen.Tilmeld.route)},
+            onClick = { /*TODO*/ },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
@@ -66,15 +53,13 @@ fun OpstartMedButtonOgBaggrund(
             Text(stringResource(id = R.string.tilmeld), fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(30.dp))
-        Button(
-            onClick = { navController.navigate(Screen.Loginform.route) },
+        Button(onClick = { /*TODO*/ },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
                 .height(50.dp)
-                .width(300.dp)
-        )
-        {
+                .width(300.dp))
+            {
             Text(stringResource(id = R.string.logind), fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(100.dp))
