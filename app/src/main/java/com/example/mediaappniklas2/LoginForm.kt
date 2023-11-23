@@ -48,11 +48,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.mediaappniklas2.navcontroller.Screen
-import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 @Composable
 fun LoginForm(modifier: Modifier = Modifier, navController: NavController) {
     Surface {
