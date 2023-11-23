@@ -222,7 +222,7 @@ private fun verticalListTopHighlight(
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.mand),
+                        painter = painterResource(id = film.image),
                         contentDescription = "",
                         modifier
                             .fillMaxSize(),
