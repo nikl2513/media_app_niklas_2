@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.ui.theme
+package com.example.mediaappniklas2
 
 import android.app.Activity
 import android.content.Context
@@ -48,17 +48,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mediaappniklas2.MainActivity
-import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
 @Composable
 fun SignupForm(modifier: Modifier = Modifier, navController: NavController) {
     Surface {
 
-        var credentials by remember { mutableStateOf(Credentials()) }
+        var credentials by remember { mutableStateOf(SignupCredentials()) }
         val context = LocalContext.current
         Image(
             painter = painterResource(id = R.drawable.background1),
@@ -79,14 +76,14 @@ fun SignupForm(modifier: Modifier = Modifier, navController: NavController) {
                 onChange = {data -> credentials = credentials.copy(login = data) },
                 modifier = Modifier.fillMaxWidth()
             )
-            PasswordField(
+            SignupPasswordField(
                 value = credentials.pwd,
                 onChange =  {data -> credentials = credentials.copy(pwd = data) },
-                submit = { checkCredentials(credentials, context) },
+                submit = { SignupcheckCredentials(credentials, context) },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(10.dp))
-            LabeledCheckbox(
+            SignupLabeledCheckbox(
                 label = "Remember Me",
                 onCheckChanged = {
                     credentials = credentials.copy(remember = !credentials.remember)},
@@ -110,7 +107,7 @@ fun SignupForm(modifier: Modifier = Modifier, navController: NavController) {
 
 
 
-fun checkCredentials(creds: Credentials, context: Context){
+fun SignupcheckCredentials(creds: SignupCredentials, context: Context){
     if(creds.isNotEmpty() && creds.login == "admin"){
         context.startActivity(Intent(context, MainActivity::class.java))
         (context as Activity).finish()
@@ -118,14 +115,14 @@ fun checkCredentials(creds: Credentials, context: Context){
         Toast.makeText(context,"wrong Credentials", Toast.LENGTH_SHORT).show()
     }
 }
-data class Credentials(var login : String = "", var pwd : String = "", var remember : Boolean = false){
+data class SignupCredentials(var login : String = "", var pwd : String = "", var remember : Boolean = false){
     fun isNotEmpty(): Boolean {
         return login.isNotEmpty() && pwd.isNotEmpty()
     }
 }
 
 @Composable
-fun LabeledCheckbox(
+fun SignupLabeledCheckbox(
     label : String,
     onCheckChanged : () -> Unit,
     isChecked : Boolean
@@ -186,7 +183,7 @@ fun SignupField(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordField(
+fun SignupPasswordField(
     value : String,
     onChange : (String)->Unit,
     submit : ()->Unit,
