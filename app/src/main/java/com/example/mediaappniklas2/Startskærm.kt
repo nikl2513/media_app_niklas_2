@@ -36,8 +36,31 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.datalayer.MovieApiResponse
+import com.example.mediaappniklas2.datalayer.MovieDTO
+import com.example.mediaappniklas2.datalayer.MovieData
+import com.example.mediaappniklas2.datalayer.RecommendationModels
+import com.example.mediaappniklas2.datalayer.convertToMovieData
+import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
+import retrofit2.Call
+
+fun import_of_movies() : List<MovieData>{
+    val call: Call<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+    val apiResponse = call.execute()
+    assert(apiResponse.isSuccessful)
+    val movieApiResponse: MovieApiResponse? = apiResponse.body()
+    if (movieApiResponse != null) {
+        val resultsList: List<MovieDTO> = movieApiResponse.results
+        val movieDataList: List<MovieData> = resultsList.map { convertToMovieData(it) }
+        return movieDataList
+    }else{
+        return emptyList()
+    }
+}
+
+private val model = RecommendationModels()
 
 private data class Film(
     val filmName: String,
@@ -48,28 +71,18 @@ private data class Film(
 
 )
 
-private val filmList = listOf(
-    Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman),
-    Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
-    Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
-    Film("Batman Begins","Batman 1",2,"Action",R.drawable.batman),
-    Film("Batman Begins","Batman 1",8,"Action",R.drawable.batman),
-    Film("The Mandalorian", "The Mandalorian series", 9,"Action", R.drawable.mand),
-    Film("The Mandalorian", "The Mandalorian series", 9,"Action", R.drawable.mand),
-    Film("The Mandalorian", "The Mandalorian series", 9,"Action", R.drawable.mand)
-)
+private val filmList = import_of_movies()
+private val filmlist2 = model.trending(filmList)
 
 
 
 @Composable
-fun OpstartStartskærm(
-    modifier: Modifier = Modifier
+fun OpstartStartskærm(modifier: Modifier = Modifier
         .background(Color.DarkGray)
         .fillMaxSize()
         .wrapContentSize(Alignment.TopCenter),
     navController: NavController
-) {
-    LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+) {LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
             Topapp(navController)
             Spacer(modifier = Modifier.height(35.dp))
