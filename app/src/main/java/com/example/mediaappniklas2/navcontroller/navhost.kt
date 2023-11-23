@@ -10,6 +10,7 @@ import com.example.mediaappniklas2.MediaPageAPP
 import com.example.mediaappniklas2.OpstartStartskærm
 import com.example.mediaappniklas2.LoginForm
 import com.example.mediaappniklas2.OpstartMedButtonOgBaggrund
+import com.example.mediaappniklas2.ui.theme.SignupForm
 
 @Composable
 fun NavHost() {
@@ -22,7 +23,7 @@ fun NavHost() {
             LoginForm(navController = navController)
         }
         composable(route = Screen.Tilmeld.route){
-
+        SignupForm(navController = navController)
         }
         composable(route = Screen.Startskaerm.route){
             OpstartStartskærm(navController = navController)
