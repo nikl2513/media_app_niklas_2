@@ -85,17 +85,17 @@ fun OpstartStartskærm(
 
         }
         item {
-            Text(text = "Tjenester", color = Color.White, fontSize = 20.sp)
+            Text(text = "Streaming services", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             MedieKnapper(navController)
             Spacer(modifier = Modifier.height(25.dp))
         }
         item {
-            Text(text = "Anbefalede", color = Color.White, fontSize = 20.sp)
+            Text(text = "Recommended", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             verticalList(navController)
             Spacer(modifier = Modifier.height(25.dp))
-            Text(text = "Nyt og spændende", color = Color.White, fontSize = 20.sp)
+            Text(text = "New and exciting", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
             verticalList(navController)
             Spacer(modifier = Modifier.height(25.dp))

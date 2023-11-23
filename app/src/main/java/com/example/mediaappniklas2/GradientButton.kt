@@ -65,7 +65,7 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController) 
 
             TextButton(onClick = { }
             ) {
-                Text(text = "Vælg dine streaming tjenester:")
+                Text(text = "Choose your streaming services:")
             }
             Row {
                 Switch(
@@ -208,7 +208,7 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController) 
                 onClick = { navController.navigate(Screen.Startskaerm.route) },
                 colors = ButtonDefaults.buttonColors(Color.Blue)
             ) {
-                Text(text = "Kom i gang", color = Color.LightGray)
+                Text(text = "Let's get it", color = Color.LightGray)
             }
 
 

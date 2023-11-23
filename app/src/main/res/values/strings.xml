@@ -9,7 +9,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="app_name">media app niklas 2</string>
-    <string name="tilmeld">TILMELD DIG NU</string>
-    <string name="logind">LOG IND</string>
+    <string name="tilmeld">SIGN UP NOW</string>
+    <string name="logind">LOG IN</string>
     <string name="arrow">↞</string>
 </resources>

@@ -2,8 +2,7 @@ package com.example.mediaappniklas2.datalayer
 
 class RecommendationModels {
     fun trending(movielist: List<MovieData>){
-
-
+        
     }
 
 
