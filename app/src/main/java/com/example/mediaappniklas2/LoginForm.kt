@@ -51,13 +51,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mediaappniklas2.MainActivity
-import com.example.mediaappniklas2.R
-import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
 @Composable
 fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
+LoginForm(modifier) {
+
+}
+}
+
+@Composable
+fun LoginForm(modifier: Modifier = Modifier,onNavigationPressed :() -> Unit) {
     Surface {
 
         var credentials by remember { mutableStateOf(Credentials()) }
@@ -74,7 +78,7 @@ fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 30.dp)
-            ) {
+        ) {
             Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
             LoginField(
                 value = credentials.login,
@@ -92,11 +96,11 @@ fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
                 label = "Remember Me",
                 onCheckChanged = {
                     credentials = credentials.copy(remember = !credentials.remember)},
-               isChecked = credentials.remember
+                isChecked = credentials.remember
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = {navController.navigate(Screen.Startskaerm.route)},
+                onClick = {onNavigationPressed.invoke()},
                 enabled = credentials.isNotEmpty(),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -105,12 +109,14 @@ fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
             {
                 Text("Login")
 
+            }
         }
+}
     }
-}
-}
 
-fun checkCredentials(creds: Credentials, context: Context){
+
+
+fun checkCredentials(creds: com.example.mediaappniklas2.Credentials, context: Context){
 if(creds.isNotEmpty() && creds.login == "admin"){
     context.startActivity(Intent(context, MainActivity::class.java))
     (context as Activity).finish()
@@ -234,5 +240,12 @@ fun PasswordField(
     )
 }
 
+@Preview(showBackground = true, device = "id:Nexus One", showSystemUi = true)
+@Composable
+fun loginPreviewdark() {
+    MediaAppNiklas2Theme(darkTheme = true) {
+        LoginForm(onNavigationPressed = {})
+    }
 
+}
 
