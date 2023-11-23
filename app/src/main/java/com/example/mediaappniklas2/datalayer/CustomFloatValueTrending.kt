@@ -1,6 +1,6 @@
 package com.example.mediaappniklas2.datalayer
 
-class CustomFloatValueTrending private constructor(private val value: Float) {
+class CustomFloatValueTrending private constructor(val value: Float) {
 
     init {
         require(value in 1.0..10.0)

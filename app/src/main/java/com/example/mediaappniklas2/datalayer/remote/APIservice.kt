@@ -66,7 +66,11 @@ val logger = LoggerFactory.getLogger("APIserviceKt")
             if (searchResultList.isNotEmpty()) {
                 val movieData: List<MovieData> = searchResultList.map { convertToMovieData(it) }
                 val movieTitle: String = movieData.first().title
+                val movieURL: String = movieData.first().imageRef
+
                 logger.info("$movieTitle")
+                logger.info("$movieURL")
+
                 if(movieTitle == ""){
                     logger.error("no result found")
                 }
