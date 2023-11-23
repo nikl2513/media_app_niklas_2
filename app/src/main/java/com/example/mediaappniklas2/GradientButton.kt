@@ -210,9 +210,6 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
         ) {
             Text(text = "Kom i gang", color = Color.LightGray)
         }
-    }
-    }
-            }
             Button(
                 onClick = { },
                 colors = ButtonDefaults.buttonColors(Color.Blue)
