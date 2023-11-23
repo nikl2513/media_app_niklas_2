@@ -63,133 +63,145 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
         var switchCheckedState5 by remember { mutableStateOf(false) }
         var switchCheckedState6 by remember { mutableStateOf(false) }
 
-        TextButton(onClick = { }
-        ) {
-            Text(text = "Vælg dine streaming tjenester:")
-        }
-        Row {
-            Switch(checked = switchCheckedState1, onCheckedChange = { switchCheckedState1 = it })
+            TextButton(onClick = { }
+            ) {
+                Text(text = "Vælg dine streaming tjenester:")
+            }
+            Row {
+                Switch(
+                    checked = switchCheckedState1,
+                    onCheckedChange = { switchCheckedState1 = it })
 
-            if (switchCheckedState1 == true) {
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(buttonColor.value),
+                if (switchCheckedState1) {
+                    Button(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(buttonColor.value),
 
-                    ) { Text(text = "Netflix", color = Color.Green) }
-            } else {
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(buttonColor.value),
+                        ) { Text(text = "Netflix", color = Color.Green) }
+                } else {
+                    Button(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(buttonColor.value),
 
-                    ) { Text(text = "Netflix", color = Color.LightGray) }
+                        ) { Text(text = "Netflix", color = Color.LightGray) }
+
+                }
+            }
+            Row {
+                Switch(
+                    checked = switchCheckedState2,
+                    onCheckedChange = { switchCheckedState2 = it })
+                if (switchCheckedState2) {
+
+
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "Viaplay", color = Color.Green)
+
+                    }
+                } else {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "Viaplay", color = Color.LightGray)
+
+                    }
+
+                }
+
 
             }
-        }
-        Row {
-            Switch(checked = switchCheckedState2, onCheckedChange = { switchCheckedState2 = it })
-            if (switchCheckedState2 == true) {
+            Row {
+                Switch(
+                    checked = switchCheckedState3,
+                    onCheckedChange = { switchCheckedState3 = it })
 
+                if (switchCheckedState3) {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "Amazon Prime", color = Color.Green)
+                    }
+                } else {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "Amazon Prime", color = Color.LightGray)
+                    }
 
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "Viaplay", color = Color.Green)
-
-                }
-            } else {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "Viaplay", color = Color.LightGray)
-
-                }
-
-            }
-
-
-        }
-        Row {
-            Switch(checked = switchCheckedState3, onCheckedChange = { switchCheckedState3 = it })
-
-            if (switchCheckedState3 == true) {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "Amazon Prime", color = Color.Green)
-                }
-            } else {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "Amazon Prime", color = Color.LightGray)
-                }
-
-            }
-
-        }
-        Row {
-            Switch(checked = switchCheckedState4, onCheckedChange = { switchCheckedState4 = it })
-            if (switchCheckedState4 == true) {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "HBO", color = Color.Green)
-                }
-            } else {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "HBO", color = Color.LightGray)
                 }
 
             }
+            Row {
+                Switch(
+                    checked = switchCheckedState4,
+                    onCheckedChange = { switchCheckedState4 = it })
+                if (switchCheckedState4) {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "HBO", color = Color.Green)
+                    }
+                } else {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "HBO", color = Color.LightGray)
+                    }
 
-
-        }
-
-        Row {
-            Switch(checked = switchCheckedState5, onCheckedChange = { switchCheckedState5 = it })
-            if (switchCheckedState5) {
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "Disney+", color = Color.Green)
                 }
-            } else {
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "Disney+", color = Color.LightGray)
-                }
+
 
             }
 
-        }
-        Row {
-            Switch(checked = switchCheckedState6, onCheckedChange = { switchCheckedState6 = it })
-            if (switchCheckedState6) {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "AppleTV", color = Color.Green)
+            Row {
+                Switch(
+                    checked = switchCheckedState5,
+                    onCheckedChange = { switchCheckedState5 = it })
+                if (switchCheckedState5) {
+                    Button(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "Disney+", color = Color.Green)
+                    }
+                } else {
+                    Button(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "Disney+", color = Color.LightGray)
+                    }
+
                 }
-            } else {
-                Button(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(buttonColor.value)
-                ) {
-                    Text(text = "AppleTV", color = Color.LightGray)
-                }
+
             }
+            Row {
+                Switch(
+                    checked = switchCheckedState6,
+                    onCheckedChange = { switchCheckedState6 = it })
+                if (switchCheckedState6) {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "AppleTV", color = Color.Green)
+                    }
+                } else {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(buttonColor.value)
+                    ) {
+                        Text(text = "AppleTV", color = Color.LightGray)
+                    }
+                }
 
         }
         Button(
@@ -200,6 +212,36 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
         }
     }
     }
+            }
+            Button(
+                onClick = { },
+                colors = ButtonDefaults.buttonColors(Color.Blue)
+            ) {
+                Text(text = "Kom i gang", color = Color.LightGray)
+            }
+
+
+        var netflixtjek by remember { mutableStateOf(false) }
+        if (switchCheckedState1) {netflixtjek = true}
+
+        var viaplaytjek by remember { mutableStateOf(false) }
+            if (switchCheckedState2) {viaplaytjek= true}
+
+        var amazontjek by remember { mutableStateOf(false) }
+            if (switchCheckedState3) {amazontjek = true}
+
+        var hbotjek by remember { mutableStateOf(false) }
+            if (switchCheckedState4) {hbotjek = true}
+
+        var disneytjek by remember { mutableStateOf(false) }
+            if (switchCheckedState5) {disneytjek = true}
+
+        var appeltvtjek by remember { mutableStateOf(false) }
+            if (switchCheckedState6) {appeltvtjek = true}
+
+    }}
+
+
 }
 
 
