@@ -45,7 +45,7 @@ fun OpstartMedButtonOgBaggrund(
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
         Image(painter = painterResource(id = R.drawable.logotext2), contentDescription = "", modifier = Modifier .size(300.dp))
         Button(
-            onClick = {navController.navigate(Screen.Tilmeld.route)},
+            onClick = {navController.navigate(Screen.SignupForm.route)},
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier

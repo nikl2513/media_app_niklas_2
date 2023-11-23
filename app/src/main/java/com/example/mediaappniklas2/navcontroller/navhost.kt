@@ -22,7 +22,7 @@ fun NavHost() {
         composable(route = Screen.Loginform.route){
             LoginForm(navController = navController)
         }
-        composable(route = Screen.Tilmeld.route){
+        composable(route = Screen.SignupForm.route){
         SignupForm(navController = navController)
         }
         composable(route = Screen.Startskaerm.route){
