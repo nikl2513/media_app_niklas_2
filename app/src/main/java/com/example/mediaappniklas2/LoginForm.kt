@@ -51,17 +51,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
-
 @Composable
-fun LoginForm(modifier: Modifier = Modifier, navController: NavController){
-LoginForm(modifier) {
-
-}
-}
-
-@Composable
-fun LoginForm(modifier: Modifier = Modifier,onNavigationPressed :() -> Unit) {
+fun LoginForm(modifier: Modifier = Modifier, navController: NavController) {
     Surface {
 
         var credentials by remember { mutableStateOf(Credentials()) }
@@ -100,7 +93,7 @@ fun LoginForm(modifier: Modifier = Modifier,onNavigationPressed :() -> Unit) {
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = {onNavigationPressed.invoke()},
+                onClick = {navController.navigate(Screen.GradientButton.route)},
                 enabled = credentials.isNotEmpty(),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -240,12 +233,12 @@ fun PasswordField(
     )
 }
 
-@Preview(showBackground = true, device = "id:Nexus One", showSystemUi = true)
+/*@Preview(showBackground = true, device = "id:Nexus One", showSystemUi = true)
 @Composable
 fun loginPreviewdark() {
     MediaAppNiklas2Theme(darkTheme = true) {
-        LoginForm(onNavigationPressed = {})
+        LoginForm(n)
     }
 
-}
+}*/
 

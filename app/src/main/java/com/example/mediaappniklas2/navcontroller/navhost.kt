@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mediaappniklas2.GradientButton
 import com.example.mediaappniklas2.MediaPageAPP
 import com.example.mediaappniklas2.OpstartStartskærm
 import com.example.mediaappniklas2.LoginForm
@@ -28,6 +29,9 @@ fun NavHost() {
         }
         composable(route =Screen.MediaPage.route){
             MediaPageAPP(navController = navController)
+        }
+        composable(route = Screen.GradientButton.route){
+            GradientButton(navController = navController)
         }
     }
 }

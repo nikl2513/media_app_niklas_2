@@ -6,4 +6,5 @@ sealed class Screen(val route: String){
     object Tilmeld : Screen("Tilmeld")
     object Startskaerm : Screen("Startskærm")
     object MediaPage : Screen("MediaPage")
+    object GradientButton : Screen("GradientButton")
 }

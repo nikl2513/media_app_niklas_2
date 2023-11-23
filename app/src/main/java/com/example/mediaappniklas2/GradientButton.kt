@@ -30,10 +30,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
 @Composable
-fun GradientButton(modifier: Modifier = Modifier){
+fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -191,7 +193,7 @@ fun GradientButton(modifier: Modifier = Modifier){
 
         }
         Button(
-            onClick = { },
+            onClick = {navController.navigate(Screen.Startskaerm.route)},
             colors = ButtonDefaults.buttonColors(Color.Blue)
         ) {
             Text(text = "Kom i gang", color = Color.LightGray)
@@ -201,13 +203,13 @@ fun GradientButton(modifier: Modifier = Modifier){
 }
 
 
-@Preview()
+/*@Preview()
 @Composable
 fun loginPreviewdark2() {
     MediaAppNiklas2Theme(darkTheme = true) {
         GradientButton()
         }
-    }
+    }*/
 
 
 
