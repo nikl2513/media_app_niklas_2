@@ -35,12 +35,12 @@ import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 
 @Composable
-fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
+fun GradientButton(modifier: Modifier = Modifier, navController: NavController) {
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
-    ){
+    ) {
         Image(
             painter = painterResource(id = R.drawable.background1),
             contentDescription = "",
@@ -48,20 +48,20 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
             contentScale = ContentScale.Crop
         )
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-    )
-    {
-        val buttonColor = remember { mutableStateOf(Color.Black) }
-        var switchCheckedState1 by remember { mutableStateOf(false) }
-        var switchCheckedState2 by remember { mutableStateOf(false) }
-        var switchCheckedState3 by remember { mutableStateOf(false) }
-        var switchCheckedState4 by remember { mutableStateOf(false) }
-        var switchCheckedState5 by remember { mutableStateOf(false) }
-        var switchCheckedState6 by remember { mutableStateOf(false) }
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+        )
+        {
+            val buttonColor = remember { mutableStateOf(Color.Black) }
+            var switchCheckedState1 by remember { mutableStateOf(false) }
+            var switchCheckedState2 by remember { mutableStateOf(false) }
+            var switchCheckedState3 by remember { mutableStateOf(false) }
+            var switchCheckedState4 by remember { mutableStateOf(false) }
+            var switchCheckedState5 by remember { mutableStateOf(false) }
+            var switchCheckedState6 by remember { mutableStateOf(false) }
 
             TextButton(onClick = { }
             ) {
@@ -203,47 +203,47 @@ fun GradientButton(modifier: Modifier = Modifier, navController: NavController){
                     }
                 }
 
-        }
-        Button(
-            onClick = {navController.navigate(Screen.Startskaerm.route)},
-            colors = ButtonDefaults.buttonColors(Color.Blue)
-        ) {
-            Text(text = "Kom i gang", color = Color.LightGray)
-        }
-    }
-    }
             }
             Button(
-                onClick = { },
+                onClick = { navController.navigate(Screen.Startskaerm.route) },
                 colors = ButtonDefaults.buttonColors(Color.Blue)
             ) {
                 Text(text = "Kom i gang", color = Color.LightGray)
             }
 
 
-        var netflixtjek by remember { mutableStateOf(false) }
-        if (switchCheckedState1) {netflixtjek = true}
+            var netflixtjek by remember { mutableStateOf(false) }
+            if (switchCheckedState1) {
+                netflixtjek = true
+            }
 
-        var viaplaytjek by remember { mutableStateOf(false) }
-            if (switchCheckedState2) {viaplaytjek= true}
+            var viaplaytjek by remember { mutableStateOf(false) }
+            if (switchCheckedState2) {
+                viaplaytjek = true
+            }
 
-        var amazontjek by remember { mutableStateOf(false) }
-            if (switchCheckedState3) {amazontjek = true}
+            var amazontjek by remember { mutableStateOf(false) }
+            if (switchCheckedState3) {
+                amazontjek = true
+            }
 
-        var hbotjek by remember { mutableStateOf(false) }
-            if (switchCheckedState4) {hbotjek = true}
+            var hbotjek by remember { mutableStateOf(false) }
+            if (switchCheckedState4) {
+                hbotjek = true
+            }
 
-        var disneytjek by remember { mutableStateOf(false) }
-            if (switchCheckedState5) {disneytjek = true}
+            var disneytjek by remember { mutableStateOf(false) }
+            if (switchCheckedState5) {
+                disneytjek = true
+            }
 
-        var appeltvtjek by remember { mutableStateOf(false) }
-            if (switchCheckedState6) {appeltvtjek = true}
-
-    }}
-
-
+            var appeltvtjek by remember { mutableStateOf(false) }
+            if (switchCheckedState6) {
+                appeltvtjek = true
+            }
+        }
+    }
 }
-
 
 /*@Preview()
 @Composable
