@@ -10,7 +10,7 @@ import com.example.mediaappniklas2.MediaPageAPP
 import com.example.mediaappniklas2.OpstartStartskærm
 import com.example.mediaappniklas2.LoginForm
 import com.example.mediaappniklas2.OpstartMedButtonOgBaggrund
-import com.example.mediaappniklas2.ui.theme.SignupForm
+import com.example.mediaappniklas2.SignupForm
 
 @Composable
 fun NavHost() {

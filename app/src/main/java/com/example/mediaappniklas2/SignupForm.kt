@@ -98,7 +98,7 @@ fun SignupForm(modifier: Modifier = Modifier, navController: NavController) {
 
             )
             {
-                Text("Login")
+                Text("Signup")
 
             }
         }
