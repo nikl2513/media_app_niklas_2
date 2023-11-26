@@ -25,7 +25,7 @@ fun NavHost() {
 
         }
         composable(route = Screen.Startskaerm.route){
-            OpstartStartskærm(navController = navController)
+            OpstartStartskærm()
         }
         composable(route =Screen.MediaPage.route){
             MediaPageAPP(navController = navController)

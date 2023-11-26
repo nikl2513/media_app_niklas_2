@@ -33,9 +33,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
 import com.example.mediaappniklas2.datalayer.MovieDTO
 import com.example.mediaappniklas2.datalayer.MovieData
@@ -67,47 +70,47 @@ private data class Film(
     val description: String,
     val imdb: Int,
     val genre: String,
-    val image: Int
-
-)
+    val image: Int)
 
 private val filmList = import_of_movies()
 private val filmlist2 = model.trending(filmList)
 
 
 
+
 @Composable
+@Preview
 fun OpstartStartskærm(modifier: Modifier = Modifier
         .background(Color.DarkGray)
         .fillMaxSize()
         .wrapContentSize(Alignment.TopCenter),
-    navController: NavController
+
 ) {LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
-            Topapp(navController)
+           // Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            verticalListTopHighlight()
+            //verticalListTopHighlight()
             Spacer(modifier = Modifier.height(25.dp))
 
         }
         item {
             Text(text = "Streaming services", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            MedieKnapper(navController)
+            //MedieKnapper()
             Spacer(modifier = Modifier.height(25.dp))
         }
         item {
             Text(text = "Recommended", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList(navController)
+           // verticalList()
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "New and exciting", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList(navController)
+            //verticalList()
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "Action", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList(navController)
+            //verticalList()
         }
     }
 }
@@ -115,26 +118,25 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
 @Composable
 fun MedieKnapper(
-    navController: NavController
 ){
     MediaAppNiklas2Theme {
         Column {
             Row {
-                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Netflix",
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Viaplay"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "HBO"
                         , fontSize = 10.sp
@@ -144,21 +146,21 @@ fun MedieKnapper(
             }
             Spacer(modifier = Modifier.height(5.dp))
             Row {
-                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Disney+"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Apple tv"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.MediaPage.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Prime"
                         , fontSize = 10.sp
@@ -173,9 +175,9 @@ fun MedieKnapper(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topapp(navController: NavController){
+fun Topapp(){
         Row() {
-            IconButton(onClick = {navController.navigate(Screen.MediaPage.route)}) {
+            IconButton(onClick = {}) {
                 Icon(
                     imageVector = Icons.Default.List,
                     contentDescription = null
@@ -202,28 +204,34 @@ private fun MovieItem(film : Film, navController: NavController) {
     Image(modifier = Modifier.clickable {navController.navigate(Screen.MediaPage.route)},painter = painterResource(id = imageidd), contentDescription = "")
 
 }
+@Composable
+private fun MovieItem2(film : MovieData) {
+    AsyncImage(
+        model = film.imageRef,
+        placeholder = painterResource(id = R.drawable.logo1),
+        error = painterResource(id = R.drawable.logo1),
+        contentDescription = "The delasign logo",
+    )
+
+}
 
 @Composable
-private fun verticalList(navController: NavController) {
+private fun verticalList() {
     LazyRow {
         items(filmList) { film ->
-            if (0 < film.imdb) {
                 Spacer(modifier = Modifier.width(10.dp))
-                MovieItem(film = film, navController)
-            }
+                MovieItem2(film = film,)
+
         }
     }
 }
 
 @Composable
 private fun verticalListTopHighlight(
-    modifier: Modifier = Modifier
-    .background(Color.DarkGray)
-    .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter)) {
+    modifier: Modifier = Modifier) {
     LazyRow(modifier = modifier) {
         items(filmList) { film ->
-            if (8 < film.imdb) {
+
                 Spacer(modifier = Modifier.width(10.dp))
                 Box(
                     modifier
@@ -240,7 +248,7 @@ private fun verticalListTopHighlight(
                     )
                 }
             }
-        }
+
     }
 }
 

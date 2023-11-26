@@ -87,7 +87,7 @@ fun LoginForm(modifier: Modifier = Modifier, navController: NavController) {
                 label = "Remember Me",
                 onCheckChanged = {
                     credentials = credentials.copy(remember = !credentials.remember)},
-                isChecked = credentials.remember
+                isChecked = credentials.remember,
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(

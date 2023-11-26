@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -43,11 +45,16 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/LICENSE.md"
+            excludes += "/META-INF/LICENSE-notice.md"
         }
     }
+
+
 }
 
 dependencies {
@@ -81,6 +88,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
+    //load image url
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation("androidx.navigation:navigation-compose:2.7.4")
 
