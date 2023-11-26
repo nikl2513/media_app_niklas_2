@@ -23,7 +23,25 @@ class RecommendationModels {
     }
 
 
-    fun forYouPage(movielist: List<MovieData>){
+    fun forYouPage(movielist: List<MovieData>) : List<MovieData> {
+        // These declared parameters would be averages from userdata
+        val userrating: CustomFloatValueTrending = CustomFloatValueTrending.create(4.5f)
+        val trendy: CustomFloatValueTrending = CustomFloatValueTrending.create(7.5f)
+        val trendRating: CustomFloatValueTrending = CustomFloatValueTrending.create(5.1f)
+
+        // This is to make the actual ratings random since they all use the same static values do to not having Userdata to create them from.
+        val abitaryVal: CustomFloatValueTrending = CustomFloatValueTrending.create(generateRandomFloat())
+
+        val ratedMovies = movielist.map { movieData ->
+            val rating: CustomFloatValueTrending = calculateRating(userrating, trendy, trendRating, abitaryVal)
+            Pair(movieData, rating)
+        }
+
+        val sortedMovies = ratedMovies.sortedByDescending { it.second.value }
+
+        val top10Movies = sortedMovies.take(10).map { it.first }
+
+        return top10Movies
 
     }
 
@@ -38,7 +56,7 @@ private fun calculateRating(
     trendRating: CustomFloatValueTrending,
     abitaryVal : CustomFloatValueTrending
 ): CustomFloatValueTrending {
-    val ratingValue = ((userrating.value + trendy.value) * abitaryVal.value ) / 2 * trendRating.value
+    val ratingValue = (userrating.value + trendy.value + abitaryVal.value ) / 3 * trendRating.value
     return CustomFloatValueTrending.create(ratingValue)
 }
 

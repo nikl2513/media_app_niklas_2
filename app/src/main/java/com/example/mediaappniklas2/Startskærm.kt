@@ -42,7 +42,6 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
 import com.example.mediaappniklas2.datalayer.MovieDTO
 import com.example.mediaappniklas2.datalayer.MovieData
-import com.example.mediaappniklas2.datalayer.RecommendationModels
 import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
@@ -81,9 +80,9 @@ private val filmList = import_of_movies()
 @Composable
 @Preview
 fun OpstartStartskærm(modifier: Modifier = Modifier
-        .background(Color.DarkGray)
-        .fillMaxSize()
-        .wrapContentSize(Alignment.TopCenter),
+    .background(Color.DarkGray)
+    .fillMaxSize()
+    .wrapContentSize(Alignment.TopCenter),
 
 ) {LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
@@ -212,6 +211,11 @@ private fun MovieItem2(film : MovieData) {
         error = painterResource(id = R.drawable.logo1),
         contentDescription = "The delasign logo",
     )
+
+}
+@Composable
+private fun MovieItem3(film : MovieData) {
+  Image(painter = rememberAsyncImagePainter(film.imageRef), contentDescription ="" )
 
 }
 
