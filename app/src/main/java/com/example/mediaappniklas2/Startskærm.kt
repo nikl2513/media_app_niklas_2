@@ -78,9 +78,9 @@ private val filmlist2 = model.trending(filmList)
 
 @Composable
 fun OpstartStartskærm(modifier: Modifier = Modifier
-        .background(Color.DarkGray)
-        .fillMaxSize()
-        .wrapContentSize(Alignment.TopCenter),
+    .background(Color.DarkGray)
+    .fillMaxSize()
+    .wrapContentSize(Alignment.TopCenter),
     navController: NavController
 ) {LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
@@ -197,52 +197,40 @@ fun Topapp(navController: NavController){
 
 }
 @Composable
-private fun MovieItem(film : Film, navController: NavController) {
-     val imageidd: Int = film.image
-    Image(modifier = Modifier.clickable {navController.navigate(Screen.MediaPage.route)},painter = painterResource(id = imageidd), contentDescription = "")
-
+private fun MovieItem(navController: NavController) {
+    
+Button(onClick = { /*TODO*/ }) {
+    
+}
 }
 
 @Composable
 private fun verticalList(navController: NavController) {
     LazyRow {
-        items(filmList) { film ->
-            if (0 < film.imdb) {
-                Spacer(modifier = Modifier.width(10.dp))
-                MovieItem(film = film, navController)
-            }
-        }
+        //items(filmList) { film ->
+
+               // Spacer(modifier = Modifier.width(10.dp))
+               // MovieItem( navController)
+
     }
-}
+
+        }
+    
+
 
 @Composable
 private fun verticalListTopHighlight(
     modifier: Modifier = Modifier
-    .background(Color.DarkGray)
-    .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter)) {
+        .background(Color.DarkGray)
+        .fillMaxSize()
+        .wrapContentSize(Alignment.TopCenter)) {
     LazyRow(modifier = modifier) {
-        items(filmList) { film ->
-            if (8 < film.imdb) {
-                Spacer(modifier = Modifier.width(10.dp))
-                Box(
-                    modifier
-                        .size(360.dp, 190.dp)
-                        .background(Color.DarkGray)
-                        .clip(shape = RoundedCornerShape(10.dp))
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.mand),
-                        contentDescription = "",
-                        modifier
-                            .fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                }
+
+                
             }
         }
-    }
-}
+
+
 
 
 
