@@ -63,7 +63,7 @@ fun import_of_movies() : List<MovieData>{
     }
 }
 
-private val model = RecommendationModels()
+//private val model = RecommendationModels()
 
 private data class Film(
     val filmName: String,
@@ -73,7 +73,7 @@ private data class Film(
     val image: Int)
 
 private val filmList = import_of_movies()
-private val filmlist2 = model.trending(filmList)
+//private val filmlist2 = model.trending(filmList)
 
 
 
@@ -87,30 +87,30 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
 ) {LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
-           // Topapp()
+           Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            //verticalListTopHighlight()
+            verticalListTopHighlight()
             Spacer(modifier = Modifier.height(25.dp))
 
         }
         item {
             Text(text = "Streaming services", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            //MedieKnapper()
+            MedieKnapper()
             Spacer(modifier = Modifier.height(25.dp))
         }
         item {
             Text(text = "Recommended", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-           // verticalList()
+           verticalList()
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "New and exciting", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            //verticalList()
+            verticalList()
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "Action", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            //verticalList()
+            verticalList()
         }
     }
 }
