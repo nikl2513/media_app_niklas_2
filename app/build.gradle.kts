@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -91,9 +89,9 @@ dependencies {
     //load image url
     implementation("io.coil-kt:coil-compose:2.4.0")
 
+
     implementation("androidx.navigation:navigation-compose:2.7.4")
 
-    testImplementation("junit:junit:4.13.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -103,6 +101,7 @@ dependencies {
     androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation("junit:junit:4.13.2")
 
 }

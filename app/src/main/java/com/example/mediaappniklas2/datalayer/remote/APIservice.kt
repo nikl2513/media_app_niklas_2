@@ -1,38 +1,34 @@
 package com.example.mediaappniklas2.datalayer.remote
 
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
-import com.example.mediaappniklas2.datalayer.MovieDTO
-import com.example.mediaappniklas2.datalayer.MovieData
-import com.example.mediaappniklas2.datalayer.convertToMovieData
 import org.slf4j.LoggerFactory
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApiService {
-    @Headers(
-        "X-RapidAPI-Key:254e2c3adfmsh3da535182efaf51p108f81jsn69df13326d34",
-        "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com"
-    )
+
     @GET("titles?titleType=movie&limit=50")
-     fun fetchMovies(
+     suspend fun fetchMovies(
         @Query("startYear") startYear: Int,
-        @Query("endYear") endYear: Int
-    ): Call<MovieApiResponse>
+        @Query("endYear") endYear: Int,
+        @Header("X-RapidAPI-Key") apiKey: String = "254e2c3adfmsh3da535182efaf51p108f81jsn69df13326d34",
+        @Header("X-RapidAPI-Host") apiHost: String = "moviesdatabase.p.rapidapi.com"
+    ): MovieApiResponse
     @Headers(
         "X-RapidAPI-Key:254e2c3adfmsh3da535182efaf51p108f81jsn69df13326d34",
         "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com"
     )
     @GET("titles/search/title/{title}")
-    fun searchmovies(
+   suspend fun searchmovies(
         @Path("title") title : String,
         @Query("exact") exact: Boolean = true,
     @Query("titleType") titleType: String = "movie"
-    ) : Call<MovieApiResponse>
+    ) : MovieApiResponse
 }
 
 object RetrofitClient{
@@ -50,6 +46,7 @@ object RetrofitClient{
 }
 val logger = LoggerFactory.getLogger("APIserviceKt")
  fun main() {
+     /*
     try {
         val searchWord =  "The Wolf of Wall Street"
         val call: Call<MovieApiResponse> =
@@ -79,6 +76,8 @@ val logger = LoggerFactory.getLogger("APIserviceKt")
     } catch (e: Exception) {
         logger.error("Error", "Error fetching movies", e)
     }
+
+      */
 }
 
 

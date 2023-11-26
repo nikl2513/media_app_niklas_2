@@ -52,22 +52,17 @@ import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Call
 import java.io.IOException
 
 suspend fun import_of_movies(): List<MovieData> {
     return withContext(Dispatchers.IO) {
         try {
-            val call: Call<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
-            val apiResponse = call.execute()
+            val movieApiResponse: MovieApiResponse = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
 
-            if (apiResponse.isSuccessful) {
-                val movieApiResponse: MovieApiResponse? = apiResponse.body()
-                if (movieApiResponse != null) {
-                    val resultsList: List<MovieDTO> = movieApiResponse.results
-                    return@withContext resultsList.map { convertToMovieData(it) }
-                }
-            }
+            // Process the response as before
+            val resultsList: List<MovieDTO> = movieApiResponse.results
+            return@withContext resultsList.map { convertToMovieData(it) }
+
         } catch (e: IOException) {
             // Handle network error
             e.printStackTrace()
@@ -89,7 +84,14 @@ private data class Film(
 
 //private val filmlist2 = model.trending(filmList)
 
-
+@Composable
+private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieData>) {
+    Column {
+        Text(text = sectionTitle, color = Color.White, fontSize = 20.sp)
+        Spacer(modifier = Modifier.height(10.dp))
+        verticalList(filmList = filmList)
+    }
+}
 
 
 @Composable
@@ -127,20 +129,12 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             MedieKnapper()
             Spacer(modifier = Modifier.height(25.dp))
         }
-        item {
-            Text(text = "Recommended", color = Color.White, fontSize = 20.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-           verticalList(filmList = movieList.value)
+        items(sections) { section ->
+            SectionWithVerticalList(sectionTitle = section.title, filmList = movieList.value)
             Spacer(modifier = Modifier.height(25.dp))
-            Text(text = "New and exciting", color = Color.White, fontSize = 20.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-            verticalList(filmList = movieList.value)
-            Spacer(modifier = Modifier.height(25.dp))
-            Text(text = "Action", color = Color.White, fontSize = 20.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-            verticalList(filmList = movieList.value)
         }
     }
+
 }
 
 
@@ -247,14 +241,20 @@ private fun MovieItem3(film : MovieData) {
   Image(painter = rememberAsyncImagePainter(film.imageRef), contentDescription ="" )
 
 }
+data class Section(val title: String)
 
+val sections = listOf(
+    Section("Recommended"),
+    Section("New and exciting"),
+    Section("Action")
+)
 @Composable
-private fun verticalList(filmList : List<MovieData>) {
+private fun verticalList(filmList: List<MovieData>) {
     LazyRow {
         items(filmList) { film ->
-                Spacer(modifier = Modifier.width(10.dp))
-                MovieItem3(film = film,)
-
+            Spacer(modifier = Modifier.width(10.dp))
+            // Use the appropriate MovieItem function based on your requirements
+            MovieItem3(film = film)
         }
     }
 }
@@ -284,6 +284,8 @@ private fun verticalListTopHighlight(
 
     }
 }
+
+
 
 
 
