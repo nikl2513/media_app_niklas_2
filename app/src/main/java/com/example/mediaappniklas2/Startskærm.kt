@@ -1,5 +1,6 @@
 package com.example.mediaappniklas2
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,19 +50,30 @@ import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
+import java.io.IOException
 
-fun import_of_movies() : List<MovieData>{
-    val call: Call<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
-    val apiResponse = call.execute()
-    assert(apiResponse.isSuccessful)
-    val movieApiResponse: MovieApiResponse? = apiResponse.body()
-    if (movieApiResponse != null) {
-        val resultsList: List<MovieDTO> = movieApiResponse.results
-        val movieDataList: List<MovieData> = resultsList.map { convertToMovieData(it) }
-        return movieDataList
-    }else{
-        return emptyList()
+suspend fun import_of_movies(): List<MovieData> {
+    return withContext(Dispatchers.IO) {
+        try {
+            val call: Call<MovieApiResponse> = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+            val apiResponse = call.execute()
+
+            if (apiResponse.isSuccessful) {
+                val movieApiResponse: MovieApiResponse? = apiResponse.body()
+                if (movieApiResponse != null) {
+                    val resultsList: List<MovieDTO> = movieApiResponse.results
+                    return@withContext resultsList.map { convertToMovieData(it) }
+                }
+            }
+        } catch (e: IOException) {
+            // Handle network error
+            e.printStackTrace()
+        }
+
+        return@withContext emptyList()
     }
 }
 
@@ -71,7 +86,7 @@ private data class Film(
     val genre: String,
     val image: Int)
 
-private val filmList = import_of_movies()
+
 //private val filmlist2 = model.trending(filmList)
 
 
@@ -84,11 +99,25 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     .fillMaxSize()
     .wrapContentSize(Alignment.TopCenter),
 
-) {LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+)
+{
+    val movieList = remember { mutableStateOf<List<MovieData>>(emptyList()) }
+
+    // Use LaunchedEffect to execute a coroutine when the Composable is first launched
+    LaunchedEffect(true) {
+        // Launch a coroutine to fetch movies
+        val movies = withContext(Dispatchers.IO) {
+            import_of_movies()
+        }
+
+        // Update the movieList with the fetched movies
+        movieList.value = movies
+    }
+    LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
            Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            verticalListTopHighlight()
+            verticalListTopHighlight(filmList = movieList.value)
             Spacer(modifier = Modifier.height(25.dp))
 
         }
@@ -101,15 +130,15 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         item {
             Text(text = "Recommended", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-           verticalList()
+           verticalList(filmList = movieList.value)
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "New and exciting", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList()
+            verticalList(filmList = movieList.value)
             Spacer(modifier = Modifier.height(25.dp))
             Text(text = "Action", color = Color.White, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(10.dp))
-            verticalList()
+            verticalList(filmList = movieList.value)
         }
     }
 }
@@ -220,11 +249,11 @@ private fun MovieItem3(film : MovieData) {
 }
 
 @Composable
-private fun verticalList() {
+private fun verticalList(filmList : List<MovieData>) {
     LazyRow {
         items(filmList) { film ->
                 Spacer(modifier = Modifier.width(10.dp))
-                MovieItem2(film = film,)
+                MovieItem3(film = film,)
 
         }
     }
@@ -232,7 +261,7 @@ private fun verticalList() {
 
 @Composable
 private fun verticalListTopHighlight(
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier,filmList : List<MovieData>) {
     LazyRow(modifier = modifier) {
         items(filmList) { film ->
 
