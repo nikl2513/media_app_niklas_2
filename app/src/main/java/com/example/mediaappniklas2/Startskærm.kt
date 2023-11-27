@@ -237,8 +237,12 @@ private fun MovieItem2(film : MovieData) {
 
 }
 @Composable
-private fun MovieItem3(film : MovieData) {
-  Image(painter = rememberAsyncImagePainter(film.imageRef), contentDescription ="" )
+private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier) {
+  Image(
+      painter = rememberAsyncImagePainter(film.imageRef),
+      contentDescription ="",
+      modifier .fillMaxSize(),
+      contentScale = ContentScale.Crop)
 
 }
 data class Section(val title: String)
@@ -248,17 +252,28 @@ val sections = listOf(
     Section("New and exciting"),
     Section("Action")
 )
+
+private var listCounter = 0
 @Composable
-private fun verticalList(filmList: List<MovieData>) {
-    LazyRow {
-        items(filmList) { film ->
-            Spacer(modifier = Modifier.width(10.dp))
-            // Use the appropriate MovieItem function based on your requirements
-            MovieItem3(film = film)
+private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier) {
+    while (listCounter > 20) {
+        LazyRow {
+            items(filmList) { film ->
+                Spacer(modifier = Modifier.width(10.dp))
+                // Use the appropriate MovieItem function based on your requirements
+                Box(
+                    modifier
+                        .size(360.dp, 190.dp)
+                        .background(Color.DarkGray)
+                        .clip(shape = RoundedCornerShape(10.dp))
+                ) {
+                MovieItem3(film = film)
+            }
         }
     }
+        listCounter++
 }
-
+}
 @Composable
 private fun verticalListTopHighlight(
     modifier: Modifier = Modifier,filmList : List<MovieData>) {
