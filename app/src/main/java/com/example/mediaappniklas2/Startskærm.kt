@@ -256,7 +256,7 @@ val sections = listOf(
 private var listCounter = 0
 @Composable
 private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier) {
-    while (listCounter > 20) {
+
         LazyRow {
             items(filmList) { film ->
                 Spacer(modifier = Modifier.width(10.dp))
@@ -273,7 +273,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
     }
         listCounter++
 }
-}
+
 @Composable
 private fun verticalListTopHighlight(
     modifier: Modifier = Modifier,filmList : List<MovieData>) {
@@ -295,6 +295,7 @@ private fun verticalListTopHighlight(
                         contentScale = ContentScale.Crop
                     )
                 }
+
             }
 
     }
