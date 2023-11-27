@@ -46,6 +46,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
 import com.example.mediaappniklas2.datalayer.MovieDTO
 import com.example.mediaappniklas2.datalayer.MovieData
+import com.example.mediaappniklas2.datalayer.RecommendationModels
 import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
@@ -115,6 +116,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         // Update the movieList with the fetched movies
         movieList.value = movies
     }
+    val recommendationModels = RecommendationModels()
+
+    val trending : List<MovieData> = recommendationModels.trending(movieList.value)
+    val forYouPage : List<MovieData>  = recommendationModels.forYouPage(movieList.value)
     LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
            Topapp()
