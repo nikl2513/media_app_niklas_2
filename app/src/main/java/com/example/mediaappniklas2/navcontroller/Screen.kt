@@ -5,6 +5,6 @@ sealed class Screen(val route: String){
     object Loginform : Screen("LoginForm")
     object Tilmeld : Screen("Tilmeld")
     object Startskaerm : Screen("Startskærm")
-    object MediaPage : Screen("MediaPage")
+    object MediaPage : Screen("MediaPage/{title}")
     object GradientButton : Screen("GradientButton")
 }

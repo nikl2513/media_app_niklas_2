@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2
+package com.example.mediaappniklas2.presentation.Login
 
 import android.app.Activity
 import android.content.Context
@@ -50,6 +50,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.MainActivity
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
 @Composable
 fun LoginForm(modifier: Modifier = Modifier, navController: NavController) {
@@ -107,7 +109,7 @@ fun LoginForm(modifier: Modifier = Modifier, navController: NavController) {
 
 
 
-fun checkCredentials(creds: com.example.mediaappniklas2.Credentials, context: Context){
+fun checkCredentials(creds: Credentials, context: Context){
 if(creds.isNotEmpty() && creds.login == "admin"){
     context.startActivity(Intent(context, MainActivity::class.java))
     (context as Activity).finish()

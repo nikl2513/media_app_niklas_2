@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2
+package com.example.mediaappniklas2.presentation.Opstart
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -19,10 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
 
 /*@Preview

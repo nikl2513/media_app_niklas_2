@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2
+package com.example.mediaappniklas2.presentation.Login
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

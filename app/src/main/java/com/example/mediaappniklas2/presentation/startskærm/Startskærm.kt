@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2
+package com.example.mediaappniklas2.presentation.startskærm
 
 
 import androidx.compose.foundation.Image
@@ -37,16 +37,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavArgument
 import androidx.navigation.NavController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
 import com.example.mediaappniklas2.datalayer.MovieDTO
 import com.example.mediaappniklas2.datalayer.MovieData
-import com.example.mediaappniklas2.datalayer.RecommendationModels
 import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
@@ -247,7 +250,7 @@ private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navContr
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",
       modifier .fillMaxSize()
-          .clickable {navController.navigate(Screen.MediaPage.route)},
+          .clickable {navController.navigate(Screen.MediaPage.route.replace("{title}", film.title))},
       contentScale = ContentScale.Crop,
       )
 
