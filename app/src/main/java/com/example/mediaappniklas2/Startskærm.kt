@@ -285,13 +285,7 @@ private fun verticalListTopHighlight(
                         .background(Color.DarkGray)
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.mand),
-                        contentDescription = "",
-                        modifier
-                            .fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
+                    MovieItem3(film = film)
                 }
 
             }
