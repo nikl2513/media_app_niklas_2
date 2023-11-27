@@ -86,21 +86,21 @@ private data class Film(
 //private val filmlist2 = model.trending(filmList)
 
 @Composable
-private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieData>) {
+private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieData>, navController: NavController) {
     Column {
         Text(text = sectionTitle, color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(10.dp))
-        verticalList(filmList = filmList)
+        verticalList(filmList = filmList, navController = navController)
     }
 }
 
 
 @Composable
-@Preview
 fun OpstartStartskærm(modifier: Modifier = Modifier
     .background(Color.DarkGray)
     .fillMaxSize()
     .wrapContentSize(Alignment.TopCenter),
+                      navController: NavController
 
 )
 {
@@ -124,7 +124,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         item {
            Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            verticalListTopHighlight(filmList = movieList.value)
+            verticalListTopHighlight(filmList = movieList.value, navController = navController)
             Spacer(modifier = Modifier.height(25.dp))
 
         }
@@ -135,7 +135,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             Spacer(modifier = Modifier.height(25.dp))
         }
         items(sections) { section ->
-            SectionWithVerticalList(sectionTitle = section.title, filmList = movieList.value)
+            SectionWithVerticalList(sectionTitle = section.title, filmList = movieList.value, navController)
             Spacer(modifier = Modifier.height(25.dp))
         }
     }
@@ -242,12 +242,14 @@ private fun MovieItem2(film : MovieData) {
 
 }
 @Composable
-private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier) {
+private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
   Image(
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",
-      modifier .fillMaxSize(),
-      contentScale = ContentScale.Crop)
+      modifier .fillMaxSize()
+          .clickable {navController.navigate(Screen.MediaPage.route)},
+      contentScale = ContentScale.Crop,
+      )
 
 }
 data class Section(val title: String)
@@ -259,7 +261,7 @@ val sections = listOf(
 )
 
 @Composable
-private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier) {
+private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier, navController: NavController) {
 
         LazyRow {
             items(filmList) { film ->
@@ -271,7 +273,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
                         .background(Color.DarkGray)
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
-                MovieItem3(film = film)
+                MovieItem3(film = film, navController = navController)
             }
         }
     }
@@ -279,7 +281,8 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
 
 @Composable
 private fun verticalListTopHighlight(
-    modifier: Modifier = Modifier,filmList : List<MovieData>) {
+    modifier: Modifier = Modifier,filmList : List<MovieData>,
+    navController: NavController) {
     LazyRow(modifier = modifier) {
         items(filmList) { film ->
 
@@ -290,7 +293,7 @@ private fun verticalListTopHighlight(
                         .background(Color.DarkGray)
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
-                    MovieItem3(film = film)
+                    MovieItem3(film = film, navController = navController)
                 }
 
             }
