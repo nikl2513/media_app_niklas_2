@@ -116,10 +116,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         // Update the movieList with the fetched movies
         movieList.value = movies
     }
-    val recommendationModels = RecommendationModels()
+    //val recommendationModels = RecommendationModels()
 
-    val trending : List<MovieData> = recommendationModels.trending(movieList.value)
-    val forYouPage : List<MovieData>  = recommendationModels.forYouPage(movieList.value)
+    //val trending : List<MovieData> = recommendationModels.trending(movieList.value)
+    //val forYouPage : List<MovieData>  = recommendationModels.forYouPage(movieList.value)
     LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
            Topapp()
