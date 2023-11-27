@@ -253,7 +253,6 @@ val sections = listOf(
     Section("Action")
 )
 
-private var listCounter = 0
 @Composable
 private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier) {
 
@@ -263,7 +262,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
                 // Use the appropriate MovieItem function based on your requirements
                 Box(
                     modifier
-                        .size(360.dp, 190.dp)
+                        .size(150.dp, 190.dp)
                         .background(Color.DarkGray)
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
@@ -271,7 +270,6 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
             }
         }
     }
-        listCounter++
 }
 
 @Composable
