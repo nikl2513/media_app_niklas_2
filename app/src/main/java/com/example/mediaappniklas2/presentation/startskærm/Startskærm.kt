@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.mediaappniklas2.presentation.startskærm
 
 
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -19,19 +22,40 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -49,6 +73,7 @@ import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
@@ -100,10 +125,25 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                       navController: NavController,
                       movieViewModel: HomePageViewModel
 
-)
-{
-
-
+) {
+    val items = listOf(
+        NavigationItem(
+            title = "Home",
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home
+            //tilføj route for navcontroller her
+        ),
+        NavigationItem(
+            title = "Search",
+            selectedIcon = Icons.Filled.Search,
+            unselectedIcon = Icons.Outlined.Search
+        ),
+        NavigationItem(
+            title = "List",
+            selectedIcon = Icons.Filled.List,
+            unselectedIcon = Icons.Outlined.List
+        )
+    )
     // Use LaunchedEffect to execute a coroutine when the Composable is first launched
     LaunchedEffect(true) {
         // Launch a coroutine to fetch movies
@@ -112,33 +152,88 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         }
 
         // Update the movieList with the fetched movies
-       movieViewModel.updateMovieList(movies)
+        movieViewModel.updateMovieList(movies)
         movieViewModel.calculateTrendingMovies()
 
     }
-
-    LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        item {
-           Topapp()
-            Spacer(modifier = Modifier.height(35.dp))
-            verticalListTopHighlight(filmList = movieViewModel.movieList.value
-                , navController = navController)
-            Spacer(modifier = Modifier.height(25.dp))
-
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+        val scope = rememberCoroutineScope()
+        var selectedItemIndex by rememberSaveable {
+            mutableStateOf(0)
         }
-        item {
-            Text(text = "Streaming services", color = Color.White, fontSize = 20.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-            MedieKnapper()
-            Spacer(modifier = Modifier.height(25.dp))
-        }
-        items(sections) { section ->
-            SectionWithVerticalList(sectionTitle = section.title, filmList = movieViewModel.trendingMovies.value, navController)
-            Spacer(modifier = Modifier.height(25.dp))
+        ModalNavigationDrawer(
+            drawerContent = {
+                ModalDrawerSheet {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    items.forEachIndexed { index, item ->
+                        NavigationDrawerItem(
+                            label = { Text(text = item.title) },
+                            selected = index == selectedItemIndex,
+                            onClick = {
+                                //her kan man tilføje navcontroller.navigate(item.route)
+                                //hvor route er gemt i item
+                                selectedItemIndex = index
+                                scope.launch {
+                                    drawerState.close()
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = if (index == selectedItemIndex) {
+                                        item.selectedIcon
+                                    } else item.unselectedIcon,
+                                    contentDescription = item.title
+                                )
+                            },
+                            badge = {
+                                item.badgeCount?.let {
+                                    Text(text = item.badgeCount.toString())
+                                }
+
+                            },
+                            modifier = Modifier
+                                .padding(NavigationDrawerItemDefaults.ItemPadding)
+                        )
+                    }
+
+                }
+            },
+            drawerState = drawerState
+        ) {
+            LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+                item {
+                    Topapp(drawerState)
+                    Spacer(modifier = Modifier.height(35.dp))
+                    verticalListTopHighlight(
+                        filmList = movieViewModel.movieList.value, navController = navController
+                    )
+                    Spacer(modifier = Modifier.height(25.dp))
+
+                }
+                item {
+                    Text(text = "Streaming services", color = Color.White, fontSize = 20.sp)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    MedieKnapper()
+                    Spacer(modifier = Modifier.height(25.dp))
+                }
+                items(sections) { section ->
+                    SectionWithVerticalList(
+                        sectionTitle = section.title,
+                        filmList = movieViewModel.trendingMovies.value,
+                        navController
+                    )
+                    Spacer(modifier = Modifier.height(25.dp))
+                }
+            }
+
         }
     }
-
 }
+
 
 
 @Composable
@@ -200,12 +295,15 @@ fun MedieKnapper(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topapp(){
+fun Topapp(DrawerState: DrawerState){
+        val scope = rememberCoroutineScope()
         Row() {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {scope.launch {
+                DrawerState.open()}
+            }) {
                 Icon(
-                    imageVector = Icons.Default.List,
-                    contentDescription = null
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu"
                 )
             }
 
@@ -223,6 +321,14 @@ fun Topapp(){
         }
 
 }
+
+data class NavigationItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector,
+    val badgeCount: Int? = null
+    //tilføj route til navigation her
+)
 @Composable
 private fun MovieItem(film : Film, navController: NavController) {
      val imageidd: Int = film.image
