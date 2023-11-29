@@ -12,6 +12,7 @@ import com.example.mediaappniklas2.domainLayer.MovieUtils
 import com.example.mediaappniklas2.presentation.Login.LoginForm
 import com.example.mediaappniklas2.presentation.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.presentation.Search.SearchBar
+import com.example.mediaappniklas2.presentation.Search.SearchPageViewModel
 import com.example.mediaappniklas2.presentation.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.presentation.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.presentation.startskærm.HomePageViewModel
@@ -22,7 +23,6 @@ fun NavHost() {
     val navController = rememberNavController()
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
-
 
     NavHost(navController = navController, startDestination = Screen.Opstart.route) {
         composable(route = Screen.Opstart.route){
@@ -43,6 +43,12 @@ fun NavHost() {
             mediaPageViewModel.setCurrentMovie(movie)
 
             MediaPageAPP(navController = navController,movieViewModel = mediaPageViewModel)
+        }
+        composable(route =Screen.MediaPage2.route, listOf(navArgument("movieID") { type = NavType.StringType }) ){
+            val movieID = it.arguments?.getString("movieID")
+            val movie = MovieUtils.findMovieById(movieID,SearchPageViewModel.movieList.value)
+            mediaPageViewModel.setCurrentMovie(movie)
+            MediaPageAPP(navController = navController, movieViewModel = mediaPageViewModel)
         }
         composable(route = Screen.GradientButton.route){
             GradientButton(navController = navController)

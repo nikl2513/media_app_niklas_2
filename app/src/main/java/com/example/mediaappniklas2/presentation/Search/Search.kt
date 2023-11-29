@@ -92,7 +92,7 @@ private fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navContr
             .fillMaxSize()
             .clickable {
                 navController.navigate(
-                    Screen.MediaPage.route.replace("{movieID}", film.movieID)
+                    Screen.MediaPage2.route.replace("{movieID}", film.movieID)
                 )
             }, contentScale = ContentScale.Crop,)
 
