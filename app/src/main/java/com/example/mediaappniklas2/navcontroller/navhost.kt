@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mediaappniklas2.GradientButton
+import com.example.mediaappniklas2.presentation.StreamingServices.GradientButton
 import com.example.mediaappniklas2.domainLayer.MovieUtils
 import com.example.mediaappniklas2.presentation.Login.LoginForm
 import com.example.mediaappniklas2.presentation.Opstart.OpstartMedButtonOgBaggrund
