@@ -8,21 +8,33 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,32 +45,51 @@ import com.example.mediaappniklas2.navcontroller.Screen
 
 
 @Composable
-fun MediaPageAPP(navController: NavController, movieViewModel: MediaPageViewModel) {
-    TopmenuBar(navController = navController)
+fun MediaPageAPP(
+    navController: NavController,
+    movieViewModel: MediaPageViewModel,
+) {
     MediaPage(movieViewModel = movieViewModel)
+    TopmenuBar(navController = navController)
 }
 
 @Composable
-fun TopmenuBar(modifier: Modifier= Modifier
-    .fillMaxSize()
-    .wrapContentSize(
-        Alignment.TopStart
-    ),
-               navController: NavController
-){
-    Row (modifier = modifier,
+fun TopmenuBar(
+    modifier: Modifier = Modifier
+        .fillMaxSize()
+        .wrapContentSize(
+            Alignment.TopStart
+        ),
+    navController: NavController
+) {
+    Box(
+        modifier = modifier
+            .alpha(alpha = 0.5f),
+        contentAlignment = Alignment.TopEnd
 
-
+    ) {
+        IconButton(
+            onClick = { navController.navigate(Screen.Startskaerm.route) },
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(start = 20.dp, top = 20.dp)
+                .clip(CircleShape)
+                .background(Color.DarkGray)
+                .size(30.dp)
         ) {
-        Button(onClick = {navController.navigate(Screen.Startskaerm.route)}) {
-            Text(stringResource(R.string.arrow))
+            Icon(
+                imageVector = Icons.Outlined.ArrowBackIosNew,
+                contentDescription = "Backbutton"
+            )
+
         }
 
     }
 
 }
+
 @Composable
-fun MediaPage(modifier: Modifier = Modifier, movieViewModel: MediaPageViewModel) {
+fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieViewModel: MediaPageViewModel) {
     val currentMovie = movieViewModel.currentMovie.value
 
     // Use LaunchedEffect to observe changes in currentMovie
@@ -71,31 +102,39 @@ fun MediaPage(modifier: Modifier = Modifier, movieViewModel: MediaPageViewModel)
     Column(
         modifier = modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center),
+            .wrapContentSize(Alignment.TopCenter),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         currentMovie?.let { movie ->
-            /*Box(
-                modifier
-                    .size(300.dp, 380.dp)
-                    .background(Color.DarkGray)
-                    .clip(shape = RoundedCornerShape(10.dp))
-            ) {*/
-                val imageModifier = Modifier
-                    .width(350.dp)
-                    .height(400.dp)
-                    .border(BorderStroke(1.dp, Color.Black))
-                    .background(Color.Yellow)
+            val imageModifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Yellow)
+            Image(
+                painter = rememberAsyncImagePainter(movie.imageRef),
+                contentDescription = "A movie poster",
+                contentScale = ContentScale.Crop,
+                modifier = imageModifier
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(modifier = Modifier) {
                 Image(
-                    painter = rememberAsyncImagePainter(movie.imageRef),
-                    contentDescription = "A movie poster",
-                    contentScale = ContentScale.Crop,
-                    modifier = imageModifier
+                    painter = painterResource(id = R.drawable.imdb),
+                    contentDescription = "logo",
+                    Modifier.width(35.dp)
                 )
-            //}
-            Text(movie.title)
-            Text(movie.releasedate)
+                Text(text = " 9.0 ", color = Color.White)
+                Text(text = "| ", color = Color.White)
+                Text(text = "4K ", color = Color.White)
+                Text(text = "| ", color = Color.White)
+                Text(text = "18 Years ", color = Color.White)
+                Text(text = "| ", color = Color.White)
+                Text(movie.releasedate, color = Color.White)
+                Text(text = " | ", color = Color.White)
+                Text(text = "2 t. 32 m.", color = Color.White)
+            }
+            Text(movie.title, color = Color.White)
+
         }
     }
 }
