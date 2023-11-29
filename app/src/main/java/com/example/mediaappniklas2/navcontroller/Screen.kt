@@ -8,5 +8,5 @@ sealed class Screen(val route: String){
     object MediaPage : Screen("MediaPage/{movieID}")
     object GradientButton : Screen("GradientButton")
     object Search : Screen("Search")
-    object MediaPage2 : Screen("MediaPage/{movieID}")
+    object MediaPage2 : Screen("MediaPage2/{movieID}")
 }

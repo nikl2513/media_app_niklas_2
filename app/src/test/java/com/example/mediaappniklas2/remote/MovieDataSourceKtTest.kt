@@ -11,6 +11,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -68,20 +69,20 @@ class MovieApiServiceTest {
 
 
 
-/*
+
     @Test
-        fun searchMovie() {
+        fun searchMovie() = runBlocking{
             val searchWord = "The Wolf of Wall Street" // Use the unencoded search word
-            val call: Call<MovieApiResponse> =
+            val call: MovieApiResponse =
                 RetrofitClient.movieApiService.searchmovies(searchWord)
-            val searchResponse = call.execute()
-            val searchApiResponse = searchResponse.body()
+
+            val searchApiResponse = call.results
 
             if (searchApiResponse != null) {
-                val searchResultList: List<MovieDTO> = searchApiResponse.results
 
-                if (searchResultList.isNotEmpty()) {
-                    val movieData: List<MovieData> = searchResultList.map { convertToMovieData(it) }
+
+                if (searchApiResponse.isNotEmpty()) {
+                    val movieData: List<MovieData> = searchApiResponse.map { convertToMovieData(it) }
                     val movieTitle: String = movieData.first().title
                    println(movieTitle)
                     println(searchWord)
@@ -94,7 +95,7 @@ class MovieApiServiceTest {
             }
         }
 
- */
+
 
 
 }
