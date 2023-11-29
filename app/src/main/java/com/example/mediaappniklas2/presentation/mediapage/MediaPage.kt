@@ -72,7 +72,7 @@ fun MediaPage(modifier: Modifier = Modifier, movieViewModel: MediaPageViewModel)
         modifier = modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center),
-        horizontalAlignment = Alignment.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         currentMovie?.let { movie ->
