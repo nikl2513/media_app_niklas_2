@@ -27,6 +27,16 @@ class SearchPageViewModel: ViewModel() {
         val movieList  = resultsList.map { convertToMovieData(it) }
 
 
+    suspend fun searchMovieInAPI(searchword : String ) : List<MovieData>{
+        val movieApiResponse: MovieApiResponse = RetrofitClient.movieApiService.searchmovies(searchword)
+
+        // Process the response as before
+        val resultsList: List<MovieDTO> = movieApiResponse.results
+
+
+        val movieList  = resultsList.map { convertToMovieData(it) }
+
+
 
         return movieList
     }
