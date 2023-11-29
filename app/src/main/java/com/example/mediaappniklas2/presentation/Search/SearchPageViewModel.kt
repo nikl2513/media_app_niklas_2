@@ -17,31 +17,35 @@ import kotlinx.coroutines.flow.stateIn
 
 class SearchPageViewModel: ViewModel() {
 
-    suspend fun searchMovieInAPI(searchword : String ) : List<MovieData>{
-        val movieApiResponse: MovieApiResponse = RetrofitClient.movieApiService.searchmovies(searchword)
+        suspend fun searchMovieInAPI(searchword: String): List<MovieData> {
+            val movieApiResponse: MovieApiResponse =
+                RetrofitClient.movieApiService.searchmovies(searchword)
 
-        // Process the response as before
-        val resultsList: List<MovieDTO> = movieApiResponse.results
-
-
-        val movieList  = resultsList.map { convertToMovieData(it) }
+            // Process the response as before
+            val resultsList: List<MovieDTO> = movieApiResponse.results
 
 
-    suspend fun searchMovieInAPI(searchword : String ) : List<MovieData>{
-        val movieApiResponse: MovieApiResponse = RetrofitClient.movieApiService.searchmovies(searchword)
-
-        // Process the response as before
-        val resultsList: List<MovieDTO> = movieApiResponse.results
+            val movieList = resultsList.map { convertToMovieData(it) }
 
 
-        val movieList  = resultsList.map { convertToMovieData(it) }
+            return movieList
+        }
+
+    companion object {
+        suspend fun searchMovieInAPI(searchword: String): List<MovieData> {
+            val movieApiResponse: MovieApiResponse =
+                RetrofitClient.movieApiService.searchmovies(searchword)
+
+            // Process the response as before
+            val resultsList: List<MovieDTO> = movieApiResponse.results
 
 
+            val movieList = resultsList.map { convertToMovieData(it) }
 
-        return movieList
+
+            return movieList
+        }
     }
-
-
 
 
 }
