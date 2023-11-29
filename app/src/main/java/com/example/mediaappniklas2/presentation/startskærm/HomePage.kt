@@ -77,7 +77,6 @@ import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Route
 import java.io.IOException
 
 suspend fun import_of_movies(): List<MovieData> {
