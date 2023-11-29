@@ -54,6 +54,7 @@ class MovieApiServiceTest {
 
                 // Verify specific details about the movies
                 assertEquals(50, movieDataList.size)
+            assertEquals("61e58509d8f3c0931e423367",movieDataList.first().movieID)
                 assertEquals("The Flash", movieDataList.first().title)
                 assertEquals("2023", movieDataList.first().releasedate)
                 assertEquals("https://m.media-amazon.com/images/M/MV5BZWE2ZWE5MDQtMTJlZi00MTVjLTkxOTgtNmNiYjg2NDIxN2NhXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",

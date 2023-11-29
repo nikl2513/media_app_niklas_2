@@ -26,17 +26,19 @@ data class MovieDTO(
 )
 
 data class MovieData(
+        val movieID : String,
         val title: String,
         val releasedate: String,
         val imageRef: String
 )
 
 fun convertToMovieData(movieDTO: MovieDTO): MovieData {
+        val id = movieDTO.id
         val title = movieDTO.titleText.text
         val releasedate = "${movieDTO.releaseYear?.year}" ?: "UnkownreleaseYear" // Assuming you want the release year as a String
         val imageRef = movieDTO.imageRef?.url ?: "defaultImageUrl"
 
-        return MovieData(title, releasedate, imageRef)
+        return MovieData(id,title, releasedate, imageRef)
 }
 data class MovieApiResponse(
         val results : List<MovieDTO>

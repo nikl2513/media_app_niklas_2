@@ -28,8 +28,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,11 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavArgument
 import androidx.navigation.NavController
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
@@ -103,11 +97,12 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     .background(Color.DarkGray)
     .fillMaxSize()
     .wrapContentSize(Alignment.TopCenter),
-                      navController: NavController
+                      navController: NavController,
+                      movieViewModel: HomePageViewModel
 
 )
 {
-    val movieList = remember { mutableStateOf<List<MovieData>>(emptyList()) }
+
 
     // Use LaunchedEffect to execute a coroutine when the Composable is first launched
     LaunchedEffect(true) {
@@ -117,7 +112,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         }
 
         // Update the movieList with the fetched movies
-        movieList.value = movies
+       movieViewModel.updateMovieList(movies)
     }
     //val recommendationModels = RecommendationModels()
 
@@ -127,7 +122,8 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         item {
            Topapp()
             Spacer(modifier = Modifier.height(35.dp))
-            verticalListTopHighlight(filmList = movieList.value, navController = navController)
+            verticalListTopHighlight(filmList = movieViewModel.movieList.value
+                , navController = navController)
             Spacer(modifier = Modifier.height(25.dp))
 
         }
@@ -138,7 +134,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             Spacer(modifier = Modifier.height(25.dp))
         }
         items(sections) { section ->
-            SectionWithVerticalList(sectionTitle = section.title, filmList = movieList.value, navController)
+            SectionWithVerticalList(sectionTitle = section.title, filmList = movieViewModel.movieList.value, navController)
             Spacer(modifier = Modifier.height(25.dp))
         }
     }
@@ -250,7 +246,7 @@ private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navContr
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",
       modifier .fillMaxSize()
-          .clickable {navController.navigate(Screen.MediaPage.route.replace("{title}", film.title))},
+          .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))},
       contentScale = ContentScale.Crop,
       )
 
