@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import com.example.mediaappniklas2.datalayer.MovieDTO
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.stateIn
 
 class SearchPageViewModel: ViewModel() {
@@ -18,7 +20,9 @@ class SearchPageViewModel: ViewModel() {
     val issearchning = _issearchning.asStateFlow()
 
     private val _ismovie = MutableStateFlow(listOf<MovieDTO>())
+    @OptIn(FlowPreview::class)
     val ismovie = searchtekst
+        .debounce(500L)
         .combine(_ismovie) { text, movie ->
             if (text.isBlank()) {
                 movie
