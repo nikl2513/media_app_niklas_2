@@ -1,5 +1,7 @@
 package com.example.mediaappniklas2.presentation.Search
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
@@ -17,7 +19,7 @@ import kotlinx.coroutines.flow.stateIn
 
 class SearchPageViewModel: ViewModel() {
 
-        suspend fun searchMovieInAPI(searchword: String): List<MovieData> {
+        /*suspend fun searchMovieInAPI(searchword: String): List<MovieData> {
             val movieApiResponse: MovieApiResponse =
                 RetrofitClient.movieApiService.searchmovies(searchword)
 
@@ -29,10 +31,13 @@ class SearchPageViewModel: ViewModel() {
 
 
             return movieList
-        }
+        }*/
 
-    companion object {
-        suspend fun searchMovieInAPI(searchword: String): List<MovieData> {
+
+    companion object{
+        private val _movieList = mutableStateOf<List<MovieData>>(emptyList())
+        val movieList: State<List<MovieData>> get() = _movieList
+        suspend fun searchMovieInAPI(searchword: String) {
             val movieApiResponse: MovieApiResponse =
                 RetrofitClient.movieApiService.searchmovies(searchword)
 
@@ -41,11 +46,10 @@ class SearchPageViewModel: ViewModel() {
 
 
             val movieList = resultsList.map { convertToMovieData(it) }
-
-
-            return movieList
+            _movieList.value = movieList
         }
     }
+
 
 
 }

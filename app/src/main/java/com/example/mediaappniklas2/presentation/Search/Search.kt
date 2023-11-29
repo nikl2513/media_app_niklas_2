@@ -21,6 +21,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mediaappniklas2.navcontroller.Screen
-
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,6 +38,7 @@ import com.example.mediaappniklas2.navcontroller.Screen
 @Composable
 fun SearchBar() {
     var text by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
     Column {
 
         TextField(
@@ -47,7 +49,8 @@ fun SearchBar() {
             modifier = Modifier.fillMaxWidth()
 
         )
-        Button(onClick = {filmliste(text) }) {
+        val scope = rememberCoroutineScope()
+        Button(onClick = {scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }) {
             Text(text = "Search")
             
         }
@@ -57,10 +60,10 @@ fun SearchBar() {
     }
 
 
-    suspend fun filmliste(searchword: String)
+    /*suspend fun filmliste(searchword: String)
     {
         SearchPageViewModel.searchMovieInAPI(searchword)
 
-    }
+    }*/
 
 }
