@@ -47,7 +47,7 @@ fun SearchBar() {
             modifier = Modifier.fillMaxWidth()
 
         )
-        Button(onClick = { SearchPageViewModel.searchMovieInAPI(text) }) {
+        Button(onClick = {filmliste(text) }) {
             Text(text = "Search")
             
         }
@@ -57,5 +57,10 @@ fun SearchBar() {
     }
 
 
+    suspend fun filmliste(searchword: String)
+    {
+        SearchPageViewModel.searchMovieInAPI(searchword)
+
+    }
 
 }
