@@ -86,7 +86,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
-    //load image url
+
     implementation("io.coil-kt:coil-compose:2.4.0")
 
 
