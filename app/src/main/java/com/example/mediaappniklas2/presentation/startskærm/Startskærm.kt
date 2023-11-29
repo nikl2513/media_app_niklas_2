@@ -113,11 +113,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
         // Update the movieList with the fetched movies
        movieViewModel.updateMovieList(movies)
-    }
-    //val recommendationModels = RecommendationModels()
+        movieViewModel.calculateTrendingMovies()
 
-    //val trending : List<MovieData> = recommendationModels.trending(movieList.value)
-    //val forYouPage : List<MovieData>  = recommendationModels.forYouPage(movieList.value)
+    }
+
     LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         item {
            Topapp()
@@ -134,7 +133,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             Spacer(modifier = Modifier.height(25.dp))
         }
         items(sections) { section ->
-            SectionWithVerticalList(sectionTitle = section.title, filmList = movieViewModel.movieList.value, navController)
+            SectionWithVerticalList(sectionTitle = section.title, filmList = movieViewModel.trendingMovies.value, navController)
             Spacer(modifier = Modifier.height(25.dp))
         }
     }

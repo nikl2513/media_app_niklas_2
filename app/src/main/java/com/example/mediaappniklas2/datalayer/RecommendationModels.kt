@@ -2,20 +2,21 @@ package com.example.mediaappniklas2.datalayer
 import kotlin.random.Random
 class RecommendationModels {
     fun trending(movielist: List<MovieData>): List<MovieData> {
-        // These declared parameters would be averages from userdata
-        val userrating: CustomFloatValueTrending = CustomFloatValueTrending.create(1f)
-        val trendy: CustomFloatValueTrending = CustomFloatValueTrending.create(4f)
-        val trendRating: CustomFloatValueTrending = CustomFloatValueTrending.create(5f)
+
+        val userrating: Float = 1.1f
+        val trendy: Float = 2.3f
+        val trendRating: Float = 5.1f
 
         // This is to make the actual ratings random since they all use the same static values do to not having Userdata to create them from.
-        val abitaryVal: CustomFloatValueTrending = CustomFloatValueTrending.create(generateRandomFloat())
+
 
         val ratedMovies = movielist.map { movieData ->
-            val rating: CustomFloatValueTrending = calculateRating(userrating, trendy, trendRating, abitaryVal)
+            val abitaryVal: Float = generateRandomFloat()
+            val rating: Float = calculateRating(userrating, trendy, trendRating, abitaryVal)
             Pair(movieData, rating)
         }
 
-        val sortedMovies = ratedMovies.sortedByDescending { it.second.value }
+        val sortedMovies = ratedMovies.sortedByDescending { it.second }
 
         val top10Movies = sortedMovies.take(10).map { it.first }
 
@@ -25,19 +26,19 @@ class RecommendationModels {
 
     fun forYouPage(movielist: List<MovieData>) : List<MovieData> {
         // These declared parameters would be averages from userdata
-        val userrating: CustomFloatValueTrending = CustomFloatValueTrending.create(4.5f)
-        val trendy: CustomFloatValueTrending = CustomFloatValueTrending.create(7.5f)
-        val trendRating: CustomFloatValueTrending = CustomFloatValueTrending.create(5.1f)
+        val userrating: Float = 1.1f
+        val trendy: Float = 2.3f
+        val trendRating: Float = 5.1f
 
         // This is to make the actual ratings random since they all use the same static values do to not having Userdata to create them from.
-        val abitaryVal: CustomFloatValueTrending = CustomFloatValueTrending.create(generateRandomFloat())
+        val abitaryVal: Float = generateRandomFloat()
 
         val ratedMovies = movielist.map { movieData ->
-            val rating: CustomFloatValueTrending = calculateRating(userrating, trendy, trendRating, abitaryVal)
+            val rating: Float = calculateRating(userrating, trendy, trendRating, abitaryVal)
             Pair(movieData, rating)
         }
 
-        val sortedMovies = ratedMovies.sortedByDescending { it.second.value }
+        val sortedMovies = ratedMovies.sortedByDescending { it.second}
 
         val top10Movies = sortedMovies.take(10).map { it.first }
 
@@ -51,13 +52,13 @@ class RecommendationModels {
     }
 }
 private fun calculateRating(
-    userrating: CustomFloatValueTrending,
-    trendy: CustomFloatValueTrending,
-    trendRating: CustomFloatValueTrending,
-    abitaryVal : CustomFloatValueTrending
-): CustomFloatValueTrending {
-    val ratingValue = (userrating.value + trendy.value + abitaryVal.value ) / 3 * trendRating.value
-    return CustomFloatValueTrending.create(ratingValue)
+    userrating: Float,
+    trendy: Float,
+    trendRating: Float,
+    abitaryVal : Float
+): Float {
+    val ratingValue = (userrating + trendy + abitaryVal ) / 3 * trendRating
+    return ratingValue
 }
 
 fun generateRandomFloat(): Float {
