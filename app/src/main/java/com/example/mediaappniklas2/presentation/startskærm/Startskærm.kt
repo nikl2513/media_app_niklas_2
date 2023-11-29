@@ -209,6 +209,7 @@ fun Topapp(){
                     contentDescription = null
                 )
             }
+
             Spacer(modifier = Modifier.width(120.dp))
             Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
             Spacer(modifier = Modifier.width(120.dp))
@@ -218,7 +219,10 @@ fun Topapp(){
                     contentDescription = null
                 )
             }
+
+
         }
+
 }
 @Composable
 private fun MovieItem(film : Film, navController: NavController) {

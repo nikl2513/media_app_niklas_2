@@ -22,65 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.mediaappniklas2.datalayer.MovieApiResponse
-import com.example.mediaappniklas2.datalayer.MovieDTO
-import com.example.mediaappniklas2.datalayer.MovieData
-import com.example.mediaappniklas2.datalayer.convertToMovieData
-import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
 import com.example.mediaappniklas2.navcontroller.Screen
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.io.IOException
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(navController: NavController) {
-    val viewModel = viewModel<SearchPageViewModel>()
-    val searchtext by viewModel.searchtekst.collectAsState()
-    val movie by viewModel.ismovie.collectAsState()
-    val issearching by viewModel.issearchning.collectAsState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        TextField(
-            value = searchtext,
-            onValueChange = viewModel::onSearchTextChange,
-        label = { Text("Search") },
-        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ){
-            items(movie){
-                movie ->
-                Text(text = "${movie.title}",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", movie.movieID))}
-                )
-
-            }
-
-        }
-
-    }
-
-
-
-
-
 
     var text by remember { mutableStateOf("") }
     TextField(
