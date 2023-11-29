@@ -36,26 +36,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
-suspend fun import_of_movies(): List<MovieData> {
-    return withContext(Dispatchers.IO) {
-        try {
-            val movieApiResponse: MovieApiResponse = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
-
-            // Process the response as before
-            val resultsList: List<MovieDTO> = movieApiResponse.results
-            return@withContext resultsList.map { convertToMovieData(it) }
-
-        } catch (e: IOException) {
-            // Handle network error
-            e.printStackTrace()
-        }
-
-        return@withContext emptyList()
-    }
-}
-
-
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,7 +49,8 @@ fun SearchBar(navController: NavController) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        TextField(value = searchtext,
+        TextField(
+            value = searchtext,
             onValueChange = viewModel::onSearchTextChange,
         label = { Text("Search") },
         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
@@ -83,11 +64,11 @@ fun SearchBar(navController: NavController) {
         ){
             items(movie){
                 movie ->
-                Text(text = "${movie.titleText}",
+                Text(text = "${movie.title}",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
-                    .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", movie.id))}
+                    .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", movie.movieID))}
                 )
 
             }

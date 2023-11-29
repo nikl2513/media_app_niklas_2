@@ -2,9 +2,11 @@ package com.example.mediaappniklas2.presentation.Search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import com.example.mediaappniklas2.datalayer.MovieDTO
+import com.example.mediaappniklas2.datalayer.MovieData
+import com.example.mediaappniklas2.presentation.startskærm.HomePageViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -19,7 +21,7 @@ class SearchPageViewModel: ViewModel() {
     private val _issearchning = MutableStateFlow(false)
     val issearchning = _issearchning.asStateFlow()
 
-    private val _ismovie = MutableStateFlow(listOf<MovieDTO>())
+    private val _ismovie = MutableStateFlow(listOf<MovieData>())
     @OptIn(FlowPreview::class)
     val ismovie = searchtekst
         .debounce(500L)
@@ -31,8 +33,6 @@ class SearchPageViewModel: ViewModel() {
                     it.matchsearch(text)
                 }
             }
-
-
         }
         .stateIn(
             viewModelScope,

@@ -23,23 +23,23 @@ data class MovieDTO(
 
         @SerializedName("primaryImage")
         val imageRef : ImageRef
-){
-        fun matchsearch(query:String):Boolean{
-                val matchingcom = listOf(
-                        "$titleText"
-                )
-                return matchingcom.any{
-                        it.contains(query, ignoreCase = true)
-                }
-        }
-}
+)
 
 data class MovieData(
         val movieID : String,
         val title: String,
         val releasedate: String,
         val imageRef: String
-)
+){
+        fun matchsearch(query:String):Boolean{
+                val matchingcom = listOf(
+                        "$title"
+                )
+                return matchingcom.any{
+                        it.contains(query, ignoreCase = true)
+                }
+        }
+}
 
 fun convertToMovieData(movieDTO: MovieDTO): MovieData {
         val id = movieDTO.id
