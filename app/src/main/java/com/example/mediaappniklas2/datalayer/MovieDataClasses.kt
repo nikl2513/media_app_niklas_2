@@ -45,7 +45,7 @@ data class MovieData(
 fun convertToMovieData(movieDTO: MovieDTO): MovieData {
         val id = movieDTO.id
         val title = movieDTO.titleText.text
-        val releasedate = "${movieDTO.releaseYear?.year}" ?: "UnkownreleaseYear" // Assuming you want the release year as a String
+        val releasedate = "${movieDTO.releaseYear?.year}" ?: "UnkownreleaseYear"
         val imageRef = movieDTO.imageRef?.url ?: "defaultImageUrl"
 
         return MovieData(id,title, releasedate, imageRef)
