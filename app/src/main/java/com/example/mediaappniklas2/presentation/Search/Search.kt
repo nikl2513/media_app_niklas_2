@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,27 +55,29 @@ import kotlinx.coroutines.launch
 fun SearchBar(modifier: Modifier = Modifier
     .background(Color.DarkGray)
     .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter),
-              navController: NavController,
-              ) {
+    .wrapContentSize(Alignment.TopCenter), navController: NavController, ) {
     var text by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     Column {
 
+        Row{
+            Icon(Icons.Filled.ArrowBack,
+                contentDescription = null,
+                modifier = Modifier.clickable {navController.navigate(Screen.Startskaerm.route)   }
+                )
         TextField(
             value = text,
             onValueChange = { text = it },
             label = { Text("Search") },
             leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
             modifier = Modifier.fillMaxWidth()
-
         )
+    }
         val scope = rememberCoroutineScope()
         Button(onClick = {scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }) {
             Text(text = "Search")
         }
         verticalList(filmList = SearchPageViewModel.movieList.value, navController = navController)
-
     }
 
 }
@@ -88,7 +92,9 @@ private fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navContr
             .fillMaxSize()
             .clickable {
                 navController.navigate(
-                    Screen.MediaPage.route.replace("{movieID}", film.movieID)) }, contentScale = ContentScale.Crop,)
+                    Screen.MediaPage.route.replace("{movieID}", film.movieID)
+                )
+            }, contentScale = ContentScale.Crop,)
 
 }
 
