@@ -25,9 +25,11 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -75,6 +77,7 @@ import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.Route
 import java.io.IOException
 
 suspend fun import_of_movies(): List<MovieData> {
@@ -102,7 +105,7 @@ private data class Film(
     val description: String,
     val imdb: Int,
     val genre: String,
-    val image: Int)
+    val image: Int,)
 
 
 //private val filmlist2 = model.trending(filmList)
@@ -130,19 +133,29 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         NavigationItem(
             title = "Home",
             selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home
+            unselectedIcon = Icons.Outlined.Home,
+            route = Screen.Startskaerm.route
             //tilføj route for navcontroller her
         ),
         NavigationItem(
             title = "Search",
             selectedIcon = Icons.Filled.Search,
-            unselectedIcon = Icons.Outlined.Search
+            unselectedIcon = Icons.Outlined.Search,
+            route = Screen.Search.route
         ),
         NavigationItem(
             title = "List",
             selectedIcon = Icons.Filled.List,
-            unselectedIcon = Icons.Outlined.List
+            unselectedIcon = Icons.Outlined.List,
+            route = Screen.Startskaerm.route
+        ),
+        NavigationItem(
+            title = "Your Streaming Services",
+            selectedIcon = Icons.Filled.PlayArrow,
+            unselectedIcon = Icons.Outlined.PlayArrow,
+            route = Screen.GradientButton.route
         )
+
     )
     // Use LaunchedEffect to execute a coroutine when the Composable is first launched
     LaunchedEffect(true) {
@@ -173,7 +186,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                         NavigationDrawerItem(
                             label = { Text(text = item.title) },
                             selected = index == selectedItemIndex,
-                            onClick = {
+                            onClick = {navController.navigate(item.route)
                                 //her kan man tilføje navcontroller.navigate(item.route)
                                 //hvor route er gemt i item
                                 selectedItemIndex = index
@@ -326,8 +339,8 @@ data class NavigationItem(
     val title: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val badgeCount: Int? = null
-    //tilføj route til navigation her
+    val badgeCount: Int? = null,
+    val route: String
 )
 @Composable
 private fun MovieItem(film : Film, navController: NavController) {
