@@ -246,9 +246,7 @@ private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navContr
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",
       modifier .fillMaxSize()
-          .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))},
-      contentScale = ContentScale.Crop,
-      )
+          .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))}, contentScale = ContentScale.Crop,)
 
 }
 data class Section(val title: String)
