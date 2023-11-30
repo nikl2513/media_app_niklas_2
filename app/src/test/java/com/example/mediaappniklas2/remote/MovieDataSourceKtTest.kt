@@ -6,6 +6,7 @@ import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.MovieApiService
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
+import com.example.mediaappniklas2.presentation.mediapage.MediaPageViewModel
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -95,6 +96,16 @@ class MovieApiServiceTest {
             }
         }
 
+    @Test
+    fun mediaRating_IsCorrect() = runBlocking {
+        val movieID = ("tt0439572")
+        val TheFlashRating = 6.7F
+
+        MediaPageViewModel.searchRating(movieID)
+        val MediaPageRating = MediaPageViewModel.currentImdb.value?.averageRating
+
+        assertEquals(TheFlashRating, MediaPageRating)
+    }
 
 
 
