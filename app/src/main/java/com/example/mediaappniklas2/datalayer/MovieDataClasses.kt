@@ -30,6 +30,17 @@ data class MovieDTO(
 
 }
 
+data class ImdbDTO(
+        @SerializedName("tconst")
+        val imdbID : String,
+
+        @SerializedName("averageRating")
+        val averageRating: Float,
+
+        @SerializedName("numVotes")
+        val numVotes: Float
+)
+
 
 data class MovieData(
         val movieID : String,
@@ -50,6 +61,10 @@ fun convertToMovieData(movieDTO: MovieDTO): MovieData {
 }
 data class MovieApiResponse(
         val results : List<MovieDTO>
+)
+
+data class ImdbApiResponse(
+        val results : ImdbDTO
 )
 data class ApiSearchResponse(
         val result : MovieDTO

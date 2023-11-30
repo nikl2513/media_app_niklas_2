@@ -1,5 +1,6 @@
 package com.example.mediaappniklas2.datalayer.remote
 
+import com.example.mediaappniklas2.datalayer.ImdbApiResponse
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
 import org.slf4j.LoggerFactory
 import retrofit2.Retrofit
@@ -27,17 +28,17 @@ interface MovieApiService {
    suspend fun searchmovies(
         @Path("title") title : String,
         @Query("exact") exact: Boolean = true,
-    @Query("titleType") titleType: String = "movie"
+        @Query("titleType") titleType: String = "movie"
     ) : MovieApiResponse
 
     @Headers(
         "X-RapidAPI-Key:254e2c3adfmsh3da535182efaf51p108f81jsn69df13326d34",
         "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com"
     )
-    @GET("")
+    @GET("titles/{id}/ratings")
     suspend fun getRatings(
-
-    ) : MovieApiResponse
+        @Path("id") id : String
+    ) : ImdbApiResponse
 }
 
 object RetrofitClient{

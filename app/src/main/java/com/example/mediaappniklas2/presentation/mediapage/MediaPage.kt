@@ -14,6 +14,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
@@ -38,6 +48,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
@@ -91,13 +102,14 @@ fun TopmenuBar(
 @Composable
 fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieViewModel: MediaPageViewModel) {
     val currentMovie = movieViewModel.currentMovie.value
-
-    // Use LaunchedEffect to observe changes in currentMovie
-    LaunchedEffect(currentMovie) {
-        if (currentMovie != null) {
-            // Do any additional setup or data loading based on the currentMovie
+    LaunchedEffect(currentMovie?.imdbID) {
+        currentMovie?.imdbID?.let { movieId ->
+            movieViewModel.fetchImdbRating(currentMovie.imdbID)
         }
     }
+    val currentImdb = MediaPageViewModel.currentImdb
+
+    // Use LaunchedEffect to observe changes in currentMovie
 
     Column(
         modifier = modifier
@@ -123,13 +135,14 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                     contentDescription = "logo",
                     Modifier.width(35.dp)
                 )
-                Text(text = " 9.0 ", color = Color.White)
+                Text(text = " ", color = Color.White)
+                Text(text = currentImdb.value?.averageRating.toString(), color = Color.White)
                 Text(text = "| ", color = Color.White)
                 Text(text = "4K ", color = Color.White)
                 Text(text = "| ", color = Color.White)
                 Text(text = "18 Years ", color = Color.White)
                 Text(text = "| ", color = Color.White)
-                Text(movie.releasedate, color = Color.White)
+                Text(currentMovie.releasedate, color = Color.White)
                 Text(text = " | ", color = Color.White)
                 Text(text = "2 t. 32 m.", color = Color.White)
             }
