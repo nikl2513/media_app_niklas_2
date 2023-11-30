@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.presentation.Login
+package com.example.mediaappniklas2.uiLayer.Login
 
 import android.app.Activity
 import android.content.Context

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.mediaappniklas2.presentation.startskærm
+package com.example.mediaappniklas2.uiLayer.startskærm
 
 
 import androidx.compose.foundation.Image

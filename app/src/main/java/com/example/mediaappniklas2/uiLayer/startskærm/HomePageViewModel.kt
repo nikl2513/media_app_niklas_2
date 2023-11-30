@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.presentation.startskærm
+package com.example.mediaappniklas2.uiLayer.startskærm
 
 import android.util.Log
 import androidx.compose.runtime.State

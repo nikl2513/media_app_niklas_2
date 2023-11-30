@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.presentation.Opstart
+package com.example.mediaappniklas2.uiLayer.Opstart
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

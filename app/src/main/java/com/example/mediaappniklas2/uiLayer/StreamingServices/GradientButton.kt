@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.presentation.StreamingServices
+package com.example.mediaappniklas2.uiLayer.StreamingServices
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
