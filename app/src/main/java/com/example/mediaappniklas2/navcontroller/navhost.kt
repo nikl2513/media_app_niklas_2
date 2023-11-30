@@ -7,16 +7,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mediaappniklas2.presentation.StreamingServices.GradientButton
+import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
 import com.example.mediaappniklas2.domainLayer.MovieUtils
-import com.example.mediaappniklas2.presentation.Login.LoginForm
-import com.example.mediaappniklas2.presentation.Opstart.OpstartMedButtonOgBaggrund
-import com.example.mediaappniklas2.presentation.Search.SearchBar
-import com.example.mediaappniklas2.presentation.Search.SearchPageViewModel
-import com.example.mediaappniklas2.presentation.mediapage.MediaPageAPP
-import com.example.mediaappniklas2.presentation.mediapage.MediaPageViewModel
-import com.example.mediaappniklas2.presentation.startskærm.HomePageViewModel
-import com.example.mediaappniklas2.presentation.startskærm.OpstartStartskærm
+import com.example.mediaappniklas2.uiLayer.Login.LoginForm
+import com.example.mediaappniklas2.uiLayer.Opstart.OpstartMedButtonOgBaggrund
+import com.example.mediaappniklas2.uiLayer.Search.SearchBar
+import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
+import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
+import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
+import com.example.mediaappniklas2.uiLayer.startskærm.HomePageViewModel
+import com.example.mediaappniklas2.uiLayer.startskærm.OpstartStartskærm
 
 @Composable
 fun NavHost() {

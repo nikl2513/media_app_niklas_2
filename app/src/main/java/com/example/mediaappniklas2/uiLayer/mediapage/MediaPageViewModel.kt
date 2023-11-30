@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.presentation.mediapage
+package com.example.mediaappniklas2.uiLayer.mediapage
 
 import android.util.Log
 import androidx.compose.runtime.State
