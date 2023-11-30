@@ -15,6 +15,9 @@ data class MovieDTO(
         @SerializedName("_id")
         val id: String,
 
+        @SerializedName("id")
+        val imdbID : String,
+
         @SerializedName("titleText")
         val titleText : TitleText,
 
@@ -24,19 +27,13 @@ data class MovieDTO(
         @SerializedName("primaryImage")
         val imageRef : ImageRef
 ){
-        fun matchsearch(query:String):Boolean{
-                val matchingcom = listOf(
-                        "$titleText"
-                )
-                return matchingcom.any{
-                        it.contains(query, ignoreCase = true)
-                }
-        }
+
 }
 
 
 data class MovieData(
         val movieID : String,
+        val imdbID : String,
         val title: String,
         val releasedate: String,
         val imageRef: String
@@ -44,11 +41,12 @@ data class MovieData(
 
 fun convertToMovieData(movieDTO: MovieDTO): MovieData {
         val id = movieDTO.id
+        val idIMDB = movieDTO.imdbID
         val title = movieDTO.titleText.text
         val releasedate = "${movieDTO.releaseYear?.year}" ?: "UnkownreleaseYear"
         val imageRef = movieDTO.imageRef?.url ?: "defaultImageUrl"
 
-        return MovieData(id,title, releasedate, imageRef)
+        return MovieData(id,idIMDB,title, releasedate, imageRef)
 }
 data class MovieApiResponse(
         val results : List<MovieDTO>

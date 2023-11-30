@@ -29,6 +29,15 @@ interface MovieApiService {
         @Query("exact") exact: Boolean = true,
     @Query("titleType") titleType: String = "movie"
     ) : MovieApiResponse
+
+    @Headers(
+        "X-RapidAPI-Key:254e2c3adfmsh3da535182efaf51p108f81jsn69df13326d34",
+        "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com"
+    )
+    @GET("")
+    suspend fun getRatings(
+
+    ) : MovieApiResponse
 }
 
 object RetrofitClient{
