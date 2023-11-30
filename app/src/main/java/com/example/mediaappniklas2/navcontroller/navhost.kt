@@ -7,12 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mediaappniklas2.presentation.StreamingServices.GradientButton
 import com.example.mediaappniklas2.domainLayer.MovieUtils
 import com.example.mediaappniklas2.presentation.Login.LoginForm
+import com.example.mediaappniklas2.presentation.Login.LoginViewModel
 import com.example.mediaappniklas2.presentation.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.presentation.Search.SearchBar
 import com.example.mediaappniklas2.presentation.Search.SearchPageViewModel
+import com.example.mediaappniklas2.presentation.StreamingServices.GradientButton
 import com.example.mediaappniklas2.presentation.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.presentation.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.presentation.startskærm.HomePageViewModel
@@ -23,6 +24,7 @@ fun NavHost() {
     val navController = rememberNavController()
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
+    val loginViewModel : LoginViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = Screen.Opstart.route) {
         composable(route = Screen.Opstart.route){

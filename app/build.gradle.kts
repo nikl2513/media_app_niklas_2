@@ -86,7 +86,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
-    //load image url
+    implementation("io.cucumber:cucumber-java:7.0.0")
+    implementation("io.cucumber:cucumber-java8:7.0.0")
+    implementation("io.cucumber:cucumber-kotlin:7.0.0")
+
     implementation("io.coil-kt:coil-compose:2.4.0")
 
 
@@ -94,6 +97,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.0")
+    implementation ("io.cucumber:cucumber-android:v7.14.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
