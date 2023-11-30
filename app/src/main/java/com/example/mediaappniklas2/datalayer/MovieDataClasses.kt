@@ -23,16 +23,7 @@ data class MovieDTO(
 
         @SerializedName("primaryImage")
         val imageRef : ImageRef
-){
-        fun matchsearch(query:String):Boolean{
-                val matchingcom = listOf(
-                        "$titleText"
-                )
-                return matchingcom.any{
-                        it.contains(query, ignoreCase = true)
-                }
-        }
-}
+)
 
 
 data class MovieData(
