@@ -1,6 +1,5 @@
 package com.example.mediaappniklas2
 
-import com.example.mediaappniklas2.presentation.mediapage.MediaPageViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

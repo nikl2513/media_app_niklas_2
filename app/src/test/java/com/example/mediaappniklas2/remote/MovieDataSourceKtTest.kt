@@ -6,7 +6,7 @@ import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.datalayer.convertToMovieData
 import com.example.mediaappniklas2.datalayer.remote.MovieApiService
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
-import com.example.mediaappniklas2.presentation.mediapage.MediaPageViewModel
+import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
