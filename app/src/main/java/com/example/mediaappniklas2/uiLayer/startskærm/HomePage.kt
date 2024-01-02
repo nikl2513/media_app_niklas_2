@@ -64,7 +64,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
@@ -99,12 +98,6 @@ suspend fun import_of_movies(): List<MovieData> {
 
 //private val model = RecommendationModels()
 
-private data class Film(
-    val filmName: String,
-    val description: String,
-    val imdb: Int,
-    val genre: String,
-    val image: Int,)
 
 
 //private val filmlist2 = model.trending(filmList)
@@ -341,22 +334,8 @@ data class NavigationItem(
     val badgeCount: Int? = null,
     val route: String
 )
-@Composable
-private fun MovieItem(film : Film, navController: NavController) {
-     val imageidd: Int = film.image
-    Image(modifier = Modifier.clickable {navController.navigate(Screen.MediaPage.route)},painter = painterResource(id = imageidd), contentDescription = "")
 
-}
-@Composable
-private fun MovieItem2(film : MovieData) {
-    AsyncImage(
-        model = film.imageRef,
-        placeholder = painterResource(id = R.drawable.logo1),
-        error = painterResource(id = R.drawable.logo1),
-        contentDescription = "The delasign logo",
-    )
 
-}
 @Composable
 private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
   Image(
