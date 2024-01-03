@@ -233,7 +233,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                 items(sections) { section ->
                     SectionWithVerticalList(
                         sectionTitle = section.title,
-                        filmList = movieViewModel.trendingMovies.value,
+                        filmList = section.filmList,
                         navController
                     )
                     Spacer(modifier = Modifier.height(25.dp))
