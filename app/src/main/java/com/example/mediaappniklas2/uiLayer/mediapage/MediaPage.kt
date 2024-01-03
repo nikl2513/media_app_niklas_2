@@ -1,5 +1,6 @@
 package com.example.mediaappniklas2.uiLayer.mediapage
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,10 +16,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,7 +33,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
@@ -110,7 +116,37 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                 contentScale = ContentScale.Crop,
                 modifier = imageModifier
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(modifier = Modifier) {
+                OutlinedButton(
+                    onClick = { /*TODO*/ },
+                    border = BorderStroke(1.dp, Color.Black),
+                    shape = RoundedCornerShape(20)
+                )
+                {
+                    IconButton(
+                        onClick = { },
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .background(Color.DarkGray)
+                            .size(30.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Add,
+                            contentDescription = "add"
+                        )
+
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                movie.title,
+                color = Color.White,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 20.sp
+            )
+            Spacer(modifier = Modifier.height(8.dp))
             Row(modifier = Modifier) {
                 Image(
                     painter = painterResource(id = R.drawable.imdb),
@@ -128,7 +164,6 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                 Text(text = " | ", color = Color.White)
                 Text(text = "2 t. 32 m.", color = Color.White)
             }
-            Text(movie.title, color = Color.White)
 
         }
     }
