@@ -21,7 +21,7 @@ class MediaPageViewModel : ViewModel() {
     var savedMovies = mutableStateListOf<MovieData>()
         private set
     fun saveMovie(movie: MovieData){
-        if (!savedMovies.any {it.movieID == movie.movieID}){
+        if (!savedMovies.any{it.movieID == movie.movieID}){
             _savedMovies.add(movie)
         }
     }
