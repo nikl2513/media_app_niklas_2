@@ -1,6 +1,8 @@
 package com.example.mediaappniklas2.uiLayer.list
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,11 +30,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.navcontroller.NavHost
+import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.uiLayer.startskærm.MovieItem3
 
@@ -94,6 +99,10 @@ fun SavedMovieListView(
 }
 
 @Composable
-fun MovieItem(film: MovieData, navController: NavController) {
-    // Implementeringen af din MovieItem view
+fun MovieItem(film: MovieData, navController: NavController, modifier: Modifier = Modifier) {
+    Image(
+        painter = rememberAsyncImagePainter(film.imageRef),
+        contentDescription ="",
+        modifier.fillMaxSize()
+            .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))}, contentScale = ContentScale.Crop,)
 }
