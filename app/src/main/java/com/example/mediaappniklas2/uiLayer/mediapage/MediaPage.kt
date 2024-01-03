@@ -18,19 +18,31 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
+import androidx.compose.material.icons.outlined.Check
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,6 +53,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
+import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 
 
 @Composable
@@ -117,26 +130,20 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                 modifier = imageModifier
             )
             Spacer(modifier = Modifier.height(8.dp))
+            val icon = remember { mutableStateOf<ImageVector>(Icons.Outlined.Add) }
             Row(modifier = Modifier) {
                 OutlinedButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {if (icon.value == Icons.Outlined.Add){
+                        icon.value = Icons.Outlined.Check
+                    } else {
+                        icon.value = Icons.Outlined.Add
+                    }
+                           },
                     border = BorderStroke(1.dp, Color.Black),
                     shape = RoundedCornerShape(20)
                 )
                 {
-                    IconButton(
-                        onClick = { },
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .background(Color.DarkGray)
-                            .size(30.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Add,
-                            contentDescription = "add"
-                        )
-
-                    }
+                    Icon(imageVector = icon.value, contentDescription = "toogle icon")
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
