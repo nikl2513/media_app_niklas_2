@@ -52,6 +52,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
+import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.navcontroller.Screen
 @Composable
 fun MediaPageAPP(
@@ -140,7 +141,7 @@ fun MediaPage(
                     onClick = {
                         if (icon.value == Icons.Outlined.Add) {
                             icon.value = Icons.Outlined.Check
-                            viewModel.saveCurrentMovie()
+                            viewModel.saveMovie(currentMovie)
                         } else {
                             icon.value = Icons.Outlined.Add
                         }
@@ -179,6 +180,12 @@ fun MediaPage(
             }
 
         }
+    }
+}
+@Composable
+fun MovieItem(movie: MovieData, viewModel: MediaPageViewModel){
+    IconButton(onClick = {viewModel.saveMovie(movie)}) {
+
     }
 }
 

@@ -14,12 +14,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class MediaPageViewModel : ViewModel() {
 
     private val _currentMovie = mutableStateOf<MovieData?>(null)
+    private val _savedMovies = mutableStateListOf<MovieData>()
     val currentMovie: State<MovieData?> get() = _currentMovie
     val currentMovie2 = MutableStateFlow<MovieData?>(null)
-    val savedMovies = mutableStateListOf<MovieData>()
-    fun saveCurrentMovie(){
-        currentMovie2.value?.let { movie ->
-            savedMovies.add(movie)
+    //val savedMovies: List<MovieData> get() = _savedMovies
+    var savedMovies = mutableStateListOf<MovieData>()
+        private set
+    fun saveMovie(movie: MovieData){
+        if (!savedMovies.any {it.movieID == movie.movieID}){
+            _savedMovies.add(movie)
         }
     }
     fun setCurrentMovie(movie: MovieData?) {
