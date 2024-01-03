@@ -139,7 +139,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             title = "List",
             selectedIcon = Icons.Filled.List,
             unselectedIcon = Icons.Outlined.List,
-            route = Screen.Startskaerm.route
+            route = Screen.SavedMovieList.route
         ),
         NavigationItem(
             title = "Your Streaming Services",
@@ -337,7 +337,7 @@ data class NavigationItem(
 
 
 @Composable
-private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
+fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
   Image(
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",

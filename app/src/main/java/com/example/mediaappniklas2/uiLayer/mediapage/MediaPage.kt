@@ -48,14 +48,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
-import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
-
-
 @Composable
 fun MediaPageAPP(
     navController: NavController,
@@ -101,7 +98,14 @@ fun TopmenuBar(
 }
 
 @Composable
-fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieViewModel: MediaPageViewModel) {
+fun MediaPage(
+    modifier: Modifier = Modifier.background(Color.DarkGray),
+    movieViewModel: MediaPageViewModel
+) {
+    val viewModel: MediaPageViewModel = viewModel()
+    val icon = remember {
+        mutableStateOf<ImageVector>(Icons.Outlined.Add)
+    }
     val currentMovie = movieViewModel.currentMovie.value
     LaunchedEffect(currentMovie?.imdbID) {
         currentMovie?.imdbID?.let { movieId ->
@@ -133,12 +137,14 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
             val icon = remember { mutableStateOf<ImageVector>(Icons.Outlined.Add) }
             Row(modifier = Modifier) {
                 OutlinedButton(
-                    onClick = {if (icon.value == Icons.Outlined.Add){
-                        icon.value = Icons.Outlined.Check
-                    } else {
-                        icon.value = Icons.Outlined.Add
-                    }
-                           },
+                    onClick = {
+                        if (icon.value == Icons.Outlined.Add) {
+                            icon.value = Icons.Outlined.Check
+                            viewModel.saveCurrentMovie()
+                        } else {
+                            icon.value = Icons.Outlined.Add
+                        }
+                    },
                     border = BorderStroke(1.dp, Color.Black),
                     shape = RoundedCornerShape(20)
                 )

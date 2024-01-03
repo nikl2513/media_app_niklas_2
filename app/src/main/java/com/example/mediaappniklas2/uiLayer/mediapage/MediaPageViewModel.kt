@@ -2,18 +2,26 @@ package com.example.mediaappniklas2.uiLayer.mediapage
 
 import android.util.Log
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.mediaappniklas2.datalayer.ImdbApiResponse
 import com.example.mediaappniklas2.datalayer.ImdbDTO
 import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.datalayer.remote.RetrofitClient
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class MediaPageViewModel : ViewModel() {
 
     private val _currentMovie = mutableStateOf<MovieData?>(null)
     val currentMovie: State<MovieData?> get() = _currentMovie
-
+    val currentMovie2 = MutableStateFlow<MovieData?>(null)
+    val savedMovies = mutableStateListOf<MovieData>()
+    fun saveCurrentMovie(){
+        currentMovie2.value?.let { movie ->
+            savedMovies.add(movie)
+        }
+    }
     fun setCurrentMovie(movie: MovieData?) {
         _currentMovie.value = movie
         if (movie != null) {

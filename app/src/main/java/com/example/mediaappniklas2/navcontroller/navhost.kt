@@ -13,6 +13,7 @@ import com.example.mediaappniklas2.uiLayer.Login.LoginForm
 import com.example.mediaappniklas2.uiLayer.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.uiLayer.Search.SearchBar
 import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
+import com.example.mediaappniklas2.uiLayer.list.SavedMovieListScreen
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.uiLayer.startskærm.HomePageViewModel
@@ -55,6 +56,9 @@ fun NavHost() {
         }
         composable(route = Screen.Search.route){
             SearchBar(navController = navController)
+        }
+        composable(route = Screen.SavedMovieList.route){
+            SavedMovieListScreen(navController = navController)
         }
     }
 }
