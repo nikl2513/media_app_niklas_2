@@ -157,13 +157,18 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     // Use LaunchedEffect to execute a coroutine when the Composable is first launched
     LaunchedEffect(true) {
         // Launch a coroutine to fetch movies
-        val movies = withContext(Dispatchers.IO) {
-            import_of_movies()
+
+        if(movieViewModel.movieList.value.isEmpty()) {
+            val movies = withContext(Dispatchers.IO) {
+                import_of_movies()
+            }
+
+            // Update the movieList with the fetched movies
+            movieViewModel.updateMovieList(movies)
+            movieViewModel.calculateTrendingMovies()
         }
 
-        // Update the movieList with the fetched movies
-        movieViewModel.updateMovieList(movies)
-        movieViewModel.calculateTrendingMovies()
+
 
     }
     Surface(
