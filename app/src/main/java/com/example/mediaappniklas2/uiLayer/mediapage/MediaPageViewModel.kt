@@ -18,10 +18,10 @@ class MediaPageViewModel : ViewModel() {
     val currentMovie: State<MovieData?> get() = _currentMovie
     val currentMovie2 = MutableStateFlow<MovieData?>(null)
     //val savedMovies: List<MovieData> get() = _savedMovies
-    var savedMovies = mutableStateListOf<MovieData>()
-        private set
+    val savedMovies: List<MovieData> get() = _savedMovies
+
     fun saveMovie(movie: MovieData){
-        if (!savedMovies.any{it.movieID == movie.movieID}){
+        if (!_savedMovies.any{it.movieID == movie.movieID}){
             _savedMovies.add(movie)
         }
     }

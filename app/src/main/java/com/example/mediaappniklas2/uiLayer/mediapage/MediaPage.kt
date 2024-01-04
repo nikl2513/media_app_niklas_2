@@ -29,6 +29,8 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
@@ -147,7 +149,8 @@ fun MediaPage(
                         }
                     },
                     border = BorderStroke(1.dp, Color.Black),
-                    shape = RoundedCornerShape(20)
+                    shape = RoundedCornerShape(20),
+                    colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.Black)
                 )
                 {
                     Icon(imageVector = icon.value, contentDescription = "toogle icon")
