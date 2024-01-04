@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
@@ -127,6 +127,13 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                 Text(currentMovie.releasedate, color = Color.White)
                 Text(text = " | ", color = Color.White)
                 Text(text = "2 t. 32 m.", color = Color.White)
+                Text(text = " | ", color = Color.White)
+                Text(text = "avg. rating", color = Color.White)
+                Icon(
+                    imageVector = Icons.Default.Star, // This assumes you're using the default star icon
+                    contentDescription = null, // You can provide a description if needed
+                    tint = Color.White, // You can change the color of the star icon if required
+                    modifier = Modifier.padding(start = 4.dp))
             }
             Text(movie.title, color = Color.White)
 
