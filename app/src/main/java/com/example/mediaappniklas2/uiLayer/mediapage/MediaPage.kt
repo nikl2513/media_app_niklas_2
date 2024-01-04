@@ -99,6 +99,8 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
     var rating by remember { mutableStateOf(0f) }
     var isRatingSubmitted by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    var gennemsnitligRating by remember { mutableStateOf(0.0) }
+
 
 
 
@@ -109,6 +111,8 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
         }
     }
     val currentImdb = MediaPageViewModel.currentImdb
+
+
 
     // Use LaunchedEffect to observe changes in currentMovie
 
@@ -156,7 +160,16 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
             }
             Text(movie.title, color = Color.White)
 
+
+
+            LaunchedEffect(key1 = movie.title) {
+                // Hent gennemsnitlig rating ved opstart
+                gennemsnitligRating = viewModel.hentGennemsnitligFilmRating(movie.title)
+            }
+
+
             Spacer(modifier = Modifier.height(20.dp))
+            Text("Gennemsnitlig Rating: $gennemsnitligRating")
             if (!isRatingSubmitted) {
                 RatingBar(rating = rating, onRatingChanged = { newRating ->
                     rating = newRating
@@ -172,6 +185,8 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                         // Gem rating i Firebase
                         viewModel.gemFilmRating(movie.title, rating.toDouble())
                         isRatingSubmitted = true
+                        gennemsnitligRating = viewModel.hentGennemsnitligFilmRating(movie.title)
+
                     } }) {
                     Text("Gem Rating")
                 }
