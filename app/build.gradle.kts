@@ -89,7 +89,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     implementation("androidx.navigation:navigation-compose:2.7.4")
 
