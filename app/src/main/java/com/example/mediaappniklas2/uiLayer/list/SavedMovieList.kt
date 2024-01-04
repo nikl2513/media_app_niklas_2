@@ -15,8 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.datalayer.local.WatchListManager
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.uiLayer.startskærm.MovieItem3
 
@@ -28,8 +30,10 @@ fun SavedMovieList(
             Alignment.BottomCenter
         ), navController: NavController
 ) {
+    val watchLaterManager = WatchListManager(context = LocalContext.current)
+    val WatchLaterList = watchLaterManager.getWatchLaterList()
     LazyRow {
-        items(viewModel.savedMovies) { movie ->
+        items(WatchLaterList) { movie ->
             Spacer(modifier = Modifier.width(10.dp))
             Box(
                 modifier
