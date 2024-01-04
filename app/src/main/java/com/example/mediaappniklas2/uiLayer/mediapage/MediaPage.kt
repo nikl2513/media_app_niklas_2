@@ -1,7 +1,9 @@
 package com.example.mediaappniklas2.uiLayer.mediapage
 
+import android.widget.RatingBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,15 +16,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -35,6 +45,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -82,7 +93,15 @@ fun TopmenuBar(
 }
 
 @Composable
-fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieViewModel: MediaPageViewModel) {
+fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieViewModel: MediaPageViewModel, viewModel: FilmRatingViewModel = FilmRatingViewModel()) {
+
+  //Mikkel Rating forsøg
+    var rating by remember { mutableStateOf(0f) }
+    var isRatingSubmitted by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+
+
+
     val currentMovie = movieViewModel.currentMovie.value
     LaunchedEffect(currentMovie?.imdbID) {
         currentMovie?.imdbID?.let { movieId ->
@@ -137,7 +156,62 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
             }
             Text(movie.title, color = Color.White)
 
+            Spacer(modifier = Modifier.height(20.dp))
+            if (!isRatingSubmitted) {
+                RatingBar(rating = rating, onRatingChanged = { newRating ->
+                    rating = newRating
+                })
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Gem rating knap
+                Button(onClick = {
+                    // Gem rating i Firebase
+
+                    scope.launch {
+                        // Gem rating i Firebase
+                        viewModel.gemFilmRating(movie.title, rating.toDouble())
+                        isRatingSubmitted = true
+                    } }) {
+                    Text("Gem Rating")
+                }
+            } else {
+                // Vis besked, når rating er gemt
+                Text("Tak for din rating!")
+            }
+        }
+
+
+
+        }
+    }
+
+@Composable
+fun RatingBar(
+    rating: Float,
+    onRatingChanged: (Float) -> Unit
+) {
+    var isRatingBeingChanged by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = Modifier
+            .wrapContentWidth()
+            .padding(8.dp)
+    ) {
+        for (i in 1..5) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = if (isRatingBeingChanged || i <= rating) MaterialTheme.colorScheme.primary else Color.Gray,
+                modifier = Modifier
+                    .clickable {
+                        onRatingChanged(i.toFloat())
+                    }
+                    .padding(4.dp)
+                    .size(40.dp)
+            )
         }
     }
 }
+
 

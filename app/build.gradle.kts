@@ -124,6 +124,9 @@ dependencies {
 
         // Add the dependencies for any other desired Firebase products
         // https://firebase.google.com/docs/android/setup#available-libraries
+        implementation("com.google.firebase:firebase-analytics:21.5.0")
+        implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
+
     }
 
 

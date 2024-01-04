@@ -13,10 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mediaappniklas2.navcontroller.NavHost
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 import com.google.android.material.search.SearchBar
+import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContent {
             MediaAppNiklas2Theme {
                 // A surface container using the 'background' color from the theme
