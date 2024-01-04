@@ -18,18 +18,9 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.Check
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.List
-import androidx.compose.material.icons.outlined.PlayArrow
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -55,6 +47,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.MovieData
+import com.example.mediaappniklas2.datalayer.local.WatchListManager
 import com.example.mediaappniklas2.navcontroller.Screen
 @Composable
 fun MediaPageAPP(
@@ -136,24 +129,47 @@ fun MediaPage(
                 contentScale = ContentScale.Crop,
                 modifier = imageModifier
             )
+            val watchLaterManager = WatchListManager(LocalContext.current)
+
+            val isMovieSaved = remember { mutableStateOf(false) }
+
+            LaunchedEffect(currentMovie?.imdbID) {
+                currentMovie?.imdbID?.let { movieId ->
+                    movieViewModel.fetchImdbRating(currentMovie.imdbID)
+                    // Check if the current movie is already saved
+                    isMovieSaved.value = watchLaterManager.getWatchLaterList().any { it.movieID == currentMovie.imdbID }
+                }
+            }
+
             Spacer(modifier = Modifier.height(8.dp))
             val icon = remember { mutableStateOf<ImageVector>(Icons.Outlined.Add) }
             Row(modifier = Modifier) {
                 OutlinedButton(
                     onClick = {
-                        if (icon.value == Icons.Outlined.Add) {
-                            icon.value = Icons.Outlined.Check
-                            viewModel.saveMovie(currentMovie)
+                        if (!isMovieSaved.value) {
+                            // If the movie is not saved, save it
+                            watchLaterManager.addToWatchLater(
+                                MovieData(
+                                    movieID = currentMovie?.movieID ?: "",
+                                    imdbID = currentMovie?.imdbID ?: "",
+                                    title = currentMovie?.title ?: "",
+                                    releasedate = currentMovie?.releasedate ?: "",
+                                    imageRef = currentMovie?.imageRef ?: ""
+                                )
+                            )
                         } else {
-                            icon.value = Icons.Outlined.Add
+                            // Handle the case where the movie is already saved (optional)
                         }
+                        // Toggle the button icon
+                        isMovieSaved.value = !isMovieSaved.value
                     },
                     border = BorderStroke(1.dp, Color.Black),
                     shape = RoundedCornerShape(20),
                     colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.Black)
                 )
                 {
-                    Icon(imageVector = icon.value, contentDescription = "toogle icon")
+                    Icon(imageVector = if (isMovieSaved.value) Icons.Outlined.Check else Icons.Outlined.Add,
+                        contentDescription = "toogle icon")
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
