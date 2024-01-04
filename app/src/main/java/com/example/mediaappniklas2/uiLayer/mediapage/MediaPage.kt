@@ -2,6 +2,7 @@ package com.example.mediaappniklas2.uiLayer.mediapage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -128,16 +129,32 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
                 Text(text = " | ", color = Color.White)
                 Text(text = "2 t. 32 m.", color = Color.White)
                 Text(text = " | ", color = Color.White)
-                Text(text = "avg. rating", color = Color.White)
-                Icon(
-                    imageVector = Icons.Default.Star, // This assumes you're using the default star icon
-                    contentDescription = null, // You can provide a description if needed
-                    tint = Color.White, // You can change the color of the star icon if required
-                    modifier = Modifier.padding(start = 4.dp))
-            }
-            Text(movie.title, color = Color.White)
 
+            }
+            Row(modifier = Modifier,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                repeat(5) { index ->
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Star icon",
+                        tint = Color.White,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {
+                                when (index) {
+                                    0 -> { /* Action for the first icon */ }
+                                    1 -> { /* Action for the second icon */ }
+                                    2 -> { /* Action for the third icon */ }
+                                    3 -> { /* Action for the fourth icon */ }
+                                    4 -> { /* Action for the fifth icon */ }
+                                }
+                            }
+                    )
+                }
+            }
+                Text(movie.title, color = Color.White)
+            }
         }
     }
-}
+
 
