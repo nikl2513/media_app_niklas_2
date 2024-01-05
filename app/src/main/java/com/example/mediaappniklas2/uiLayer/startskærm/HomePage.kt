@@ -122,9 +122,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
 ) {
     val sections = listOf(
-        Section("Recommended",movieViewModel.trendingMovies.value),
-        Section("New and exciting",movieViewModel.trendingMovies.value),
-        Section("Action",movieViewModel.trendingMovies.value)
+        Section("Trending",movieViewModel.trendingMovies.value),
+        Section("Must watch",movieViewModel.mustWatchMovies.value),
+        Section("For you",movieViewModel.forYouMovies.value),
+        Section("All movies",movieViewModel.movieList.value)
     )
     val items = listOf(
         NavigationItem(
@@ -166,6 +167,8 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             // Update the movieList with the fetched movies
             movieViewModel.updateMovieList(movies)
             movieViewModel.calculateTrendingMovies()
+            movieViewModel.calculateForYouMovies()
+            movieViewModel.calculateMustWatchMovies()
         }
 
 

@@ -57,7 +57,7 @@ fun convertToMovieData(movieDTO: MovieDTO): MovieData {
         val idIMDB = movieDTO.imdbID
         val title = movieDTO.titleText.text
         val releasedate = "${movieDTO.releaseYear?.year}" ?: "UnkownreleaseYear"
-        val imageRef = movieDTO.imageRef?.url ?: "defaultImageUrl"
+        val imageRef = movieDTO.imageRef?.url ?: "https://cdn.discordapp.com/attachments/1014540895955193889/1192754307427221524/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.png?ex=65aa3a03&is=6597c503&hm=fac7c7b03804e45c786d6605d23c096e5ff436e3d92472ce3e93a8558e8045f1&"
 
         return MovieData(id,idIMDB,title, releasedate, imageRef)
 }
