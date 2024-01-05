@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
@@ -160,13 +162,10 @@ fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieVie
             }
             Text(movie.title, color = Color.White)
 
-
-
             LaunchedEffect(key1 = movie.title) {
                 // Hent gennemsnitlig rating ved opstart
                 gennemsnitligRating = viewModel.hentGennemsnitligFilmRating(movie.title)
             }
-
 
             Spacer(modifier = Modifier.height(20.dp))
             Text("Gennemsnitlig Rating: $gennemsnitligRating")
