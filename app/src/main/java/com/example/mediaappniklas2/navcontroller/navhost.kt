@@ -13,6 +13,7 @@ import com.example.mediaappniklas2.uiLayer.Login.LoginForm
 import com.example.mediaappniklas2.uiLayer.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.uiLayer.Search.SearchBar
 import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
+import com.example.mediaappniklas2.uiLayer.list.SavedMovieList
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.uiLayer.startskærm.HomePageViewModel
@@ -24,7 +25,7 @@ fun NavHost() {
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = Screen.Opstart.route) {
+    NavHost(navController = navController, startDestination = Screen.Startskaerm.route/*Opstart.route*/) {
         composable(route = Screen.Opstart.route){
             OpstartMedButtonOgBaggrund(navController = navController)
         }
@@ -37,14 +38,14 @@ fun NavHost() {
         composable(route = Screen.Startskaerm.route){
             OpstartStartskærm(navController = navController,movieViewModel = homePageViewModel)
         }
-        composable(route =Screen.MediaPage.route, listOf(navArgument("movieID") { type = NavType.StringType }) ){
+        composable(route = Screen.MediaPage.route, listOf(navArgument("movieID") { type = NavType.StringType }) ){
             val movieID = it.arguments?.getString("movieID")
             val movie = MovieUtils.findMovieById(movieID,homePageViewModel.movieList.value)
             mediaPageViewModel.setCurrentMovie(movie)
 
             MediaPageAPP(navController = navController,movieViewModel = mediaPageViewModel)
         }
-        composable(route =Screen.MediaPage2.route, listOf(navArgument("movieID") { type = NavType.StringType }) ){
+        composable(route = Screen.MediaPage2.route, listOf(navArgument("movieID") { type = NavType.StringType }) ){
             val movieID = it.arguments?.getString("movieID")
             val movie = MovieUtils.findMovieById(movieID,SearchPageViewModel.movieList.value)
             mediaPageViewModel.setCurrentMovie(movie)
@@ -55,6 +56,9 @@ fun NavHost() {
         }
         composable(route = Screen.Search.route){
             SearchBar(navController = navController)
+        }
+        composable(route = Screen.SavedMovieList.route){
+            SavedMovieList(viewModel = mediaPageViewModel, navController = navController)
         }
     }
 }

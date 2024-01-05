@@ -1,6 +1,7 @@
 package com.example.mediaappniklas2.datalayer
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 /**
  * @author s215698
@@ -42,6 +43,7 @@ data class ImdbDTO(
 )
 
 
+@Serializable
 data class MovieData(
         val movieID : String,
         val imdbID : String,

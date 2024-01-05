@@ -144,7 +144,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             title = "List",
             selectedIcon = Icons.Filled.List,
             unselectedIcon = Icons.Outlined.List,
-            route = Screen.Startskaerm.route
+            route = Screen.SavedMovieList.route
         ),
         NavigationItem(
             title = "Your Streaming Services",
@@ -344,10 +344,19 @@ data class NavigationItem(
     val badgeCount: Int? = null,
     val route: String
 )
-
-
 @Composable
-private fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
+fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
+    Spacer(modifier = Modifier.width(100.dp))
+    Image(
+        painter = rememberAsyncImagePainter(film.imageRef),
+        contentDescription ="",
+        modifier .fillMaxSize()
+            .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))}, contentScale = ContentScale.Crop,)
+    Spacer(modifier = Modifier.width(100.dp))
+
+}
+@Composable
+fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
   Image(
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",
