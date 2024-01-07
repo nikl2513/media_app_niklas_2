@@ -58,7 +58,7 @@ fun NavHost() {
             SearchBar(navController = navController)
         }
         composable(route = Screen.SavedMovieList.route){
-            SavedMovieList(viewModel = mediaPageViewModel, navController = navController)
+            SavedMovieList(navController = navController, movieViewModel = homePageViewModel)
         }
     }
 }

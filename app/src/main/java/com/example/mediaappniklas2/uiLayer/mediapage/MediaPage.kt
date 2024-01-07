@@ -74,7 +74,7 @@ fun TopmenuBar(
 
     ) {
         IconButton(
-            onClick = { navController.navigate(Screen.Startskaerm.route) },
+            onClick = { navController.popBackStack() },
             modifier = Modifier
                 .align(Alignment.TopStart)
                 .padding(start = 20.dp, top = 20.dp)

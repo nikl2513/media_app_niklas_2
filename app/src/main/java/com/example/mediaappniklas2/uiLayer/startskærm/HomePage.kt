@@ -60,6 +60,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -336,22 +337,39 @@ data class NavigationItem(
 )
 @Composable
 fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
-    Spacer(modifier = Modifier.width(100.dp))
+    //Spacer(modifier = Modifier.height(100.dp))
     Image(
         painter = rememberAsyncImagePainter(film.imageRef),
         contentDescription ="",
-        modifier .fillMaxSize()
-            .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))}, contentScale = ContentScale.Crop,)
-    Spacer(modifier = Modifier.width(100.dp))
 
+        modifier
+            .size(175.dp, 100.dp)
+            .clip(shape = RoundedCornerShape(10.dp))
+            .clickable {
+                navController.navigate(
+                    Screen.MediaPage.route.replace(
+                        "{movieID}",
+                        film.movieID
+                    )
+                )
+            }, contentScale = ContentScale.Crop,)
+    //Spacer(modifier = Modifier.height(100.dp))
 }
 @Composable
 fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
   Image(
       painter = rememberAsyncImagePainter(film.imageRef),
       contentDescription ="",
-      modifier .fillMaxSize()
-          .clickable {navController.navigate(Screen.MediaPage.route.replace("{movieID}", film.movieID))}, contentScale = ContentScale.Crop,)
+      modifier
+          .fillMaxSize()
+          .clickable {
+              navController.navigate(
+                  Screen.MediaPage.route.replace(
+                      "{movieID}",
+                      film.movieID
+                  )
+              )
+          }, contentScale = ContentScale.Crop,)
 
 }
 data class Section(val title: String)
@@ -382,7 +400,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
 }
 
 @Composable
-private fun verticalListTopHighlight(
+fun verticalListTopHighlight(
     modifier: Modifier = Modifier,filmList : List<MovieData>,
     navController: NavController) {
     LazyRow(modifier = modifier) {
