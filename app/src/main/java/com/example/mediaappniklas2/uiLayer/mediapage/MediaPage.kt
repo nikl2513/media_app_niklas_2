@@ -137,7 +137,7 @@ fun MediaPage(
                 currentMovie?.imdbID?.let { movieId ->
                     movieViewModel.fetchImdbRating(currentMovie.imdbID)
                     // Check if the current movie is already saved
-                    isMovieSaved.value = watchLaterManager.getWatchLaterList().any { it.movieID == currentMovie.imdbID }
+                    isMovieSaved.value = watchLaterManager.getWatchLaterList().any { it.movieID == currentMovie.movieID }
                 }
             }
 
