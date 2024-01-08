@@ -222,9 +222,9 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
                 }
                 item {
-                    Text(text = "Streaming services", color = Color.White, fontSize = 20.sp)
+                    Text(text = "Short cut", color = Color.White, fontSize = 20.sp)
                     Spacer(modifier = Modifier.height(10.dp))
-                    MedieKnapper()
+                    MedieKnapper(navController)
                     Spacer(modifier = Modifier.height(25.dp))
                 }
                 items(sections) { section ->
@@ -244,62 +244,30 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
 
 @Composable
-fun MedieKnapper(
-){
+fun MedieKnapper(navController: NavController ){
     MediaAppNiklas2Theme {
         Column {
             Row {
-                Button(onClick = {}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "Netflix",
+                    Text(text = "Search",
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(85.dp,40.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "Viaplay"
-                        , fontSize = 10.sp
-                        ,textAlign = TextAlign.Center)
-                }
-                Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {}, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "HBO"
+                    Text(text = "List"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
 
-            }
-            Spacer(modifier = Modifier.height(5.dp))
-            Row {
-                Button(onClick = {}, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "Disney+"
-                        , fontSize = 10.sp
-                        ,textAlign = TextAlign.Center)
-                }
-                Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {}, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "Apple tv"
-                        , fontSize = 10.sp
-                        ,textAlign = TextAlign.Center)
-                }
-                Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {}, Modifier.size(85.dp,40.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "Prime"
-                        , fontSize = 10.sp
-                        ,textAlign = TextAlign.Center)
-                }
 
             }
 
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Topapp(DrawerState: DrawerState){
@@ -324,9 +292,7 @@ fun Topapp(DrawerState: DrawerState){
                 )
             }
 
-
         }
-
 }
 
 data class NavigationItem(
