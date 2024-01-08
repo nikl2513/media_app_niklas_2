@@ -14,6 +14,7 @@ import com.example.mediaappniklas2.navcontroller.NavHost
 import com.example.mediaappniklas2.ui.theme.MediaAppNiklas2Theme
 import com.google.android.material.search.SearchBar
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

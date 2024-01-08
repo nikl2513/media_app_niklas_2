@@ -113,6 +113,7 @@ private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieDa
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OpstartStartskærm(modifier: Modifier = Modifier
     .background(Color.DarkGray)

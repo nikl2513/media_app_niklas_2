@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "198016688277",
+    "project_id": "movie---rating",
+    "storage_bucket": "movie---rating.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198016688277:android:b812c64f3d9246387a3b9c",
+        "android_client_info": {
+          "package_name": "com.example.mediaappniklas2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_81O-rqn_Rlthdj9DyWIgRqoIPrZSiaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
