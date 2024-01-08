@@ -111,19 +111,17 @@ fun TopmenuBar(
 }
 
 @Composable
-fun MediaPage(modifier: Modifier = Modifier.background(Color.DarkGray), movieViewModel: MediaPageViewModel, viewModel: FilmRatingViewModel = FilmRatingViewModel()) {
+fun MediaPage(
+    modifier: Modifier = Modifier.background(Color.DarkGray),
+    movieViewModel: MediaPageViewModel,
+    filmviewModel: FilmRatingViewModel = FilmRatingViewModel()
+) {
 
     //Mikkel Rating forsøg
     var rating by remember { mutableStateOf(0f) }
     var isRatingSubmitted by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     var gennemsnitligRating by remember { mutableStateOf(0.0) }
-
-
-fun MediaPage(
-    modifier: Modifier = Modifier.background(Color.DarkGray),
-    movieViewModel: MediaPageViewModel
-) {
     val viewModel: MediaPageViewModel = viewModel()
     val icon = remember {
         mutableStateOf<ImageVector>(Icons.Outlined.Add)
@@ -155,39 +153,6 @@ fun MediaPage(
                 contentScale = ContentScale.Crop,
                 modifier = imageModifier
             )
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .wrapContentSize(Alignment.TopCenter)
-                    .verticalScroll(rememberScrollState())
-                ,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(modifier = Modifier) {
-                        Image(
-                            painter = painterResource(id = R.drawable.imdb),
-                            contentDescription = "logo",
-                            Modifier.width(35.dp)
-                        )
-                        Text(text = " ", color = Color.White)
-                        Text(
-                            text = currentImdb.value?.averageRating.toString(),
-                            color = Color.White
-                        )
-                        Text(text = "| ", color = Color.White)
-                        Text(text = "4K ", color = Color.White)
-                        Text(text = "| ", color = Color.White)
-                        Text(text = "18 Years ", color = Color.White)
-                        Text(text = "| ", color = Color.White)
-                        Text(currentMovie.releasedate, color = Color.White)
-                        Text(text = " | ", color = Color.White)
-                        Text(text = "2 t. 32 m.", color = Color.White)
-
-                    }
-                    Text(movie.title, color = Color.White)
             val watchLaterManager = WatchListManager(LocalContext.current)
 
             val isMovieSaved = remember { mutableStateOf(false) }
@@ -196,149 +161,154 @@ fun MediaPage(
                 currentMovie?.imdbID?.let { movieId ->
                     movieViewModel.fetchImdbRating(currentMovie.imdbID)
                     // Check if the current movie is already saved
-                    isMovieSaved.value = watchLaterManager.getWatchLaterList().any { it.movieID == currentMovie.movieID }
+                    isMovieSaved.value = watchLaterManager.getWatchLaterList()
+                        .any { it.movieID == currentMovie.movieID }
                 }
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            val icon = remember { mutableStateOf<ImageVector>(Icons.Outlined.Add) }
-            Row(modifier = Modifier) {
-                OutlinedButton(
-                    onClick = {
-                        if (!isMovieSaved.value) {
-                            // If the movie is not saved, save it
-                            watchLaterManager.addToWatchLater(
-                                MovieData(
-                                    movieID = currentMovie?.movieID ?: "",
-                                    imdbID = currentMovie?.imdbID ?: "",
-                                    title = currentMovie?.title ?: "",
-                                    releasedate = currentMovie?.releasedate ?: "",
-                                    imageRef = currentMovie?.imageRef ?: ""
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .wrapContentSize(Alignment.TopCenter)
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Spacer(modifier = Modifier.height(8.dp))
+                val icon = remember { mutableStateOf<ImageVector>(Icons.Outlined.Add) }
+                Row(modifier = Modifier) {
+                    OutlinedButton(
+                        onClick = {
+                            if (!isMovieSaved.value) {
+                                // If the movie is not saved, save it
+                                watchLaterManager.addToWatchLater(
+                                    MovieData(
+                                        movieID = currentMovie?.movieID ?: "",
+                                        imdbID = currentMovie?.imdbID ?: "",
+                                        title = currentMovie?.title ?: "",
+                                        releasedate = currentMovie?.releasedate ?: "",
+                                        imageRef = currentMovie?.imageRef ?: ""
+                                    )
                                 )
-                            )
-                        } else {
+                            } else {
 
-                            watchLaterManager.removeFromWatchLater(
-                                MovieData(
-                                    movieID = currentMovie?.movieID ?: "",
-                                    imdbID = currentMovie?.imdbID ?: "",
-                                    title = currentMovie?.title ?: "",
-                                    releasedate = currentMovie?.releasedate ?: "",
-                                    imageRef = currentMovie?.imageRef ?: ""
+                                watchLaterManager.removeFromWatchLater(
+                                    MovieData(
+                                        movieID = currentMovie?.movieID ?: "",
+                                        imdbID = currentMovie?.imdbID ?: "",
+                                        title = currentMovie?.title ?: "",
+                                        releasedate = currentMovie?.releasedate ?: "",
+                                        imageRef = currentMovie?.imageRef ?: ""
+                                    )
                                 )
-                            )
-                        }
-                        // Toggle the button icon
-                        isMovieSaved.value = !isMovieSaved.value
-                    },
-                    border = BorderStroke(1.dp, Color.Black),
-                    shape = RoundedCornerShape(20),
-                    colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.Black)
-                )
-                {
-                    Icon(imageVector = if (isMovieSaved.value) Icons.Outlined.Check else Icons.Outlined.Add,
-                        contentDescription = "toogle icon")
-                }
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                movie.title,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 20.sp
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(modifier = Modifier) {
-                Image(
-                    painter = painterResource(id = R.drawable.imdb),
-                    contentDescription = "logo",
-                    Modifier.width(35.dp)
-                )
-                Text(text = " ", color = Color.White)
-                Text(text = currentImdb.value?.averageRating.toString(), color = Color.White)
-                Text(text = "| ", color = Color.White)
-                Text(text = "4K ", color = Color.White)
-                Text(text = "| ", color = Color.White)
-                Text(text = "18 Years ", color = Color.White)
-                Text(text = "| ", color = Color.White)
-                Text(currentMovie.releasedate, color = Color.White)
-                Text(text = " | ", color = Color.White)
-                Text(text = "2 t. 32 m.", color = Color.White)
-            }
-
-                    LaunchedEffect(key1 = movie.title) {
-                        // Fetch average rating at startup
-                        gennemsnitligRating = viewModel.hentGennemsnitligFilmRating(movie.title)
-                    }
-
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Text("Gennemsnitlig Rating: $gennemsnitligRating")
-
-                    if (!isRatingSubmitted) {
-                        RatingBar(rating = rating, onRatingChanged = { newRating ->
-                            rating = newRating
-                        })
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        // Save rating button
-                        Button(onClick = {
-                            scope.launch {
-                                viewModel.gemFilmRating(movie.title, rating.toDouble())
-                                isRatingSubmitted = true
-                                gennemsnitligRating =
-                                    viewModel.hentGennemsnitligFilmRating(movie.title)
                             }
-                        }) {
-                            Text("Save Rating")
-                        }
-                    } else {
-                        // Thank you message for rated movie
-                        Text("Thanks for your rating!")
+                            // Toggle the button icon
+                            isMovieSaved.value = !isMovieSaved.value
+                        },
+                        border = BorderStroke(1.dp, Color.Black),
+                        shape = RoundedCornerShape(20),
+                        colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.Black)
+                    )
+                    {
+                        Icon(
+                            imageVector = if (isMovieSaved.value) Icons.Outlined.Check else Icons.Outlined.Add,
+                            contentDescription = "toogle icon"
+                        )
                     }
                 }
-            }
-
-        }
-    }
-
-
-
-    @Composable
-    fun RatingBar(
-        rating: Float,
-        onRatingChanged: (Float) -> Unit
-    ) {
-        var isRatingBeingChanged by remember { mutableStateOf(false) }
-
-        Row(
-            modifier = Modifier
-                .wrapContentWidth()
-                .padding(8.dp)
-        ) {
-            for (i in 1..5) {
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = null,
-                    tint = if (isRatingBeingChanged || i <= rating) MaterialTheme.colorScheme.primary else Color.Gray,
-                    modifier = Modifier
-                        .clickable {
-                            onRatingChanged(i.toFloat())
-                        }
-                        .padding(4.dp)
-                        .size(40.dp)
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    movie.title,
+                    color = Color.White,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 20.sp
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(modifier = Modifier) {
+                    Image(
+                        painter = painterResource(id = R.drawable.imdb),
+                        contentDescription = "logo",
+                        Modifier.width(35.dp)
+                    )
+                    Text(text = " ", color = Color.White)
+                    Text(text = currentImdb.value?.averageRating.toString(), color = Color.White)
+                    Text(text = "| ", color = Color.White)
+                    Text(text = "4K ", color = Color.White)
+                    Text(text = "| ", color = Color.White)
+                    Text(text = "18 Years ", color = Color.White)
+                    Text(text = "| ", color = Color.White)
+                    Text(currentMovie.releasedate, color = Color.White)
+                    Text(text = " | ", color = Color.White)
+                    Text(text = "2 t. 32 m.", color = Color.White)
+                }
+
+                LaunchedEffect(key1 = movie.title) {
+                    // Fetch average rating at startup
+                    gennemsnitligRating = filmviewModel.hentGennemsnitligFilmRating(movie.title)
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+                Text("Gennemsnitlig Rating: $gennemsnitligRating")
+
+                if (!isRatingSubmitted) {
+                    RatingBar(rating = rating, onRatingChanged = { newRating ->
+                        rating = newRating
+                    })
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Save rating button
+                    Button(onClick = {
+                        scope.launch {
+                            filmviewModel.gemFilmRating(movie.title, rating.toDouble())
+                            isRatingSubmitted = true
+                            gennemsnitligRating =
+                                filmviewModel.hentGennemsnitligFilmRating(movie.title)
+                        }
+                    }) {
+                        Text("Save Rating")
+                    }
+                } else {
+                    // Thank you message for rated movie
+                    Text("Thanks for your rating!")
+                }
             }
         }
     }
 
+}
 
+
+@Composable
+fun RatingBar(
+    rating: Float,
+    onRatingChanged: (Float) -> Unit
+) {
+    var isRatingBeingChanged by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = Modifier
+            .wrapContentWidth()
+            .padding(8.dp)
+    ) {
+        for (i in 1..5) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = if (isRatingBeingChanged || i <= rating) MaterialTheme.colorScheme.primary else Color.Gray,
+                modifier = Modifier
+                    .clickable {
+                        onRatingChanged(i.toFloat())
+                    }
+                    .padding(4.dp)
+                    .size(40.dp)
+            )
         }
     }
 }
+
 @Composable
-fun MovieItem(movie: MovieData, viewModel: MediaPageViewModel){
-    IconButton(onClick = {viewModel.saveMovie(movie)}) {
+fun MovieItem(movie: MovieData, viewModel: MediaPageViewModel) {
+    IconButton(onClick = { viewModel.saveMovie(movie) }) {
 
     }
 }
