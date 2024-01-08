@@ -158,7 +158,16 @@ fun MediaPage(
                                 )
                             )
                         } else {
-                            // Handle the case where the movie is already saved (optional)
+
+                            watchLaterManager.removeFromWatchLater(
+                                MovieData(
+                                    movieID = currentMovie?.movieID ?: "",
+                                    imdbID = currentMovie?.imdbID ?: "",
+                                    title = currentMovie?.title ?: "",
+                                    releasedate = currentMovie?.releasedate ?: "",
+                                    imageRef = currentMovie?.imageRef ?: ""
+                                )
+                            )
                         }
                         // Toggle the button icon
                         isMovieSaved.value = !isMovieSaved.value

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.withConsumedWindowInsets
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -104,7 +105,7 @@ fun SavedMovieList(
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        color = Color.DarkGray
     ) {
         val watchLaterManager = WatchListManager(context = LocalContext.current)
         val WatchLaterList = watchLaterManager.getWatchLaterList()
@@ -153,6 +154,7 @@ fun SavedMovieList(
             },
             drawerState = drawerState
         ) {
+            Spacer(modifier = Modifier.width(16.dp))
             LazyColumn {
                 item {
                     Topapp(drawerState)
