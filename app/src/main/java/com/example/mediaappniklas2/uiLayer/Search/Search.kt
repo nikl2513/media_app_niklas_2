@@ -59,6 +59,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
+import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
 import kotlinx.coroutines.launch
 
 
@@ -98,7 +99,7 @@ fun SearchBar(modifier: Modifier = Modifier
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        color = Color.DarkGray
     ) {
         var text by remember { mutableStateOf("") }
         val scope = rememberCoroutineScope()
@@ -146,14 +147,14 @@ fun SearchBar(modifier: Modifier = Modifier
             },
             drawerState = drawerState
         ) {
-            Spacer(modifier = Modifier.width(16.dp))
             Column {
-
+                Topapp(DrawerState = drawerState)
+                Spacer(modifier = Modifier.height(6.dp))
                 Row {
-                    Icon(Icons.Filled.ArrowBack,
+                    /*Icon(Icons.Filled.ArrowBack,
                         contentDescription = null,
                         modifier = Modifier.clickable { navController.navigate(Screen.Startskaerm.route) }
-                    )
+                    )*/
                     TextField(
                         value = text,
                         onValueChange = { text = it },
@@ -163,9 +164,11 @@ fun SearchBar(modifier: Modifier = Modifier
                     )
                 }
                 val scope = rememberCoroutineScope()
+                Spacer(modifier = Modifier.height(6.dp))
                 Button(onClick = { scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }) {
                     Text(text = "Search")
                 }
+                Spacer(modifier = Modifier.height(6.dp))
                 verticalList(
                     filmList = SearchPageViewModel.movieList.value,
                     navController = navController
@@ -208,6 +211,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
             ) {
                 MovieItem4(film = film, navController = navController)
             }
+            Spacer(modifier = Modifier.height(6.dp))
         }
     }
 }
