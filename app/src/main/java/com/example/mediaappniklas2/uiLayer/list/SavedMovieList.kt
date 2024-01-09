@@ -154,28 +154,30 @@ fun SavedMovieList(
             },
             drawerState = drawerState
         ) {
-            Spacer(modifier = Modifier.width(16.dp))
-            LazyColumn {
-                item {
-                    Topapp(drawerState)
-                }
-                items(WatchLaterList) { movie ->
-                    //Spacer(modifier = Modifier.height(100.dp))
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically,
-                        //modifier = modifier.background(Color.DarkGray)
-                    ) {
-                        MovieItem4(film = movie, navController = navController)
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column {
-                            Text(
-                                text = movie.title,
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
+            Row {
+                Spacer(modifier = Modifier.width(5.dp))
+                LazyColumn {
+                    item {
+                        Topapp(drawerState)
                     }
+                    items(WatchLaterList) { movie ->
+                        //Spacer(modifier = Modifier.height(100.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically,
+                            //modifier = modifier.background(Color.DarkGray)
+                        ) {
+                            MovieItem4(film = movie, navController = navController)
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column {
+                                Text(
+                                    text = movie.title,
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.ExtraBold
+                                )
+                            }
+                        }
 
+                    }
                 }
             }
         }
