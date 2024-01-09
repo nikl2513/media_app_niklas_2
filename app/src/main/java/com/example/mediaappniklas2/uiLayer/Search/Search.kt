@@ -183,10 +183,13 @@ fun SearchBar(modifier: Modifier = Modifier
                     }
                 }
                 Spacer(modifier = Modifier.height(5.dp))
-                verticalList(
-                    filmList = SearchPageViewModel.movieList.value,
-                    navController = navController
-                )
+                Row {
+                    Spacer(modifier = Modifier.width(5.dp))
+                    verticalList(
+                        filmList = SearchPageViewModel.movieList.value,
+                        navController = navController
+                    )
+                }
             }
 
         }
