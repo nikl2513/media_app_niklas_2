@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -39,6 +40,8 @@ import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -52,6 +55,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -61,6 +66,8 @@ import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
 import kotlinx.coroutines.launch
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import org.w3c.dom.Text
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -150,7 +157,7 @@ fun SearchBar(modifier: Modifier = Modifier
             Column {
                 Topapp(DrawerState = drawerState)
                 Spacer(modifier = Modifier.height(6.dp))
-                Row {
+                Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
                     /*Icon(Icons.Filled.ArrowBack,
                         contentDescription = null,
                         modifier = Modifier.clickable { navController.navigate(Screen.Startskaerm.route) }
@@ -160,15 +167,22 @@ fun SearchBar(modifier: Modifier = Modifier
                         onValueChange = { text = it },
                         label = { Text("Search") },
                         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-                        modifier = Modifier.fillMaxWidth()
+                        colors = TextFieldDefaults.textFieldColors(
+                            containerColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.width(380.dp)
+
                     )
                 }
                 val scope = rememberCoroutineScope()
-                Spacer(modifier = Modifier.height(6.dp))
-                Button(onClick = { scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }) {
-                    Text(text = "Search")
+                Row {
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Button(onClick = { scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }, shape = RoundedCornerShape(10.dp)) {
+                        Text(text = "Search")
+                    }
                 }
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(modifier = Modifier.height(5.dp))
                 verticalList(
                     filmList = SearchPageViewModel.movieList.value,
                     navController = navController
@@ -186,11 +200,16 @@ private fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navContr
     Image(
         painter = rememberAsyncImagePainter(film.imageRef),
         contentDescription ="",
+
         modifier
-            .fillMaxSize()
+            .size(175.dp, 100.dp)
+            .clip(shape = RoundedCornerShape(10.dp))
             .clickable {
                 navController.navigate(
-                    Screen.MediaPage2.route.replace("{movieID}", film.movieID)
+                    Screen.MediaPage.route.replace(
+                        "{movieID}",
+                        film.movieID
+                    )
                 )
             }, contentScale = ContentScale.Crop,)
 
@@ -201,17 +220,16 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
 
     LazyColumn() {
         items(filmList) { film ->
-            Spacer(modifier = Modifier.width(10.dp))
-            // Use the appropriate MovieItem function based on your requirements
-            Box(
-                modifier
-                    .size(150.dp, 190.dp)
-                    .background(Color.DarkGray)
-                    .clip(shape = RoundedCornerShape(10.dp))
-            ) {
+            //
+            Row(verticalAlignment = Alignment.CenterVertically){
                 MovieItem4(film = film, navController = navController)
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Text(text = film.title, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                }
             }
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+            // Use the appropriate MovieItem function based on your requirements
         }
     }
 }
