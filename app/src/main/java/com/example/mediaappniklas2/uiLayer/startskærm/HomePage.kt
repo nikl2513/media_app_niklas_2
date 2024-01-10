@@ -123,6 +123,12 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                       movieViewModel: HomePageViewModel
 
 ) {
+    val sections = listOf(
+        Section("Trending",movieViewModel.trendingMovies.value),
+        Section("Must watch",movieViewModel.mustWatchMovies.value),
+        Section("For you",movieViewModel.forYouMovies.value),
+        Section("All movies",movieViewModel.movieList.value)
+    )
     val items = listOf(
         NavigationItem(
             title = "Home",
@@ -154,13 +160,20 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
     // Use LaunchedEffect to execute a coroutine when the Composable is first launched
     LaunchedEffect(true) {
         // Launch a coroutine to fetch movies
-        val movies = withContext(Dispatchers.IO) {
-            import_of_movies()
+
+        if(movieViewModel.movieList.value.isEmpty()) {
+            val movies = withContext(Dispatchers.IO) {
+                import_of_movies()
+            }
+
+            // Update the movieList with the fetched movies
+            movieViewModel.updateMovieList(movies)
+            movieViewModel.calculateTrendingMovies()
+            movieViewModel.calculateForYouMovies()
+            movieViewModel.calculateMustWatchMovies()
         }
 
-        // Update the movieList with the fetched movies
-        movieViewModel.updateMovieList(movies)
-        movieViewModel.calculateTrendingMovies()
+
 
     }
     Surface(
@@ -230,7 +243,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                 items(sections) { section ->
                     SectionWithVerticalList(
                         sectionTitle = section.title,
-                        filmList = movieViewModel.trendingMovies.value,
+                        filmList = section.filmList,
                         navController
                     )
                     Spacer(modifier = Modifier.height(25.dp))
@@ -339,13 +352,9 @@ fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: N
           }, contentScale = ContentScale.Crop,)
 
 }
-data class Section(val title: String)
+data class Section(val title: String, val filmList : List<MovieData>)
 
-val sections = listOf(
-    Section("Recommended"),
-    Section("New and exciting"),
-    Section("Action")
-)
+
 
 @Composable
 private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier, navController: NavController) {
