@@ -149,12 +149,12 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
         ),
-        NavigationItem(
+        /*NavigationItem(
             title = "Your Streaming Services",
             selectedIcon = Icons.Filled.PlayArrow,
             unselectedIcon = Icons.Outlined.PlayArrow,
             route = Screen.GradientButton.route
-        )
+        )*/
 
     )
     // Use LaunchedEffect to execute a coroutine when the Composable is first launched
@@ -226,7 +226,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
         ) {
             LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
                 item {
-                    Topapp(drawerState)
+                    Topapp(drawerState, navController)
                     Spacer(modifier = Modifier.height(35.dp))
                     verticalListTopHighlight(
                         filmList = movieViewModel.movieList.value, navController = navController
@@ -283,7 +283,7 @@ fun MedieKnapper(navController: NavController ){
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topapp(DrawerState: DrawerState){
+fun Topapp(DrawerState: DrawerState, navController: NavController){
         val scope = rememberCoroutineScope()
         Row() {
             IconButton(onClick = {scope.launch {
@@ -297,7 +297,8 @@ fun Topapp(DrawerState: DrawerState){
 
 
             Spacer(modifier = Modifier.width(120.dp))
-            Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "")
+
+            Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "", Modifier.clickable {navController.navigate(Screen.Startskaerm.route)})
             Spacer(modifier = Modifier.width(120.dp))
             IconButton(onClick = {/*TODO*/ }) {
                 Icon(

@@ -94,13 +94,13 @@ fun SavedMovieList(
             selectedIcon = Icons.Filled.List,
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
-        ),
+        )/*,
         NavigationItem(
             title = "Your Streaming Services",
             selectedIcon = Icons.Filled.PlayArrow,
             unselectedIcon = Icons.Outlined.PlayArrow,
             route = Screen.GradientButton.route
-        )
+        )*/
 
     )
     Surface(
@@ -158,7 +158,7 @@ fun SavedMovieList(
                 Spacer(modifier = Modifier.width(5.dp))
                 LazyColumn {
                     item {
-                        Topapp(drawerState)
+                        Topapp(drawerState, navController)
                     }
                     items(WatchLaterList) { movie ->
                         //Spacer(modifier = Modifier.height(100.dp))

@@ -96,12 +96,12 @@ fun SearchBar(modifier: Modifier = Modifier
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
         ),
-        NavigationItem(
+        /*NavigationItem(
             title = "Your Streaming Services",
             selectedIcon = Icons.Filled.PlayArrow,
             unselectedIcon = Icons.Outlined.PlayArrow,
             route = Screen.GradientButton.route
-        )
+        )*/
 
     )
     Surface(
@@ -155,7 +155,7 @@ fun SearchBar(modifier: Modifier = Modifier
             drawerState = drawerState
         ) {
             Column {
-                Topapp(DrawerState = drawerState)
+                Topapp(DrawerState = drawerState, navController)
                 Spacer(modifier = Modifier.height(6.dp))
                 Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
                     /*Icon(Icons.Filled.ArrowBack,
