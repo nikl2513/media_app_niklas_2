@@ -54,9 +54,11 @@ fun NavHost() {
         composable(route = Screen.GradientButton.route){
             GradientButton(navController = navController)
         }
+
         composable(route = Screen.Search.route){
             SearchBar(navController = navController)
         }
+
         composable(route = Screen.SavedMovieList.route){
             SavedMovieList(navController = navController, movieViewModel = homePageViewModel)
         }
