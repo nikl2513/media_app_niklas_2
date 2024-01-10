@@ -232,13 +232,9 @@ fun MediaPage(
                     Text(text = " ", color = Color.White)
                     Text(text = currentImdb.value?.averageRating.toString(), color = Color.White)
                     Text(text = "| ", color = Color.White)
-                    Text(text = "4K ", color = Color.White)
-                    Text(text = "| ", color = Color.White)
-                    Text(text = "18 Years ", color = Color.White)
-                    Text(text = "| ", color = Color.White)
                     Text(currentMovie.releasedate, color = Color.White)
                     Text(text = " | ", color = Color.White)
-                    Text(text = "2 t. 32 m.", color = Color.White)
+
                 }
 
                 LaunchedEffect(key1 = movie.title) {
