@@ -25,7 +25,7 @@ fun NavHost() {
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = Screen.Startskaerm.route/*Opstart.route*/) {
+    NavHost(navController = navController, startDestination = Screen./*Startskaerm.route*/Opstart.route) {
         composable(route = Screen.Opstart.route){
             OpstartMedButtonOgBaggrund(navController = navController)
         }

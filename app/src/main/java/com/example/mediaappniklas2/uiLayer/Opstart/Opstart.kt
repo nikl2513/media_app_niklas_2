@@ -45,16 +45,16 @@ fun OpstartMedButtonOgBaggrund(
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
         Image(painter = painterResource(id = R.drawable.logotext2), contentDescription = "", modifier = Modifier .size(300.dp))
         Button(
-            onClick = {navController.navigate(Screen.Tilmeld.route)},
+            onClick = {navController.navigate(Screen.Startskaerm.route/*Tilmeld.route*/)},
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             modifier = Modifier
                 .height(50.dp)
                 .width(300.dp)
         ) {
-            Text(stringResource(id = R.string.tilmeld), fontSize = 20.sp)
+            Text(stringResource(id = /*R.string.tilmeld*/R.string.Go_find_a_movie), fontSize = 20.sp)
         }
-        Spacer(modifier = Modifier.height(30.dp))
+        /*Spacer(modifier = Modifier.height(30.dp))
         Button(onClick = {navController.navigate(Screen.Loginform.route)},
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
@@ -63,7 +63,7 @@ fun OpstartMedButtonOgBaggrund(
                 .width(300.dp))
             {
             Text(stringResource(id = R.string.logind), fontSize = 20.sp)
-        }
+        }*/
         Spacer(modifier = Modifier.height(100.dp))
     }
 
