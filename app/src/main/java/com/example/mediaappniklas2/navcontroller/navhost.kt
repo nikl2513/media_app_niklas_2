@@ -7,12 +7,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
 import com.example.mediaappniklas2.domainLayer.MovieUtils
 import com.example.mediaappniklas2.uiLayer.Login.LoginForm
 import com.example.mediaappniklas2.uiLayer.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.uiLayer.Search.SearchBar
 import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
+import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
 import com.example.mediaappniklas2.uiLayer.list.SavedMovieList
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
@@ -60,7 +60,7 @@ fun NavHost() {
         }
 
         composable(route = Screen.SavedMovieList.route){
-            SavedMovieList(navController = navController, movieViewModel = homePageViewModel)
+            SavedMovieList(navController = navController, movieViewModel =  homePageViewModel)
         }
     }
 }
