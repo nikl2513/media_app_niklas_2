@@ -60,7 +60,7 @@ fun NavHost() {
         }
 
         composable(route = Screen.SavedMovieList.route){
-            SavedMovieList(navController = navController, movieViewModel =  homePageViewModel)
+            SavedMovieList(navController = navController)
         }
     }
 }

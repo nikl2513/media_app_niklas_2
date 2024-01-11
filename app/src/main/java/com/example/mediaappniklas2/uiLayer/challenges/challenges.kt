@@ -1,4 +1,4 @@
-package com.example.mediaappniklas2.uiLayer.list
+package com.example.mediaappniklas2.uiLayer.challenges
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,33 +26,31 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mediaappniklas2.datalayer.local.WatchListManager
-import com.example.mediaappniklas2.uiLayer.startskærm.MovieItem4
-import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.example.mediaappniklas2.navcontroller.Screen
+import com.example.mediaappniklas2.uiLayer.startskærm.MovieItem4
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
-import kotlinx.coroutines.launch
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
-
+import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SavedMovieList(
+fun Challenges(
     modifier: Modifier = Modifier
         .background(Color.DarkGray)
         .fillMaxSize()
@@ -90,8 +88,6 @@ fun SavedMovieList(
         modifier = Modifier.fillMaxSize(),
         color = Color.DarkGray
     ) {
-        val watchLaterManager = WatchListManager(context = LocalContext.current)
-        val watchLaterList = watchLaterManager.getWatchLaterList()
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
         var selectedItemIndex by rememberSaveable {
@@ -140,94 +136,8 @@ fun SavedMovieList(
             Row {
                 Spacer(modifier = Modifier.width(5.dp))
                 LazyColumn {
-                    item {
-                        Topapp(drawerState, navController)
-                    }
-                    items(watchLaterList) { movie ->
-                        //Spacer(modifier = Modifier.height(100.dp))
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically,
-                            //modifier = modifier.background(Color.DarkGray)
-                        ) {
-                            MovieItem4(film = movie, navController = navController)
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Column {
-                                Text(
-                                    text = movie.title,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.ExtraBold
-                                )
-                            }
-                        }
-
-                    }
                 }
             }
         }
     }
 }
-
-/*LazyRow {
-    items(WatchLaterList) { movie ->
-        Spacer(modifier = Modifier.width(10.dp))
-        Box(
-            modifier
-                .size(150.dp, 190.dp)
-                .background(Color.DarkGray)
-                .clip(shape = RoundedCornerShape(10.dp))
-        ){
-            MovieItem3(film = movie, navController = navController)
-        }
-    }*/
-
-
-/*val LocalViewModel = staticCompositionLocalOf<MediaPageViewModel> {
-    error("No ViewModel provided")
-}
-
-@Composable
-fun SavedMovieListScreen(
-    modifier: Modifier = Modifier,
-    navController: NavController
-) {
-    // Få fat i viewModel, antagende at denne composable bliver kaldt inden for en scope, hvor en viewModel er tilgængelig
-    val viewModel: MediaPageViewModel = viewModel()
-
-    // Gem viewModel i en local så andre Composables kan bruge den
-    CompositionLocalProvider(LocalViewModel provides viewModel) {
-        SavedMovieListView(modifier, navController)
-    }
-}
-
-@Composable
-fun SavedMovieListView(
-    modifier: Modifier = Modifier,
-    navController: NavController
-) {
-    val viewModel = LocalViewModel.current
-    val filmList = viewModel.savedMovies
-
-    LazyRow(modifier = modifier) {
-        items(filmList) { film ->
-            // Din kode for at vise filmen her
-            MovieItem(movie = film, viewModel = viewModel)
-        }
-    }
-}
-
-/*@Composable
-fun MovieItem(film: MovieData, navController: NavController, modifier: Modifier = Modifier) {
-    Image(
-        painter = rememberAsyncImagePainter(film.imageRef),
-        contentDescription ="",
-        modifier
-            .fillMaxSize()
-            .clickable {
-                navController.navigate(
-                    Screen.MediaPage.route.replace(
-                        "{movieID}",
-                        film.movieID
-                    )
-                )
-            }, contentScale = ContentScale.Crop,)
-}*/
