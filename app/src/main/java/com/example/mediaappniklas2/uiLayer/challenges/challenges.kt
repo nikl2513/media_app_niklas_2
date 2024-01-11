@@ -1,10 +1,12 @@
 package com.example.mediaappniklas2.uiLayer.challenges
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -18,9 +20,11 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -31,6 +35,8 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -47,6 +53,7 @@ import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.MovieItem4
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -136,8 +143,52 @@ fun Challenges(
             Row {
                 Spacer(modifier = Modifier.width(5.dp))
                 LazyColumn {
+                    item {
+                        Topapp(drawerState, navController)
+                    }
+
                 }
             }
         }
+    }
+}
+
+@Composable
+fun LinearDeterminateIndicator() {
+    var currentProgress by remember { mutableStateOf(0f) }
+    var loading by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope() // Create a coroutine scope
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Button(onClick = {
+            loading = true
+            scope.launch {
+                loadProgress { progress ->
+                    currentProgress = progress
+                }
+                loading = false // Reset loading when the coroutine finishes
+            }
+        }, enabled = !loading) {
+            Text("Start loading")
+        }
+
+        if (loading) {
+            LinearProgressIndicator(
+                progress = { currentProgress },
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
+
+/** Iterate the progress value */
+suspend fun loadProgress(updateProgress: (Float) -> Unit) {
+    for (i in 1..100) {
+        updateProgress(i.toFloat() / 100)
+        delay(100)
     }
 }
