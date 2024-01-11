@@ -33,6 +33,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -141,12 +142,13 @@ fun Challenges(
             drawerState = drawerState
         ) {
             Row {
-                Spacer(modifier = Modifier.width(5.dp))
-                LazyColumn {
+                LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
                     item {
                         Topapp(drawerState, navController)
+                        Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
+                        Text(text = "WATCH 10 MOVIES", fontSize = 20.sp, color = Color.White)
+                        LinearDeterminateIndicator(howLong = 50)
                     }
-
                 }
             }
         }
@@ -154,40 +156,32 @@ fun Challenges(
 }
 
 @Composable
-fun LinearDeterminateIndicator() {
+fun LinearDeterminateIndicator(howLong: Int) {
     var currentProgress by remember { mutableStateOf(0f) }
-    var loading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope() // Create a coroutine scope
+
+    // Start loading progress when composable enters the composition
+    LaunchedEffect(key1 = true) {
+        loadProgress({ progress ->
+            currentProgress = progress
+        }, howLong)
+    }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Button(onClick = {
-            loading = true
-            scope.launch {
-                loadProgress { progress ->
-                    currentProgress = progress
-                }
-                loading = false // Reset loading when the coroutine finishes
-            }
-        }, enabled = !loading) {
-            Text("Start loading")
-        }
-
-        if (loading) {
-            LinearProgressIndicator(
-                progress = { currentProgress },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
+        LinearProgressIndicator(
+            progress = currentProgress,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
 /** Iterate the progress value */
-suspend fun loadProgress(updateProgress: (Float) -> Unit) {
-    for (i in 1..100) {
+suspend fun loadProgress(updateProgress: (Float) -> Unit, howLong: Int) {
+    for (i in 1..howLong) {
         updateProgress(i.toFloat() / 100)
         delay(100)
     }
