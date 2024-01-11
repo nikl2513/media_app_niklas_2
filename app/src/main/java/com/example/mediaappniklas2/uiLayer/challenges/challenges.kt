@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -19,7 +18,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,6 +30,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -43,12 +42,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Challenges(
@@ -135,12 +136,13 @@ fun Challenges(
             drawerState = drawerState
         ) {
             Row {
-                Spacer(modifier = Modifier.width(5.dp))
-                LazyColumn {
+                LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
                     item {
                         Topapp(drawerState, navController)
+                        Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
+                        Text(text = "WATCH 10 MOVIES", fontSize = 20.sp, color = Color.White)
+                        LinearDeterminateIndicator(howLong = 50)
                     }
-
                 }
             }
         }
@@ -148,40 +150,32 @@ fun Challenges(
 }
 
 @Composable
-fun LinearDeterminateIndicator() {
+fun LinearDeterminateIndicator(howLong: Int) {
     var currentProgress by remember { mutableStateOf(0f) }
-    var loading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope() // Create a coroutine scope
+
+    // Start loading progress when composable enters the composition
+    LaunchedEffect(key1 = true) {
+        loadProgress({ progress ->
+            currentProgress = progress
+        }, howLong)
+    }
 
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Button(onClick = {
-            loading = true
-            scope.launch {
-                loadProgress { progress ->
-                    currentProgress = progress
-                }
-                loading = false // Reset loading when the coroutine finishes
-            }
-        }, enabled = !loading) {
-            Text("Start loading")
-        }
-
-        if (loading) {
-            LinearProgressIndicator(
-                progress = { currentProgress },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
+        LinearProgressIndicator(
+            progress = currentProgress,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
 /** Iterate the progress value */
-suspend fun loadProgress(updateProgress: (Float) -> Unit) {
-    for (i in 1..100) {
+suspend fun loadProgress(updateProgress: (Float) -> Unit, howLong: Int) {
+    for (i in 1..howLong) {
         updateProgress(i.toFloat() / 100)
         delay(100)
     }
