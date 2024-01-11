@@ -13,6 +13,7 @@ import com.example.mediaappniklas2.uiLayer.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.uiLayer.Search.SearchBar
 import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
 import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
+import com.example.mediaappniklas2.uiLayer.challenges.Challenges
 import com.example.mediaappniklas2.uiLayer.list.SavedMovieList
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
@@ -25,7 +26,7 @@ fun NavHost() {
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = Screen./*Startskaerm.route*/Opstart.route) {
+    NavHost(navController = navController, startDestination = Screen./*Startskaerm.route*/Challenges.route) {
         composable(route = Screen.Opstart.route){
             OpstartMedButtonOgBaggrund(navController = navController)
         }
@@ -61,6 +62,9 @@ fun NavHost() {
 
         composable(route = Screen.SavedMovieList.route){
             SavedMovieList(navController = navController)
+        }
+        composable(route = Screen.Challenges.route){
+            Challenges(navController = navController)
         }
     }
 }

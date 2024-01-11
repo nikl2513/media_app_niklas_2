@@ -10,4 +10,5 @@ sealed class Screen(val route: String){
     object Search : Screen("Search")
     object MediaPage2 : Screen("MediaPage2/{movieID}")
     object SavedMovieList : Screen("SavedMovieList")
+    object Challenges : Screen("Challenges")
 }
