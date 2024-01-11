@@ -5,10 +5,15 @@ import androidx.lifecycle.ViewModel
 class ChallengesViewModel: ViewModel(){
     private val  _moviesWatched : Int = 0;
     private val _challengesCompleted : Int = 0;
+    private val _challengeList : List<Challenge> = emptyList()
+    val moviesWatched: Int
+        get() = _moviesWatched
 
-    val moviesWatched : Int = _moviesWatched
-    val challengesCompleted : Int = _challengesCompleted
+    val challengesCompleted: Int
+        get() = _challengesCompleted
 
+    val challengeList : List<Challenge>
+        get() = _challengeList
     fun watchedMovie(){
         _moviesWatched.inc()
 
@@ -17,7 +22,27 @@ class ChallengesViewModel: ViewModel(){
     fun challengeCompleted(){
         _challengesCompleted.inc()
     }
+    private fun checkChallengeCompletion(challengeType: ChallengeType) {
+        val matchingChallenge = challengeList.find { it.type == challengeType && it.goal == getCount(challengeType) }
+        matchingChallenge?.isCompleted = true
+    }
 
+    private fun getCount(challengeType: ChallengeType): Int {
+        return when (challengeType) {
+            ChallengeType.MOVIES_WATCHED -> _moviesWatched
+            ChallengeType.CHALLENGES_COMPLETED -> _challengesCompleted
+        }
+    }
+
+    fun createList() : List<Challenge>{
+return listOf(
+    Challenge("Watch 5 movies", ChallengeType.MOVIES_WATCHED, 5),
+    Challenge("Watch 15 movies",ChallengeType.MOVIES_WATCHED,15),
+    Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3),
+
+)
+
+    }
 
 }
 
