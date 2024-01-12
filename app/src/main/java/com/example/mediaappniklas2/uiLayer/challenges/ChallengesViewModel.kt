@@ -24,7 +24,7 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
         _challengesCompleted++
     }
 
-    private fun checkUncompletedChallenges() {
+     fun checkUncompletedChallenges() {
         _challengeList.filter { !it.isCompleted }.forEach { challenge ->
             val count = getCount(challenge.type)
 
@@ -44,15 +44,21 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     }
 
     fun updateChallenges() {
-        // Remove completed challenges
-        _challengeList.removeAll { it.isCompleted }
+        // Replace completed challenges with new goals
+        _challengeList.forEach { challenge ->
+            if (challenge.isCompleted) {
+                challenge.isCompleted = false
+                challenge.goal = calculateNewGoal()
+            }
+        }
 
-        // Add new challenge with higher goal
-        _challengeList.add(Challenge("Watch ${calculateNewGoal()} Movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
+        // Remove challenges with a goal of 0
+        _challengeList.removeAll { it.goal == 0 }
 
         // Optionally, you can sort the list based on some criteria
         _challengeList.sortBy { it.goal }
     }
+
 
     fun calculateNewGoal(): Int {
         // Implement your logic to calculate the new goal here
@@ -72,7 +78,7 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
 data class Challenge(
     val challName: String,
     val type: ChallengeType,  // Use an enum to represent the type
-    val goal: Int,
+    var goal: Int,
     var isCompleted: Boolean = false
 )
 

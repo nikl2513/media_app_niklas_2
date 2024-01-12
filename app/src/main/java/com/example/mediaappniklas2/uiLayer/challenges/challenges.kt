@@ -1,5 +1,6 @@
 package com.example.mediaappniklas2.uiLayer.challenges
 
+import WatchedHistoryManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -158,6 +159,7 @@ fun Challenges(
                         )
                         if (watchedHistoryManager.getWatchedHistoryList().size >= challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal){
                             challengesViewModel.addchallengecompleted()
+                            challengesViewModel.checkUncompletedChallenges()
                         }
                     }
                 }
