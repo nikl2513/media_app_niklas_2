@@ -1,6 +1,8 @@
 package com.example.mediaappniklas2.navcontroller
 
+import WatchedHistoryManager
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -26,6 +28,10 @@ fun NavHost() {
     val navController = rememberNavController()
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
+    val watchedHistoryManager = WatchedHistoryManager.getInstance(LocalContext.current)
+    val challengesViewModel = ChallengesViewModel(watchedHistoryManager)
+
+
 
     NavHost(navController = navController, startDestination = Screen./*Startskaerm.route*/Challenges.route) {
         composable(route = Screen.Opstart.route){
@@ -65,7 +71,7 @@ fun NavHost() {
             SavedMovieList(navController = navController)
         }
         composable(route = Screen.Challenges.route){
-            Challenges(navController = navController, challengesViewModel = ChallengesViewModel())
+            Challenges(navController = navController, challengesViewModel = challengesViewModel)
         }
     }
 }

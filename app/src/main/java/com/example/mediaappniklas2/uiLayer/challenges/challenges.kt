@@ -41,11 +41,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mediaappniklas2.datalayer.local.WatchedHistoryManager
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
@@ -138,7 +136,7 @@ fun Challenges(
             },
             drawerState = drawerState
         ) {
-            val watchedHistoryManager = WatchedHistoryManager(LocalContext.current)
+
             Row {
                 LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
                     item {

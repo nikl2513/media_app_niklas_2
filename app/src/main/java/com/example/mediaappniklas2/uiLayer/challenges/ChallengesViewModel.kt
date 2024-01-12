@@ -1,11 +1,14 @@
 package com.example.mediaappniklas2.uiLayer.challenges
 
 import androidx.lifecycle.ViewModel
+import com.example.mediaappniklas2.datalayer.local.WatchedHistoryManager
 
-class ChallengesViewModel: ViewModel(){
+class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManager) : ViewModel(){
     private var  _moviesWatched : Int = 0;
     private var _challengesCompleted : Int = 0;
     private val _challengeList : List<Challenge> = emptyList()
+
+
     val moviesWatched: Int
         get() = _moviesWatched
 
@@ -14,17 +17,23 @@ class ChallengesViewModel: ViewModel(){
 
     val challengeList : List<Challenge>
         get() = _challengeList
-    fun watchedMovie(){
-        _moviesWatched.inc()
 
-    }
 
     fun challengeCompleted(){
         _challengesCompleted.inc()
     }
-    private fun checkChallengeCompletion(challengeType: ChallengeType) {
-        val matchingChallenge = challengeList.find { it.type == challengeType && it.goal == getCount(challengeType) }
-        matchingChallenge?.isCompleted = true
+    private fun checkUncompletedChallenges() {
+        challengeList.filter { !it.isCompleted }.forEach { challenge ->
+            val challengeGoal = when (challenge.type) {
+                ChallengeType.MOVIES_WATCHED -> challenge.goal
+                ChallengeType.CHALLENGES_COMPLETED -> _challengesCompleted
+            }
+
+            if (getCount(challenge.type) >= challengeGoal) {
+                challenge.isCompleted = true
+                // Handle the completion logic here, such as showing a message or triggering further actions.
+            }
+        }
     }
 
     private fun getCount(challengeType: ChallengeType): Int {
