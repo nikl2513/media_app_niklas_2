@@ -153,7 +153,6 @@ fun Challenges(
                         LinearDeterminateIndicator(
                             howLong = watchedHistoryManager.getWatchedHistoryList().size * (100/challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal)
                         )
-
                     }
                 }
             }
