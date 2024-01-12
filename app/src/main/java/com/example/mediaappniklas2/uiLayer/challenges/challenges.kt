@@ -145,6 +145,9 @@ fun Challenges(
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
                         challengesViewModel.createList()
+                        if (watchedHistoryManager.getWatchedHistoryList().size >= challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal){
+                            challengesViewModel.addchallengecompleted()
+                        }
                         Text(
                             text = challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).challName,
                             fontSize = 20.sp,
@@ -153,6 +156,9 @@ fun Challenges(
                         LinearDeterminateIndicator(
                             howLong = watchedHistoryManager.getWatchedHistoryList().size * (100/challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal)
                         )
+                        if (watchedHistoryManager.getWatchedHistoryList().size >= challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal){
+                            challengesViewModel.addchallengecompleted()
+                        }
                     }
                 }
             }

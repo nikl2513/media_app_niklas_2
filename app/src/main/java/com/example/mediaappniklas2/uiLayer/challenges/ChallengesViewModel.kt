@@ -22,6 +22,9 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     fun challengeCompleted() {
         _challengesCompleted.inc()
     }
+    fun addchallengecompleted(){
+        _challengesCompleted++
+    }
 
     private fun checkUncompletedChallenges() {
         challengeList.filter { !it.isCompleted }.forEach { challenge ->
@@ -50,6 +53,7 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
         _challengeList.add(Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3)
         )
     }
+
 
 }
 
