@@ -142,18 +142,17 @@ fun Challenges(
                     item {
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
-                        Text(text = "WATCH 10 MOVIES", fontSize = 20.sp, color = Color.White)
-                        /*if (challengesViewModel.getchallengesCompleted == 0){
-                            Text(text = challengesViewModel.challengeList.get(0).challName, fontSize = 20.sp, color = Color.White)
-                            LinearDeterminateIndicator(howLong = watchedHistoryManager.getWatchedHistoryList().size*20)
-                        }
-                        if (challengesViewModel.getchallengesCompleted == 1){
-                            Text(text = challengesViewModel.challengeList.get(1).challName, fontSize = 20.sp, color = Color.White)
-                            LinearDeterminateIndicator(howLong = watchedHistoryManager.getWatchedHistoryList().size*((2/3)*10))
-                        }
-                        else{
+                        Text(
+                            text = challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).challName,
+                            fontSize = 20.sp,
+                            color = Color.White
+                        )
+                        LinearDeterminateIndicator(
+                            howLong = challengesViewModel.moviesWatched * (100 / challengesViewModel.challengeList.get(
+                                challengesViewModel.getchallengesCompleted
+                            ).goal)
+                        )
 
-                        }*/
                     }
                 }
             }
