@@ -4,10 +4,9 @@ import WatchedHistoryManager
 import androidx.lifecycle.ViewModel
 
 class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewModel() {
-    private var _moviesWatched: Int = 0;
-    private var _challengesCompleted: Int = 0;
+    private var _moviesWatched: Int = 0
+    private var _challengesCompleted: Int = 0
     private val _challengeList: MutableList<Challenge> = mutableListOf()
-
 
     val moviesWatched: Int
         get() = _moviesWatched
@@ -18,7 +17,6 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     val challengeList: List<Challenge>
         get() = _challengeList
 
-
     fun challengeCompleted() {
         _challengesCompleted.inc()
     }
@@ -27,15 +25,13 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     }
 
     private fun checkUncompletedChallenges() {
-        challengeList.filter { !it.isCompleted }.forEach { challenge ->
-            val challengeGoal = when (challenge.type) {
-                ChallengeType.MOVIES_WATCHED -> challenge.goal
-                ChallengeType.CHALLENGES_COMPLETED -> _challengesCompleted
-            }
+        _challengeList.filter { !it.isCompleted }.forEach { challenge ->
+            val count = getCount(challenge.type)
 
-            if (getCount(challenge.type) >= challengeGoal) {
+            if (count >= challenge.goal) {
                 challenge.isCompleted = true
                 // Handle the completion logic here, such as showing a message or triggering further actions.
+                updateChallenges()
             }
         }
     }
@@ -47,13 +43,29 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
         }
     }
 
+    fun updateChallenges() {
+        // Remove completed challenges
+        _challengeList.removeAll { it.isCompleted }
+
+        // Add new challenge with higher goal
+        _challengeList.add(Challenge("Watch ${calculateNewGoal()} Movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
+
+        // Optionally, you can sort the list based on some criteria
+        _challengeList.sortBy { it.goal }
+    }
+
+    fun calculateNewGoal(): Int {
+        // Implement your logic to calculate the new goal here
+        // For example, you can find the maximum goal in the existing challenges and add 5
+        val maxGoal = _challengeList.maxByOrNull { it.goal }?.goal ?: 0
+        return maxGoal + 5
+    }
+
     fun createList() {
         _challengeList.add(Challenge("Watch 5 movies", ChallengeType.MOVIES_WATCHED, 5))
         _challengeList.add(Challenge("Watch 15 movies", ChallengeType.MOVIES_WATCHED, 15))
-        _challengeList.add(Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3)
-        )
+        _challengeList.add(Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3))
     }
-
 
 }
 
