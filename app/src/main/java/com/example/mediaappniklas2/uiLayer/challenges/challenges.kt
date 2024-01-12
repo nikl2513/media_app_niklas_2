@@ -58,7 +58,8 @@ fun Challenges(
     modifier: Modifier = Modifier
         .background(Color.DarkGray)
         .fillMaxSize()
-        .wrapContentSize(Alignment.TopCenter), navController: NavController,
+        .wrapContentSize(Alignment.TopCenter),
+    navController: NavController, challengesViewModel: ChallengesViewModel
 ) {
     val items = listOf(
         NavigationItem(
@@ -144,7 +145,17 @@ fun Challenges(
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
                         Text(text = "WATCH 10 MOVIES", fontSize = 20.sp, color = Color.White)
-                        LinearDeterminateIndicator(howLong = watchedHistoryManager.getWatchedHistoryList().size*10)
+                        /*if (challengesViewModel.getchallengesCompleted == 0){
+                            Text(text = challengesViewModel.challengeList.get(0).challName, fontSize = 20.sp, color = Color.White)
+                            LinearDeterminateIndicator(howLong = watchedHistoryManager.getWatchedHistoryList().size*20)
+                        }
+                        if (challengesViewModel.getchallengesCompleted == 1){
+                            Text(text = challengesViewModel.challengeList.get(1).challName, fontSize = 20.sp, color = Color.White)
+                            LinearDeterminateIndicator(howLong = watchedHistoryManager.getWatchedHistoryList().size*((2/3)*10))
+                        }
+                        else{
+
+                        }*/
                     }
                 }
             }

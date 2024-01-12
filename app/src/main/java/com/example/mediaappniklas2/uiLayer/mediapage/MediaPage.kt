@@ -207,7 +207,7 @@ fun MediaPage(
                         shape = RoundedCornerShape(20),
                         colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.Black)
                         ) {
-                        Icon(imageVector = if (hasMovieBeenSeen.value) Icons.Outlined.LocalPlay else Icons.Filled.LocalPlay, contentDescription = "watched movies")
+                        Icon(imageVector = if (hasMovieBeenSeen.value) Icons.Filled.LocalPlay else Icons.Outlined.LocalPlay, contentDescription = "watched movies")
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     OutlinedButton(

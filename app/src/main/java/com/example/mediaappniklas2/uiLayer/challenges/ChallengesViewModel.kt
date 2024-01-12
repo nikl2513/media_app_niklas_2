@@ -3,13 +3,13 @@ package com.example.mediaappniklas2.uiLayer.challenges
 import androidx.lifecycle.ViewModel
 
 class ChallengesViewModel: ViewModel(){
-    private val  _moviesWatched : Int = 0;
-    private val _challengesCompleted : Int = 0;
+    private var  _moviesWatched : Int = 0;
+    private var _challengesCompleted : Int = 0;
     private val _challengeList : List<Challenge> = emptyList()
     val moviesWatched: Int
         get() = _moviesWatched
 
-    val challengesCompleted: Int
+    val getchallengesCompleted: Int
         get() = _challengesCompleted
 
     val challengeList : List<Challenge>

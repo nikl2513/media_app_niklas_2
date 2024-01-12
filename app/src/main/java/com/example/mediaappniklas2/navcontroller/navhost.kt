@@ -14,6 +14,7 @@ import com.example.mediaappniklas2.uiLayer.Search.SearchBar
 import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
 import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
 import com.example.mediaappniklas2.uiLayer.challenges.Challenges
+import com.example.mediaappniklas2.uiLayer.challenges.ChallengesViewModel
 import com.example.mediaappniklas2.uiLayer.list.SavedMovieList
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
@@ -64,7 +65,7 @@ fun NavHost() {
             SavedMovieList(navController = navController)
         }
         composable(route = Screen.Challenges.route){
-            Challenges(navController = navController)
+            Challenges(navController = navController, challengesViewModel = ChallengesViewModel())
         }
     }
 }
