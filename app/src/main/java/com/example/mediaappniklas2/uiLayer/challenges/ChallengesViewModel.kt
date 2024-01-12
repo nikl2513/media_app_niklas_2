@@ -3,10 +3,10 @@ package com.example.mediaappniklas2.uiLayer.challenges
 import WatchedHistoryManager
 import androidx.lifecycle.ViewModel
 
-class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewModel(){
-    private var  _moviesWatched : Int = 0;
-    private var _challengesCompleted : Int = 0;
-    private val _challengeList : List<Challenge> = emptyList()
+class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewModel() {
+    private var _moviesWatched: Int = 0;
+    private var _challengesCompleted: Int = 0;
+    private val _challengeList: MutableList<Challenge> = mutableListOf()
 
 
     val moviesWatched: Int
@@ -15,13 +15,14 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     val getchallengesCompleted: Int
         get() = _challengesCompleted
 
-    val challengeList : List<Challenge>
+    val challengeList: List<Challenge>
         get() = _challengeList
 
 
-    fun challengeCompleted(){
+    fun challengeCompleted() {
         _challengesCompleted.inc()
     }
+
     private fun checkUncompletedChallenges() {
         challengeList.filter { !it.isCompleted }.forEach { challenge ->
             val challengeGoal = when (challenge.type) {
@@ -43,14 +44,11 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
         }
     }
 
-    fun createList() : List<Challenge>{
-return listOf(
-    Challenge("Watch 5 movies", ChallengeType.MOVIES_WATCHED, 5),
-    Challenge("Watch 15 movies",ChallengeType.MOVIES_WATCHED,15),
-    Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3),
-
-)
-
+    fun createList() {
+        _challengeList.add(Challenge("Watch 5 movies", ChallengeType.MOVIES_WATCHED, 5))
+        _challengeList.add(Challenge("Watch 15 movies", ChallengeType.MOVIES_WATCHED, 15))
+        _challengeList.add(Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3)
+        )
     }
 
 }
