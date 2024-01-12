@@ -65,6 +65,10 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.filled.LocalPlay
+import androidx.compose.material.icons.outlined.LocalPlay
+import com.example.mediaappniklas2.datalayer.local.WatchedHistoryManager
+import com.example.mediaappniklas2.uiLayer.challenges.ChallengesViewModel
 
 @Composable
 fun MediaPageAPP(
@@ -154,8 +158,12 @@ fun MediaPage(
                 modifier = imageModifier
             )
             val watchLaterManager = WatchListManager(LocalContext.current)
-
+            val watchedHistoryManager = WatchedHistoryManager(LocalContext.current)
             val isMovieSaved = remember { mutableStateOf(false) }
+            val hasMovieBeenSeen = remember {
+                mutableStateOf(false)
+            }
+
 
             LaunchedEffect(currentMovie?.imdbID) {
                 currentMovie?.imdbID?.let { movieId ->
@@ -165,6 +173,16 @@ fun MediaPage(
                         .any { it.movieID == currentMovie.movieID }
                 }
             }
+
+            LaunchedEffect(currentMovie?.imdbID) {
+                currentMovie?.imdbID?.let { movieId ->
+                    movieViewModel.fetchImdbRating(currentMovie.imdbID)
+                    // Check if the current movie is already saved
+                    hasMovieBeenSeen.value = watchedHistoryManager.getWatchedHistoryList()
+                        .any { it.movieID == currentMovie.movieID }
+                }
+            }
+
             Column(
                 modifier = modifier
                     .fillMaxSize()
@@ -176,6 +194,22 @@ fun MediaPage(
                 Spacer(modifier = Modifier.height(8.dp))
                 val icon = remember { mutableStateOf<ImageVector>(Icons.Outlined.Add) }
                 Row(modifier = Modifier) {
+                    OutlinedButton(onClick = {
+                        if (!hasMovieBeenSeen.value){
+                            watchedHistoryManager.addToWatchedHistory(currentMovie)
+                        }
+                        else{
+
+                        }
+                        hasMovieBeenSeen.value = !hasMovieBeenSeen.value
+                    },
+                        border = BorderStroke(1.dp, Color.Black),
+                        shape = RoundedCornerShape(20),
+                        colors = ButtonDefaults.elevatedButtonColors(containerColor = Color.Black)
+                        ) {
+                        Icon(imageVector = if (hasMovieBeenSeen.value) Icons.Outlined.LocalPlay else Icons.Filled.LocalPlay, contentDescription = "watched movies")
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
                     OutlinedButton(
                         onClick = {
                             if (!isMovieSaved.value) {

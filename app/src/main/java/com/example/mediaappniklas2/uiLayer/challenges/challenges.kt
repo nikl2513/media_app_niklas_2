@@ -41,9 +41,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.datalayer.local.WatchedHistoryManager
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
@@ -135,13 +137,14 @@ fun Challenges(
             },
             drawerState = drawerState
         ) {
+            val watchedHistoryManager = WatchedHistoryManager(LocalContext.current)
             Row {
                 LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
                     item {
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
                         Text(text = "WATCH 10 MOVIES", fontSize = 20.sp, color = Color.White)
-                        LinearDeterminateIndicator(howLong = 50)
+                        LinearDeterminateIndicator(howLong = watchedHistoryManager.getWatchedHistoryList().size*10)
                     }
                 }
             }
