@@ -1,9 +1,9 @@
 package com.example.mediaappniklas2.uiLayer.challenges
 
+import WatchedHistoryManager
 import androidx.lifecycle.ViewModel
-import com.example.mediaappniklas2.datalayer.local.WatchedHistoryManager
 
-class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManager) : ViewModel(){
+class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewModel(){
     private var  _moviesWatched : Int = 0;
     private var _challengesCompleted : Int = 0;
     private val _challengeList : List<Challenge> = emptyList()
