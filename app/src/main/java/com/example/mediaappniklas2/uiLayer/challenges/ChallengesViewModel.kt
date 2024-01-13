@@ -2,11 +2,17 @@ package com.example.mediaappniklas2.uiLayer.challenges
 
 import WatchedHistoryManager
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewModel() {
+class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManager) : ViewModel() {
     private var _moviesWatched: Int = 0
     private var _challengesCompleted: Int = 0
     private val _challengeList: MutableList<Challenge> = mutableListOf()
+    // Use MutableStateFlow for challengeList
+    private val _challengeListState = MutableStateFlow<List<Challenge>>(emptyList())
+
+    val challengeListState = _challengeListState.asStateFlow()
 
     val moviesWatched: Int
         get() = _moviesWatched
@@ -19,12 +25,16 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
 
     fun challengeCompleted() {
         _challengesCompleted.inc()
+
     }
     fun addchallengecompleted(){
         _challengesCompleted++
     }
 
-     fun checkUncompletedChallenges() {
+
+    fun checkUncompletedChallenges() {
+        _moviesWatched = watchedHistoryManager.getWatchedHistoryList().size
+
         _challengeList.filter { !it.isCompleted }.forEach { challenge ->
             val count = getCount(challenge.type)
 
@@ -36,6 +46,7 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
         }
     }
 
+
     private fun getCount(challengeType: ChallengeType): Int {
         return when (challengeType) {
             ChallengeType.MOVIES_WATCHED -> _moviesWatched
@@ -44,20 +55,28 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     }
 
     fun updateChallenges() {
-        // Replace completed challenges with new goals
-        _challengeList.forEach { challenge ->
-            if (challenge.isCompleted) {
-                challenge.isCompleted = false
-                challenge.goal = calculateNewGoal()
-            }
+        // Update completed challenges with new goals
+        _challengeList.filter { it.isCompleted }.forEach { challenge ->
+            challenge.goal = calculateNewGoal()
+            challenge.isCompleted = false
         }
 
-        // Remove challenges with a goal of 0
+        // Add new challenges
+        _challengeList.add(Challenge("Watch ${calculateNewGoal()} Movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
+
+        // Remove challenges with a goal of 0 (completed challenges)
         _challengeList.removeAll { it.goal == 0 }
 
         // Optionally, you can sort the list based on some criteria
         _challengeList.sortBy { it.goal }
+
+        // Update the StateFlow
+        _challengeListState.value = _challengeList.toList()
     }
+
+
+
+
 
 
     fun calculateNewGoal(): Int {
@@ -70,7 +89,16 @@ class ChallengesViewModel(watchedHistoryManager: WatchedHistoryManager) : ViewMo
     fun createList() {
         _challengeList.add(Challenge("Watch 5 movies", ChallengeType.MOVIES_WATCHED, 5))
         _challengeList.add(Challenge("Watch 15 movies", ChallengeType.MOVIES_WATCHED, 15))
-        _challengeList.add(Challenge("Complete 3 challenges", ChallengeType.CHALLENGES_COMPLETED, 3))
+
+    }
+    fun calculateProgress(goal: Int): Int {
+        val watchedMovies = watchedHistoryManager.getWatchedHistoryList().size
+        return if (goal > 0) {
+            // Ensure the progress is between 0 and 100
+            ((watchedMovies.toFloat() / goal) * 100).coerceIn(0f, 100f).toInt()
+        } else {
+            0
+        }
     }
 
 }

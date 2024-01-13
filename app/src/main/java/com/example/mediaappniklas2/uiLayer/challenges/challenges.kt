@@ -32,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -61,6 +62,8 @@ fun Challenges(
         .wrapContentSize(Alignment.TopCenter),
     navController: NavController, challengesViewModel: ChallengesViewModel
 ) {
+
+
     val items = listOf(
         NavigationItem(
             title = "Home",
@@ -138,29 +141,29 @@ fun Challenges(
             },
             drawerState = drawerState
         ) {
-
             Row {
                 LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
                     item {
-                        val watchedHistoryManager = WatchedHistoryManager.getInstance(LocalContext.current)
+                        val watchedHistoryManager =
+                            WatchedHistoryManager.getInstance(LocalContext.current)
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
-                        challengesViewModel.createList()
-                        if (watchedHistoryManager.getWatchedHistoryList().size >= challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal){
-                            challengesViewModel.addchallengecompleted()
+
+                        challengesViewModel.challengeListState.collectAsState().value.getOrNull(
+                            challengesViewModel.getchallengesCompleted
+                        )?.let { currentChallenge ->
+                            Text(
+                                text = currentChallenge.challName,
+                                fontSize = 20.sp,
+                                color = Color.White
+                            )
+                            LinearDeterminateIndicator(
+                                howLong = challengesViewModel.calculateProgress(currentChallenge.goal)
+                            )
                         }
-                        Text(
-                            text = challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).challName,
-                            fontSize = 20.sp,
-                            color = Color.White
-                        )
-                        LinearDeterminateIndicator(
-                            howLong = watchedHistoryManager.getWatchedHistoryList().size * (100/challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal)
-                        )
-                        if (watchedHistoryManager.getWatchedHistoryList().size >= challengesViewModel.challengeList.get(challengesViewModel.getchallengesCompleted).goal){
-                            challengesViewModel.addchallengecompleted()
-                            challengesViewModel.checkUncompletedChallenges()
-                        }
+
+                        // Perform challenge completion check based on user actions or events
+                        challengesViewModel.checkUncompletedChallenges()
                     }
                 }
             }
@@ -199,3 +202,5 @@ suspend fun loadProgress(updateProgress: (Float) -> Unit, howLong: Int) {
         delay(100)
     }
 }
+
+

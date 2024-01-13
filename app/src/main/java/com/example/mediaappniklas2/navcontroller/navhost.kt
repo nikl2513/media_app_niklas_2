@@ -29,7 +29,7 @@ fun NavHost() {
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
     val watchedHistoryManager = WatchedHistoryManager.getInstance(LocalContext.current)
-    val challengesViewModel = ChallengesViewModel(watchedHistoryManager)
+    val challengesViewModel = ChallengesViewModel(watchedHistoryManager).apply { createList() }
 
 
 
@@ -71,6 +71,7 @@ fun NavHost() {
             SavedMovieList(navController = navController)
         }
         composable(route = Screen.Challenges.route){
+            challengesViewModel.checkUncompletedChallenges()
             Challenges(navController = navController, challengesViewModel = challengesViewModel)
         }
     }
