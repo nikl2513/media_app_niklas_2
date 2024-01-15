@@ -1,6 +1,8 @@
 package com.example.mediaappniklas2.navcontroller
 
+import WatchedHistoryManager
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,6 +15,8 @@ import com.example.mediaappniklas2.uiLayer.Opstart.OpstartMedButtonOgBaggrund
 import com.example.mediaappniklas2.uiLayer.Search.SearchBar
 import com.example.mediaappniklas2.uiLayer.Search.SearchPageViewModel
 import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
+import com.example.mediaappniklas2.uiLayer.challenges.Challenges
+import com.example.mediaappniklas2.uiLayer.challenges.ChallengesViewModel
 import com.example.mediaappniklas2.uiLayer.list.SavedMovieList
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
@@ -24,8 +28,12 @@ fun NavHost() {
     val navController = rememberNavController()
     val homePageViewModel: HomePageViewModel = viewModel()
     val mediaPageViewModel : MediaPageViewModel = viewModel()
+    val watchedHistoryManager = WatchedHistoryManager.getInstance(LocalContext.current)
+    val challengesViewModel = ChallengesViewModel(watchedHistoryManager).apply { createList() }
 
-    NavHost(navController = navController, startDestination = Screen./*Startskaerm.route*/Opstart.route) {
+
+
+    NavHost(navController = navController, startDestination = Screen./*Startskaerm.route*/Challenges.route) {
         composable(route = Screen.Opstart.route){
             OpstartMedButtonOgBaggrund(navController = navController)
         }
@@ -61,6 +69,10 @@ fun NavHost() {
 
         composable(route = Screen.SavedMovieList.route){
             SavedMovieList(navController = navController)
+        }
+        composable(route = Screen.Challenges.route){
+            challengesViewModel.checkUncompletedChallenges()
+            Challenges(navController = navController, challengesViewModel = challengesViewModel)
         }
     }
 }

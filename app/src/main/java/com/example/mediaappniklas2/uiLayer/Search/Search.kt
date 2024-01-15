@@ -22,10 +22,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.LocalPlay
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.LocalPlay
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
@@ -102,7 +104,12 @@ fun SearchBar(modifier: Modifier = Modifier
             unselectedIcon = Icons.Outlined.PlayArrow,
             route = Screen.GradientButton.route
         )*/
-
+        NavigationItem(
+            title = "Challenges",
+            selectedIcon = Icons.Filled.LocalPlay,
+            unselectedIcon = Icons.Outlined.LocalPlay,
+            route = Screen.Challenges.route
+        )
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
