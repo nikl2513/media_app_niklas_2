@@ -99,6 +99,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.0")
