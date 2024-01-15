@@ -89,6 +89,7 @@ class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManag
     fun createList() {
         _challengeList.add(Challenge("Watch 5 movies", ChallengeType.MOVIES_WATCHED, 5))
         _challengeList.add(Challenge("Watch 15 movies", ChallengeType.MOVIES_WATCHED, 15))
+        checkUncompletedChallenges()
 
     }
     fun calculateProgress(goal: Int): Int {

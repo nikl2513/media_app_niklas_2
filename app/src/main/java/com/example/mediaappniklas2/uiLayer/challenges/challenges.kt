@@ -1,6 +1,5 @@
 package com.example.mediaappniklas2.uiLayer.challenges
 
-import WatchedHistoryManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,7 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -151,8 +149,7 @@ fun Challenges(
             Row {
                 LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
                     item {
-                        val watchedHistoryManager =
-                            WatchedHistoryManager.getInstance(LocalContext.current)
+
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
 
@@ -169,8 +166,7 @@ fun Challenges(
                             )
                         }
 
-                        // Perform challenge completion check based on user actions or events
-                        challengesViewModel.checkUncompletedChallenges()
+
                     }
                 }
             }
