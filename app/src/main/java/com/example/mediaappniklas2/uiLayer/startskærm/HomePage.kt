@@ -240,12 +240,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                     verticalListTopHighlight(
                         filmList = movieViewModel.movieList.value, navController = navController
                     )
-                    Spacer(modifier = Modifier.height(25.dp))
+                    Spacer(modifier = Modifier.height(35.dp))
 
                 }
                 item {
-                    Text(text = "Short cut", color = Color.White, fontSize = 20.sp)
-                    Spacer(modifier = Modifier.height(10.dp))
                     MedieKnapper(navController)
                     Spacer(modifier = Modifier.height(25.dp))
                 }
@@ -270,16 +268,23 @@ fun MedieKnapper(navController: NavController ){
     MediaAppNiklas2Theme {
         Column {
             Row {
-                Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(120.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
                     Text(text = "Search",
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(85.dp,40.dp),
+                Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(120.dp,45.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
-                    Text(text = "List"
+                    Text(text = "My List"
+                        , fontSize = 10.sp
+                        ,textAlign = TextAlign.Center)
+                }
+                Spacer(modifier = Modifier.width(5.dp))
+                Button(onClick = {navController.navigate(Screen.Challenges.route)}, Modifier.size(120.dp,45.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    Text(text = "Challenges"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
@@ -377,7 +382,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
                 Box(
                     modifier
                         .size(150.dp, 190.dp)
-                        .background(Color.DarkGray)
+                        .background(colorResource(id = R.color.deep_gray))
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
                 MovieItem3(film = film, navController = navController)
@@ -397,7 +402,7 @@ fun verticalListTopHighlight(
                 Box(
                     modifier
                         .size(360.dp, 190.dp)
-                        .background(Color.DarkGray)
+                        .background(colorResource(id = R.color.deep_gray))
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
                     MovieItem3(film = film, navController = navController)
