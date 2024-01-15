@@ -80,6 +80,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import androidx.compose.ui.res.colorResource
 
 suspend fun import_of_movies(): List<MovieData> {
     return withContext(Dispatchers.IO) {
@@ -118,7 +119,7 @@ private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieDa
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OpstartStartskærm(modifier: Modifier = Modifier
-    .background(Color.DarkGray)
+    .background(colorResource(id = R.color.deep_gray))
     .fillMaxSize()
     .wrapContentSize(Alignment.TopCenter),
                       navController: NavController,
