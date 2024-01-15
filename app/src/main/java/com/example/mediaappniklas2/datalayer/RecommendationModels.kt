@@ -7,7 +7,6 @@ class RecommendationModels {
         val trendy: Float = generateRandomFloat()
         val trendRating: Float = generateRandomFloat()
 
-        // This is to make the actual ratings random since they all use the same static values do to not having Userdata to create them from.
 
 
         val ratedMovies = movielist.map { movieData ->
