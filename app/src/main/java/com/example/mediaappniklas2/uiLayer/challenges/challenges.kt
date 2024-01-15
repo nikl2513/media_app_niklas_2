@@ -116,8 +116,7 @@ fun Challenges(
                             selected = index == selectedItemIndex,
                             onClick = {
                                 navController.navigate(item.route)
-                                //her kan man tilføje navcontroller.navigate(item.route)
-                                //hvor route er gemt i item
+
                                 selectedItemIndex = index
                                 scope.launch {
                                     drawerState.close()
@@ -179,7 +178,7 @@ fun LinearDeterminateIndicator(howLong: Int) {
     var currentProgress by remember { mutableStateOf(0f) }
     val scope = rememberCoroutineScope() // Create a coroutine scope
 
-    // Start loading progress when composable enters the composition
+
     LaunchedEffect(key1 = true) {
         loadProgress({ progress ->
             currentProgress = progress
