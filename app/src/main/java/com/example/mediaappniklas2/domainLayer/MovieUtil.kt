@@ -7,6 +7,11 @@ object MovieUtils {
 
             return movieList.find { it.movieID == movieId }
         }
+    fun findMovieByName(title: String?, movieList: List<MovieData>): MovieData? {
+
+
+        return movieList.find { it.title == title }
+    }
     }
 
 
