@@ -160,6 +160,7 @@ fun Challenges(
                                 fontSize = 20.sp,
                                 color = Color.White
                             )
+                            Spacer(modifier = Modifier.height(10.dp))
                             LinearDeterminateIndicator(
                                 howLong = challengesViewModel.calculateProgress(currentChallenge.goal)
                             )
@@ -189,10 +190,12 @@ fun LinearDeterminateIndicator(howLong: Int) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
-    ) {
+    )
+    {
         LinearProgressIndicator(
             progress = currentProgress,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().height(25.dp)
+
         )
     }
 }
