@@ -27,6 +27,12 @@ class SearchPageViewModel: ViewModel() {
             val movieList = resultsList.map { convertToMovieData(it) }
             _movieList.value = movieList
         }
+
+
+        fun search(movietitle : String, movielist : List<MovieData>){
+           // val movie = MovieUtils.find
+
+        }
     }
 
 
