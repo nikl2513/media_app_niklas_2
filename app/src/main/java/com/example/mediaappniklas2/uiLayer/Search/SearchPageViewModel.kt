@@ -20,7 +20,7 @@ class SearchPageViewModel: ViewModel() {
             val movieApiResponse: MovieApiResponse =
                 RetrofitClient.movieApiService.searchmovies(searchword)
 
-            // Process the response as before
+
             val resultsList: List<MovieDTO> = movieApiResponse.results
 
 

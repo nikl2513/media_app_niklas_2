@@ -7,7 +7,6 @@ class RecommendationModels {
         val trendy: Float = generateRandomFloat()
         val trendRating: Float = generateRandomFloat()
 
-        // This is to make the actual ratings random since they all use the same static values do to not having Userdata to create them from.
 
 
         val ratedMovies = movielist.map { movieData ->
@@ -25,7 +24,7 @@ class RecommendationModels {
 
 
     fun forYouPage(movielist: List<MovieData>): List<MovieData> {
-        // These declared parameters would be averages from userdata
+
         val userrating: Float = 1.4f
         val trendy: Float = 2.6f
         val trendRating: Float = 4.8f
@@ -43,7 +42,7 @@ class RecommendationModels {
 
 
     fun mustWatchMovies(movielist: List<MovieData>): List<MovieData> {
-        // These declared parameters would be averages from userdata
+
         val userrating: Float = 2f
         val trendy: Float = 1.2f
         val trendRating: Float = 7f
@@ -71,7 +70,7 @@ private fun calculateRating(
 }
 
 fun generateRandomFloat(): Float {
-    return Random.nextFloat() * 9 + 1  // Generates a random float between 1 and 10
+    return Random.nextFloat() * 9 + 1
 }
 
 
