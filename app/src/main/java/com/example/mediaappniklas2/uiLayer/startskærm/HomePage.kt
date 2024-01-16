@@ -120,10 +120,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
 ) {
     val sections = listOf(
-        Section("Trending",movieViewModel.trendingMovies.value),
-        Section("Must watch",movieViewModel.mustWatchMovies.value),
-        Section("For you",movieViewModel.forYouMovies.value),
-        Section("All movies",movieViewModel.movieList.value)
+        Section("  Trending",movieViewModel.trendingMovies.value),
+        Section("  Must watch",movieViewModel.mustWatchMovies.value),
+        Section("  For you",movieViewModel.forYouMovies.value),
+        Section("  All movies",movieViewModel.movieList.value)
     )
     val items = listOf(
         NavigationItem(
@@ -268,21 +268,21 @@ fun MedieKnapper(navController: NavController ){
         Column {
             Row {
                 Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "Search",
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "My List"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {navController.navigate(Screen.Challenges.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "Challenges"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
@@ -304,7 +304,8 @@ fun Topapp(DrawerState: DrawerState, navController: NavController){
             }) {
                 Icon(
                     imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu"
+                    contentDescription = "Menu",
+                    tint = Color.White
                 )
             }
 
@@ -316,7 +317,8 @@ fun Topapp(DrawerState: DrawerState, navController: NavController){
             IconButton(onClick = {/*TODO*/ }) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.White
                 )
             }
 

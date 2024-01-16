@@ -44,20 +44,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.sign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Challenges(
     modifier: Modifier = Modifier
-        .background(Color.DarkGray)
+        .background(colorResource(id = R.color.deep_gray))
         .fillMaxSize()
         .wrapContentSize(Alignment.TopCenter),
     navController: NavController, challengesViewModel: ChallengesViewModel
@@ -99,7 +102,7 @@ fun Challenges(
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.DarkGray
+        color = colorResource(id = R.color.deep_gray)
     ) {
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
@@ -160,9 +163,14 @@ fun Challenges(
                                 fontSize = 20.sp,
                                 color = Color.White
                             )
+                            Spacer(modifier = Modifier.height(16.dp))
                             LinearDeterminateIndicator(
                                 howLong = challengesViewModel.calculateProgress(currentChallenge.goal)
                             )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Text(text = "You Have Watched " + challengesViewModel.moviesWatched.toString() + " Movies",
+                                fontSize = 20.sp,
+                                color = Color.White)
                         }
 
 
@@ -192,7 +200,8 @@ fun LinearDeterminateIndicator(howLong: Int) {
     ) {
         LinearProgressIndicator(
             progress = currentProgress,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().height(25.dp)
+
         )
     }
 }
