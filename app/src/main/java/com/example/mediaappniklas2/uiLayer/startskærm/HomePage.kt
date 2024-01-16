@@ -269,21 +269,21 @@ fun MedieKnapper(navController: NavController ){
         Column {
             Row {
                 Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "Search",
                         fontSize = 10.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "My List"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {navController.navigate(Screen.Challenges.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "Challenges"
                         , fontSize = 10.sp
                         ,textAlign = TextAlign.Center)

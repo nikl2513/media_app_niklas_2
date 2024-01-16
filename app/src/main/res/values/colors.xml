@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lightblue">#FF303F9F</color>
     <color name="deep_gray">#FF121212</color>
-    <color name="deep_red">#B20710</color>
+    <color name="deep_red">#FF800020</color>
+    <color name="deep_Blue">#FF003366</color>
+    <color name="dark_gray">#FF4B4B4B</color>
+    <color name="red">#B20710</color>
 
 </resources>
