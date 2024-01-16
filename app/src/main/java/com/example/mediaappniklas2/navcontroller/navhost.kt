@@ -33,7 +33,7 @@ fun NavHost() {
 
 
 
-    NavHost(navController = navController, startDestination = Screen.Startskaerm.route) {
+    NavHost(navController = navController, startDestination = Screen.Opstart.route) {
         composable(route = Screen.Opstart.route){
             OpstartMedButtonOgBaggrund(navController = navController)
         }
