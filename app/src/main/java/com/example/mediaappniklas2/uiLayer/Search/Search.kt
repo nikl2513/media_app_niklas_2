@@ -188,6 +188,7 @@ fun SearchBar(
                     )
                 }
                 val scope = rememberCoroutineScope()
+                Spacer(modifier = Modifier.height(10.dp))
                 Row {
                     Spacer(modifier = Modifier.width(5.dp))
                     Button(onClick = { scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }, shape = RoundedCornerShape(10.dp)) {

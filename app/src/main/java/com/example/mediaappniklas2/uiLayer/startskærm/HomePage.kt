@@ -230,12 +230,14 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
                 item {
                     Topapp(drawerState, navController)
-                    Spacer(modifier = Modifier.height(35.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
                     Text(
                         text =  stringResource(id = R.string.weekly_highlight),
-                        color = Color.White
+                        color = Color.White,
+                        fontSize = 20.sp
 
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
                     verticalListTopHighlight(
                         filmList = movieViewModel.featuredfilm.value, navController = navController
                     )
