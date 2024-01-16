@@ -305,7 +305,8 @@ fun Topapp(DrawerState: DrawerState, navController: NavController){
             }) {
                 Icon(
                     imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu"
+                    contentDescription = "Menu",
+                    tint = Color.White
                 )
             }
 
@@ -317,7 +318,8 @@ fun Topapp(DrawerState: DrawerState, navController: NavController){
             IconButton(onClick = {/*TODO*/ }) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.White
                 )
             }
 

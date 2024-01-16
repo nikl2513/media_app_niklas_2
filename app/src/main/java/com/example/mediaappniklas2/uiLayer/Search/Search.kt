@@ -57,12 +57,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
@@ -74,10 +76,13 @@ import org.w3c.dom.Text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(modifier: Modifier = Modifier
-    .background(Color.DarkGray)
-    .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter), navController: NavController, ) {
+fun SearchBar(
+    modifier: Modifier = Modifier
+        .background(colorResource(id = R.color.deep_gray))
+        .fillMaxSize()
+        .wrapContentSize(Alignment.TopCenter),
+    navController: NavController,
+) {
     val items = listOf(
         NavigationItem(
             title = "Home",
@@ -113,7 +118,7 @@ fun SearchBar(modifier: Modifier = Modifier
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.DarkGray
+        color = colorResource(id = R.color.deep_gray)
     ) {
         var text by remember { mutableStateOf("") }
         val scope = rememberCoroutineScope()
