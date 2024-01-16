@@ -26,12 +26,10 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.LocalPlay
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.LocalPlay
-import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -61,8 +59,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -80,7 +79,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
-import androidx.compose.ui.res.colorResource
 
 suspend fun import_of_movies(): List<MovieData> {
     return withContext(Dispatchers.IO) {
@@ -100,11 +98,6 @@ suspend fun import_of_movies(): List<MovieData> {
     }
 }
 
-//private val model = RecommendationModels()
-
-
-
-//private val filmlist2 = model.trending(filmList)
 
 @Composable
 private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieData>, navController: NavController) {
@@ -177,6 +170,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
             // Update the movieList with the fetched movies
             movieViewModel.updateMovieList(movies)
+            movieViewModel.getFeaturedfilm()
             movieViewModel.calculateTrendingMovies()
             movieViewModel.calculateForYouMovies()
             movieViewModel.calculateMustWatchMovies()
@@ -237,8 +231,13 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                 item {
                     Topapp(drawerState, navController)
                     Spacer(modifier = Modifier.height(35.dp))
+                    Text(
+                        text =  stringResource(id = R.string.weekly_highlight),
+                        color = Color.White
+
+                    )
                     verticalListTopHighlight(
-                        filmList = movieViewModel.movieList.value, navController = navController
+                        filmList = movieViewModel.featuredfilm.value, navController = navController
                     )
                     Spacer(modifier = Modifier.height(35.dp))
 
