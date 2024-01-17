@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import okhttp3.internal.concurrent.Task
 import java.lang.Math.ceil
+import kotlin.math.pow
 
 class FilmRatingViewModel {
     private val db = FirebaseFirestore.getInstance()
@@ -34,9 +35,17 @@ class FilmRatingViewModel {
             }
         }
         var GenRating = totalRating / count.toDouble()
-        val upgenRating = ceil(GenRating).toDouble()
+        val upgenRating = roundToDecimal(GenRating,1)
 
         return if (count > 0) upgenRating else 0.0
+    }
+    //Help from chatgpt
+    fun roundToDecimal(value: Double, decimalPlaces: Int): Double {
+        val multiplier = 10.0.pow(decimalPlaces)
+        return (value * multiplier).let { roundedValue ->
+            if (roundedValue.isInfinite() || roundedValue.isNaN()) 0.0
+            else roundedValue.toLong() / multiplier
+        }
     }
 
     }
