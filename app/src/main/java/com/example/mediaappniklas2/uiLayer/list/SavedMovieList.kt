@@ -45,8 +45,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import kotlinx.coroutines.launch
@@ -56,7 +58,7 @@ import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
 @Composable
 fun SavedMovieList(
     modifier: Modifier = Modifier
-        .background(Color.DarkGray)
+        .background(colorResource(id = R.color.deep_gray))
         .fillMaxSize()
         .wrapContentSize(Alignment.TopCenter), navController: NavController,
 ) {
@@ -95,7 +97,7 @@ fun SavedMovieList(
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.DarkGray
+        color = colorResource(id = R.color.deep_gray)
     ) {
         val watchLaterManager = WatchListManager(context = LocalContext.current)
         val watchLaterList = watchLaterManager.getWatchLaterList()
@@ -162,7 +164,8 @@ fun SavedMovieList(
                                 Text(
                                     text = movie.title,
                                     fontSize = 20.sp,
-                                    fontWeight = FontWeight.ExtraBold
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = Color.White
                                 )
                             }
                         }

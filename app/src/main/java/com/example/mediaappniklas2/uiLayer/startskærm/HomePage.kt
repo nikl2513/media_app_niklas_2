@@ -26,10 +26,12 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.LocalPlay
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
 import androidx.compose.material.icons.outlined.LocalPlay
+import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -61,13 +63,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mediaappniklas2.R
-import com.example.mediaappniklas2.datalayer.MockDataModule
 import com.example.mediaappniklas2.datalayer.MovieApiResponse
 import com.example.mediaappniklas2.datalayer.MovieDTO
 import com.example.mediaappniklas2.datalayer.MovieData
@@ -79,6 +81,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import androidx.compose.ui.res.colorResource
 
 suspend fun import_of_movies(): List<MovieData> {
     return withContext(Dispatchers.IO) {
@@ -97,7 +100,6 @@ suspend fun import_of_movies(): List<MovieData> {
         return@withContext emptyList()
     }
 }
-
 
 
 @Composable
@@ -121,10 +123,10 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
 ) {
     val sections = listOf(
-        Section("Trending",movieViewModel.trendingMovies.value),
-        Section("Must watch",movieViewModel.mustWatchMovies.value),
-        Section("For you",movieViewModel.forYouMovies.value),
-        Section("All movies",movieViewModel.movieList.value)
+        Section("  Trending",movieViewModel.trendingMovies.value),
+        Section("  Must watch",movieViewModel.mustWatchMovies.value),
+        Section("  For you",movieViewModel.forYouMovies.value),
+        Section("  All movies",movieViewModel.movieList.value)
     )
     val items = listOf(
         NavigationItem(
@@ -176,6 +178,7 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
 
             // Update the movieList with the fetched movies
             movieViewModel.updateMovieList(movies)
+            movieViewModel.getFeaturedfilm()
             movieViewModel.calculateTrendingMovies()
             movieViewModel.calculateForYouMovies()
             movieViewModel.calculateMustWatchMovies()
@@ -235,9 +238,16 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             LazyColumn(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
                 item {
                     Topapp(drawerState, navController)
-                    Spacer(modifier = Modifier.height(35.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Text(
+                        text =  stringResource(id = R.string.weekly_highlight),
+                        color = Color.White,
+                        fontSize = 20.sp
+
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
                     verticalListTopHighlight(
-                        filmList = movieViewModel.movieList.value, navController = navController
+                        filmList = movieViewModel.featuredfilm.value, navController = navController
                     )
                     Spacer(modifier = Modifier.height(35.dp))
 
@@ -268,23 +278,23 @@ fun MedieKnapper(navController: NavController ){
         Column {
             Row {
                 Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "Search",
-                        fontSize = 10.sp,
+                        fontSize = 14.sp,
                         textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "My List"
-                        , fontSize = 10.sp
+                        , fontSize = 14.sp
                         ,textAlign = TextAlign.Center)
                 }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {navController.navigate(Screen.Challenges.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)) {
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
                     Text(text = "Challenges"
-                        , fontSize = 10.sp
+                        , fontSize = 14.sp
                         ,textAlign = TextAlign.Center)
                 }
 
@@ -304,7 +314,8 @@ fun Topapp(DrawerState: DrawerState, navController: NavController){
             }) {
                 Icon(
                     imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu"
+                    contentDescription = "Menu",
+                    tint = Color.White
                 )
             }
 
@@ -316,7 +327,8 @@ fun Topapp(DrawerState: DrawerState, navController: NavController){
             IconButton(onClick = {/*TODO*/ }) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.White
                 )
             }
 

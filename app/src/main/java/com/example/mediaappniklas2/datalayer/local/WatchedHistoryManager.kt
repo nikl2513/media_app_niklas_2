@@ -40,6 +40,13 @@ class WatchedHistoryManager private constructor(context: Context) {
             saveWatchedHistoryList(currentList)
         }
     }
+    fun removeFromWatchedHistory(mediaItem: MovieData){
+        val currentList = getWatchedHistoryList().toMutableList()
+        if (currentList.contains(mediaItem)){
+            currentList.remove(mediaItem)
+            saveWatchedHistoryList(currentList)
+        }
+    }
 
     private fun saveWatchedHistoryList(list: List<MovieData>) {
         val jsonString = Json.encodeToString(list)

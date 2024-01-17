@@ -12,6 +12,7 @@ object MovieUtils {
 
         return movieList.find { it.title == title }
     }
-    }
+}
+
 
 

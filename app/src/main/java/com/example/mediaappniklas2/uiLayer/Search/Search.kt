@@ -49,11 +49,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.navcontroller.Screen
 import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
@@ -63,10 +65,13 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(modifier: Modifier = Modifier
-    .background(Color.DarkGray)
-    .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter), navController: NavController, ) {
+fun SearchBar(
+    modifier: Modifier = Modifier
+        .background(colorResource(id = R.color.deep_gray))
+        .fillMaxSize()
+        .wrapContentSize(Alignment.TopCenter),
+    navController: NavController,
+) {
     val items = listOf(
         NavigationItem(
             title = "Home",
@@ -102,7 +107,7 @@ fun SearchBar(modifier: Modifier = Modifier
     )
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.DarkGray
+        color = colorResource(id = R.color.deep_gray)
     ) {
         var text by remember { mutableStateOf("") }
         val scope = rememberCoroutineScope()
@@ -172,6 +177,7 @@ fun SearchBar(modifier: Modifier = Modifier
                     )
                 }
                 val scope = rememberCoroutineScope()
+                Spacer(modifier = Modifier.height(10.dp))
                 Row {
                     Spacer(modifier = Modifier.width(5.dp))
                     Button(onClick = { scope.launch { SearchPageViewModel.search(text) } }, shape = RoundedCornerShape(10.dp)) {
@@ -224,7 +230,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
                 MovieItem4(film = film, navController = navController)
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
-                    Text(text = film.title, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                    Text(text = film.title, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Color.White)
                 }
             }
             Spacer(modifier = Modifier.height(10.dp))

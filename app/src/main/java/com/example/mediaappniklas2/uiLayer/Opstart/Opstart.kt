@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -47,7 +48,7 @@ fun OpstartMedButtonOgBaggrund(
         Button(
             onClick = {navController.navigate(Screen.Startskaerm.route/*Tilmeld.route*/)},
             shape = RoundedCornerShape(5.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
+            colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue)),
             modifier = Modifier
                 .height(50.dp)
                 .width(300.dp)
