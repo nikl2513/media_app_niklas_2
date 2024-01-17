@@ -202,7 +202,7 @@ fun MediaPage(
                             watchedHistoryManager.addToWatchedHistory(currentMovie)
                         }
                         else{
-
+                            watchedHistoryManager.removeFromWatchedHistory(currentMovie)
                         }
                         hasMovieBeenSeen.value = !hasMovieBeenSeen.value
                     },
