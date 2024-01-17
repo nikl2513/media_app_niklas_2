@@ -82,6 +82,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import androidx.compose.ui.res.colorResource
+import com.example.mediaappniklas2.datalayer.MockDataModule
 
 suspend fun import_of_movies(): List<MovieData> {
     return withContext(Dispatchers.IO) {

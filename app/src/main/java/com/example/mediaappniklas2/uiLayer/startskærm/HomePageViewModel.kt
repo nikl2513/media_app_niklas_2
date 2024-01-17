@@ -25,7 +25,7 @@ class HomePageViewModel :  ViewModel() {
 
     }
     fun getFeaturedfilm(){
-        val newFilm = MovieUtils.findMovieByName("Planet Gliese",_movieList.value)
+        val newFilm = MovieUtils.findMovieByName("Oppenheimer",_movieList.value)
         newFilm?.let {
             _featuredfilm.value = _featuredfilm.value + listOf(it)
         }
