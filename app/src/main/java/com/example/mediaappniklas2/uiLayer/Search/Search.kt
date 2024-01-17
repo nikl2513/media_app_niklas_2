@@ -188,6 +188,7 @@ fun SearchBar(
                     )
                 }
                 val scope = rememberCoroutineScope()
+                Spacer(modifier = Modifier.height(10.dp))
                 Row {
                     Spacer(modifier = Modifier.width(5.dp))
                     Button(onClick = { scope.launch { SearchPageViewModel.searchMovieInAPI(text) } }, shape = RoundedCornerShape(10.dp)) {
@@ -240,7 +241,7 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
                 MovieItem4(film = film, navController = navController)
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
-                    Text(text = film.title, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
+                    Text(text = film.title, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Color.White)
                 }
             }
             Spacer(modifier = Modifier.height(10.dp))

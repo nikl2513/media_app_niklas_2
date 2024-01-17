@@ -154,12 +154,12 @@ fun Challenges(
 
                         Topapp(drawerState, navController)
                         Text(text = "YOUR CHALLENGE", fontSize = 20.sp, color = Color.White)
-
+                        challengesViewModel.updateChallenges()
                         challengesViewModel.challengeListState.collectAsState().value.getOrNull(
                             challengesViewModel.getchallengesCompleted
                         )?.let { currentChallenge ->
                             Text(
-                                text = currentChallenge.challName,
+                                text = "watch " + challengesViewModel.calculateNewGoal().toString() + " movies",
                                 fontSize = 20.sp,
                                 color = Color.White
                             )
