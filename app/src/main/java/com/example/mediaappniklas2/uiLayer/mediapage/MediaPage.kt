@@ -100,7 +100,8 @@ fun TopmenuBar(
         ) {
             Icon(
                 imageVector = Icons.Outlined.ArrowBackIosNew,
-                contentDescription = "Backbutton"
+                contentDescription = "Backbutton",
+                tint = Color.White
             )
 
         }
