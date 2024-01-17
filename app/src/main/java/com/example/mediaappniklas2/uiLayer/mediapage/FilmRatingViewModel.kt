@@ -4,6 +4,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import okhttp3.internal.concurrent.Task
+import java.lang.Math.ceil
 
 class FilmRatingViewModel {
     private val db = FirebaseFirestore.getInstance()
@@ -32,8 +33,10 @@ class FilmRatingViewModel {
                 count++
             }
         }
+        var GenRating = totalRating / count.toDouble()
+        val upgenRating = ceil(GenRating).toDouble()
 
-        return if (count > 0) totalRating / count.toDouble() else 0.0
+        return if (count > 0) upgenRating else 0.0
     }
 
     }
