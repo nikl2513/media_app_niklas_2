@@ -280,7 +280,7 @@ fun MediaPage(
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-                Text("Gennemsnitlig Rating: $gennemsnitligRating", style = TextStyle(color = Color.White))
+                Text("Average Rating: $gennemsnitligRating", style = TextStyle(color = Color.White))
 
                 if (!isRatingSubmitted) {
                     RatingBar(rating = rating, onRatingChanged = { newRating ->
