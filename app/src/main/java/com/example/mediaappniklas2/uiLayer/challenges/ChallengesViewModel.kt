@@ -75,12 +75,12 @@ class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManag
 
     fun calculateNewGoal(): Int {
 
-        val maxGoal = _moviesWatched +(5-(_moviesWatched%5))/*_challengeList.maxByOrNull { it.goal }?.goal ?: 0*/
+        val maxGoal = moviesWatched +(5-(moviesWatched%5))/*_challengeList.maxByOrNull { it.goal }?.goal ?: 0*/
         return maxGoal
     }
 
     fun createList() {
-        _challengeList.add(Challenge("watch " + calculateNewGoal() + " movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
+        _challengeList.add(Challenge("watch " + calculateNewGoal().toString() + " movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
         }
     fun calculateProgress(goal: Int): Int {
         val watchedMovies = watchedHistoryManager.getWatchedHistoryList().size
