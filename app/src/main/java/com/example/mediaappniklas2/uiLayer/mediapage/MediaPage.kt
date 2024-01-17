@@ -51,7 +51,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -109,7 +111,7 @@ fun TopmenuBar(
 
 @Composable
 fun MediaPage(
-    modifier: Modifier = Modifier.background(Color.DarkGray),
+    modifier: Modifier = Modifier.background(colorResource(id = R.color.deep_gray)),
     movieViewModel: MediaPageViewModel,
     filmviewModel: FilmRatingViewModel = FilmRatingViewModel()
 ) {
@@ -144,12 +146,20 @@ fun MediaPage(
             val imageModifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Yellow)
-            Image(
-                painter = rememberAsyncImagePainter(movie.imageRef),
-                contentDescription = "A movie poster",
-                contentScale = ContentScale.Crop,
-                modifier = imageModifier
-            )
+            Spacer(modifier = Modifier.height(50.dp))
+            Box(
+                modifier
+                    .size(300.dp, 400.dp)
+                    .background(colorResource(id = R.color.deep_gray))
+                    .clip(shape = RoundedCornerShape(10.dp))
+            ) {
+                Image(
+                    painter = rememberAsyncImagePainter(movie.imageRef),
+                    contentDescription = "A movie poster",
+                    contentScale = ContentScale.Crop,
+                    modifier = imageModifier
+                )
+            }
             val watchLaterManager = WatchListManager(LocalContext.current)
             val watchedHistoryManager = WatchedHistoryManager.getInstance(LocalContext.current)
             val isMovieSaved = remember { mutableStateOf(false) }
@@ -192,7 +202,7 @@ fun MediaPage(
                             watchedHistoryManager.addToWatchedHistory(currentMovie)
                         }
                         else{
-
+                            watchedHistoryManager.removeFromWatchedHistory(currentMovie)
                         }
                         hasMovieBeenSeen.value = !hasMovieBeenSeen.value
                     },
@@ -270,7 +280,7 @@ fun MediaPage(
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-                Text("Gennemsnitlig Rating: $gennemsnitligRating")
+                Text("Gennemsnitlig Rating: $gennemsnitligRating", style = TextStyle(color = Color.White))
 
                 if (!isRatingSubmitted) {
                     RatingBar(rating = rating, onRatingChanged = { newRating ->
@@ -288,11 +298,11 @@ fun MediaPage(
                                 filmviewModel.hentGennemsnitligFilmRating(movie.title)
                         }
                     }) {
-                        Text("Save Rating")
+                        Text("Save Rating", style = TextStyle(color = Color.White))
                     }
                 } else {
                     // Thank you message for rated movie
-                    Text("Thanks for your rating!")
+                    Text("Thanks for your rating!", style = TextStyle(color = Color.White))
                 }
             }
         }
