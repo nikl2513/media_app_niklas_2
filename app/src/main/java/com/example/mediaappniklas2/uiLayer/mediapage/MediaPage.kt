@@ -167,7 +167,6 @@ fun MediaPage(
             LaunchedEffect(currentMovie?.imdbID) {
                 currentMovie?.imdbID?.let {
                     movieViewModel.fetchImdbRating(currentMovie.imdbID)
-                    // Check if the current movie is already saved
                     hasMovieBeenSeen.value = watchedHistoryManager.getWatchedHistoryList()
                         .any { it.movieID == currentMovie.movieID }
                 }
@@ -204,7 +203,6 @@ fun MediaPage(
                     OutlinedButton(
                         onClick = {
                             if (!isMovieSaved.value) {
-                                // If the movie is not saved, save it
                                 watchLaterManager.addToWatchLater(
                                     MovieData(
                                         movieID = currentMovie?.movieID ?: "",
