@@ -35,8 +35,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -54,7 +54,6 @@ import com.example.mediaappniklas2.uiLayer.startskærm.NavigationItem
 import com.example.mediaappniklas2.uiLayer.startskærm.Topapp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.sign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,15 +64,12 @@ fun Challenges(
         .wrapContentSize(Alignment.TopCenter),
     navController: NavController, challengesViewModel: ChallengesViewModel
 ) {
-
-
     val items = listOf(
         NavigationItem(
             title = "Home",
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             route = Screen.Startskaerm.route
-            //tilføj route for navcontroller her
         ),
         NavigationItem(
             title = "Search",
@@ -86,13 +82,7 @@ fun Challenges(
             selectedIcon = Icons.Filled.List,
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
-        ),/*
-        NavigationItem(
-            title = "Your Streaming Services",
-            selectedIcon = Icons.Filled.PlayArrow,
-            unselectedIcon = Icons.Outlined.PlayArrow,
-            route = Screen.GradientButton.route
-        )*/
+        ),
         NavigationItem(
             title = "Challenges",
             selectedIcon = Icons.Filled.LocalPlay,
@@ -143,7 +133,6 @@ fun Challenges(
                                 .padding(NavigationDrawerItemDefaults.ItemPadding)
                         )
                     }
-
                 }
             },
             drawerState = drawerState
@@ -159,7 +148,8 @@ fun Challenges(
                             challengesViewModel.getchallengesCompleted
                         )?.let { currentChallenge ->
                             Text(
-                                text = "watch " + challengesViewModel.calculateNewGoal().toString() + " movies",
+                                text = "watch " + challengesViewModel.calculateNewGoal()
+                                    .toString() + " movies",
                                 fontSize = 20.sp,
                                 color = Color.White
                             )
@@ -168,12 +158,12 @@ fun Challenges(
                                 howLong = challengesViewModel.calculateProgress(currentChallenge.goal)
                             )
                             Spacer(modifier = Modifier.height(16.dp))
-                            Text(text = "You Have Watched " + challengesViewModel.moviesWatched.toString() + " Movies",
+                            Text(
+                                text = "You Have Watched " + challengesViewModel.moviesWatched.toString() + " Movies",
                                 fontSize = 20.sp,
-                                color = Color.White)
+                                color = Color.White
+                            )
                         }
-
-
                     }
                 }
             }
@@ -183,16 +173,12 @@ fun Challenges(
 
 @Composable
 fun LinearDeterminateIndicator(howLong: Int) {
-    var currentProgress by remember { mutableStateOf(0f) }
-    val scope = rememberCoroutineScope() // Create a coroutine scope
-
-
+    var currentProgress by remember { mutableFloatStateOf(0f) }
     LaunchedEffect(key1 = true) {
         loadProgress({ progress ->
             currentProgress = progress
         }, howLong)
     }
-
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -200,8 +186,9 @@ fun LinearDeterminateIndicator(howLong: Int) {
     ) {
         LinearProgressIndicator(
             progress = currentProgress,
-            modifier = Modifier.fillMaxWidth().height(25.dp)
-
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(25.dp)
         )
     }
 }
@@ -213,5 +200,3 @@ suspend fun loadProgress(updateProgress: (Float) -> Unit, howLong: Int) {
         delay(25)
     }
 }
-
-

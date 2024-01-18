@@ -9,37 +9,23 @@ class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManag
     private var _moviesWatched: Int = 0
     private var _challengesCompleted: Int = 0
     private val _challengeList: MutableList<Challenge> = mutableListOf()
-    // Use MutableStateFlow for challengeList
     private val _challengeListState = MutableStateFlow<List<Challenge>>(emptyList())
-
     val challengeListState = _challengeListState.asStateFlow()
-
     val moviesWatched: Int
         get() = _moviesWatched
-
     val getchallengesCompleted: Int
         get() = _challengesCompleted
 
-    val challengeList: List<Challenge>
-        get() = _challengeList
-
-
-
-
     fun checkUncompletedChallenges() {
         _moviesWatched = watchedHistoryManager.getWatchedHistoryList().size
-
         _challengeList.filter { !it.isCompleted }.forEach { challenge ->
             val count = getCount(challenge.type)
-
             if (count >= challenge.goal) {
                 challenge.isCompleted = true
-
                 updateChallenges()
             }
         }
     }
-
 
     private fun getCount(challengeType: ChallengeType): Int {
         return when (challengeType) {
@@ -49,39 +35,36 @@ class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManag
     }
 
     fun updateChallenges() {
-
         _challengeList.filter { it.isCompleted }.forEach { challenge ->
             challenge.goal = calculateNewGoal()
             challenge.isCompleted = false
         }
-
-        // Add new challenges
-        _challengeList.add(Challenge("Watch ${calculateNewGoal()} Movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
-
-
+        _challengeList.add(
+            Challenge(
+                "Watch ${calculateNewGoal()} Movies",
+                ChallengeType.MOVIES_WATCHED,
+                calculateNewGoal()
+            )
+        )
         _challengeList.removeAll { it.goal == 0 }
-
-
         _challengeList.sortBy { it.goal }
-
-
         _challengeListState.value = _challengeList.toList()
     }
 
-
-
-
-
-
     fun calculateNewGoal(): Int {
-
-        val maxGoal = moviesWatched +(5-(moviesWatched%5))/*_challengeList.maxByOrNull { it.goal }?.goal ?: 0*/
-        return maxGoal
+        return moviesWatched + (5 - (moviesWatched % 5))
     }
 
     fun createList() {
-        _challengeList.add(Challenge("watch " + calculateNewGoal().toString() + " movies", ChallengeType.MOVIES_WATCHED, calculateNewGoal()))
-        }
+        _challengeList.add(
+            Challenge(
+                "watch " + calculateNewGoal().toString() + " movies",
+                ChallengeType.MOVIES_WATCHED,
+                calculateNewGoal()
+            )
+        )
+    }
+
     fun calculateProgress(goal: Int): Int {
         val watchedMovies = watchedHistoryManager.getWatchedHistoryList().size
         return if (goal > 0) {
@@ -91,12 +74,11 @@ class ChallengesViewModel(private val watchedHistoryManager: WatchedHistoryManag
             0
         }
     }
-
 }
 
 data class Challenge(
     val challName: String,
-    val type: ChallengeType, 
+    val type: ChallengeType,
     var goal: Int,
     var isCompleted: Boolean = false
 )

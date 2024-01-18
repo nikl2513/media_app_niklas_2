@@ -80,10 +80,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
-suspend fun import_of_movies(): List<MovieData> {
+suspend fun importOfMovies(): List<MovieData> {
     return withContext(Dispatchers.IO) {
         try {
-            val movieApiResponse: MovieApiResponse = RetrofitClient.movieApiService.fetchMovies(1990, 2023)
+            val movieApiResponse: MovieApiResponse =
+                RetrofitClient.movieApiService.fetchMovies(1990, 2023)
 
             // Process the response as before
             val resultsList: List<MovieDTO> = movieApiResponse.results
@@ -98,32 +99,34 @@ suspend fun import_of_movies(): List<MovieData> {
     }
 }
 
-
 @Composable
-private fun SectionWithVerticalList(sectionTitle: String, filmList: List<MovieData>, navController: NavController) {
+private fun SectionWithVerticalList(
+    sectionTitle: String,
+    filmList: List<MovieData>,
+    navController: NavController
+) {
     Column {
         Text(text = sectionTitle, color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(10.dp))
-        verticalList(filmList = filmList, navController = navController)
+        VerticalList(filmList = filmList, navController = navController)
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OpstartStartskærm(modifier: Modifier = Modifier
-    .background(colorResource(id = R.color.deep_gray))
-    .fillMaxSize()
-    .wrapContentSize(Alignment.TopCenter),
-                      navController: NavController,
-                      movieViewModel: HomePageViewModel
-
+fun OpstartStartskærm(
+    modifier: Modifier = Modifier
+        .background(colorResource(id = R.color.deep_gray))
+        .fillMaxSize()
+        .wrapContentSize(Alignment.TopCenter),
+    navController: NavController,
+    movieViewModel: HomePageViewModel
 ) {
     val sections = listOf(
-        Section("  Trending",movieViewModel.trendingMovies.value),
-        Section("  Must watch",movieViewModel.mustWatchMovies.value),
-        Section("  For you",movieViewModel.forYouMovies.value),
-        Section("  All movies",movieViewModel.movieList.value)
+        Section("  Trending", movieViewModel.trendingMovies.value),
+        Section("  Must watch", movieViewModel.mustWatchMovies.value),
+        Section("  For you", movieViewModel.forYouMovies.value),
+        Section("  All movies", movieViewModel.movieList.value)
     )
     val items = listOf(
         NavigationItem(
@@ -131,7 +134,6 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             route = Screen.Startskaerm.route
-            //tilføj route for navcontroller her
         ),
         NavigationItem(
             title = "Search",
@@ -145,39 +147,24 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
         ),
-        /*NavigationItem(
-            title = "Your Streaming Services",
-            selectedIcon = Icons.Filled.PlayArrow,
-            unselectedIcon = Icons.Outlined.PlayArrow,
-            route = Screen.GradientButton.route
-        )*/
         NavigationItem(
             title = "Challenges",
             selectedIcon = Icons.Filled.LocalPlay,
             unselectedIcon = Icons.Outlined.LocalPlay,
             route = Screen.Challenges.route
         )
-
     )
-    // Use LaunchedEffect to execute a coroutine when the Composable is first launched
     LaunchedEffect(true) {
-        // Launch a coroutine to fetch movies
-
-        if(movieViewModel.movieList.value.isEmpty()) {
+        if (movieViewModel.movieList.value.isEmpty()) {
             val movies = withContext(Dispatchers.IO) {
-                import_of_movies()
+                importOfMovies()
             }
-
-            // Update the movieList with the fetched movies
             movieViewModel.updateMovieList(movies)
             movieViewModel.getFeaturedfilm()
             movieViewModel.calculateTrendingMovies()
             movieViewModel.calculateForYouMovies()
             movieViewModel.calculateMustWatchMovies()
         }
-
-
-
     }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -196,9 +183,8 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                         NavigationDrawerItem(
                             label = { Text(text = item.title) },
                             selected = index == selectedItemIndex,
-                            onClick = {navController.navigate(item.route)
-                                //her kan man tilføje navcontroller.navigate(item.route)
-                                //hvor route er gemt i item
+                            onClick = {
+                                navController.navigate(item.route)
                                 selectedItemIndex = index
                                 scope.launch {
                                     drawerState.close()
@@ -216,13 +202,11 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                                 item.badgeCount?.let {
                                     Text(text = item.badgeCount.toString())
                                 }
-
                             },
                             modifier = Modifier
                                 .padding(NavigationDrawerItemDefaults.ItemPadding)
                         )
                     }
-
                 }
             },
             drawerState = drawerState
@@ -232,17 +216,15 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                     Topapp(drawerState, navController)
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
-                        text =  stringResource(id = R.string.weekly_highlight),
+                        text = stringResource(id = R.string.weekly_highlight),
                         color = Color.White,
                         fontSize = 20.sp
-
                     )
                     Spacer(modifier = Modifier.height(10.dp))
-                    verticalListTopHighlight(
+                    VerticalListTopHighlight(
                         filmList = movieViewModel.featuredfilm.value, navController = navController
                     )
                     Spacer(modifier = Modifier.height(35.dp))
-
                 }
                 item {
                     MedieKnapper(navController)
@@ -257,74 +239,81 @@ fun OpstartStartskærm(modifier: Modifier = Modifier
                     Spacer(modifier = Modifier.height(25.dp))
                 }
             }
-
         }
     }
 }
 
-
-
 @Composable
-fun MedieKnapper(navController: NavController ){
+fun MedieKnapper(navController: NavController) {
     MediaAppNiklas2Theme {
         Column {
             Row {
-                Button(onClick = {navController.navigate(Screen.Search.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
-                    Text(text = "Search",
+                Button(
+                    onClick = { navController.navigate(Screen.Search.route) },
+                    Modifier.size(120.dp, 45.dp),
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))
+                ) {
+                    Text(
+                        text = "Search",
                         fontSize = 14.sp,
-                        textAlign = TextAlign.Center)
+                        textAlign = TextAlign.Center
+                    )
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.SavedMovieList.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
-                    Text(text = "My List"
-                        , fontSize = 14.sp
-                        ,textAlign = TextAlign.Center)
+                Button(
+                    onClick = { navController.navigate(Screen.SavedMovieList.route) },
+                    Modifier.size(120.dp, 45.dp),
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))
+                ) {
+                    Text(
+                        text = "My List", fontSize = 14.sp, textAlign = TextAlign.Center
+                    )
                 }
                 Spacer(modifier = Modifier.width(5.dp))
-                Button(onClick = {navController.navigate(Screen.Challenges.route)}, Modifier.size(120.dp,45.dp),
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))) {
-                    Text(text = "Challenges"
-                        , fontSize = 14.sp
-                        ,textAlign = TextAlign.Center)
+                Button(
+                    onClick = { navController.navigate(Screen.Challenges.route) },
+                    Modifier.size(120.dp, 45.dp),
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue))
+                ) {
+                    Text(
+                        text = "Challenges", fontSize = 14.sp, textAlign = TextAlign.Center
+                    )
                 }
-
-
             }
-
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topapp(DrawerState: DrawerState, navController: NavController){
-        val scope = rememberCoroutineScope()
-        Row() {
-            IconButton(onClick = {scope.launch {
-                DrawerState.open()}
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu",
-                    tint = Color.White
-                )
+fun Topapp(drawerState: DrawerState, navController: NavController) {
+    val scope = rememberCoroutineScope()
+    Row {
+        IconButton(onClick = {
+            scope.launch {
+                drawerState.open()
             }
-
-
-            Spacer(modifier = Modifier.width(120.dp))
-
-            Image(painter = painterResource(id = R.drawable.logo1), contentDescription = "", Modifier.clickable {navController.navigate(Screen.Startskaerm.route)})
-            Spacer(modifier = Modifier.width(120.dp))
-            IconButton(onClick = {/*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Default.AccountCircle,
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
-
+        }) {
+            Icon(
+                imageVector = Icons.Default.Menu,
+                contentDescription = "Menu",
+                tint = Color.White
+            )
         }
+        Spacer(modifier = Modifier.width(120.dp))
+        Image(
+            painter = painterResource(id = R.drawable.logo1),
+            contentDescription = "",
+            Modifier.clickable { navController.navigate(Screen.Startskaerm.route) })
+        Spacer(modifier = Modifier.width(120.dp))
+        IconButton(onClick = {/*TODO*/ }) {
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = null,
+                tint = Color.White
+            )
+        }
+    }
 }
 
 data class NavigationItem(
@@ -334,16 +323,14 @@ data class NavigationItem(
     val badgeCount: Int? = null,
     val route: String
 )
+
 @Composable
-fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
-    //Spacer(modifier = Modifier.height(100.dp))
+fun MovieItem3(film: MovieData, modifier: Modifier = Modifier, navController: NavController) {
     Image(
         painter = rememberAsyncImagePainter(film.imageRef),
-        contentDescription ="",
-
+        contentDescription = "",
         modifier
-            .size(175.dp, 100.dp)
-            .clip(shape = RoundedCornerShape(10.dp))
+            .fillMaxSize()
             .clickable {
                 navController.navigate(
                     Screen.MediaPage.route.replace(
@@ -351,43 +338,29 @@ fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: N
                         film.movieID
                     )
                 )
-            }, contentScale = ContentScale.Crop,)
-    //Spacer(modifier = Modifier.height(100.dp))
+            },
+        contentScale = ContentScale.Crop,
+    )
 }
-@Composable
-fun MovieItem3(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
-  Image(
-      painter = rememberAsyncImagePainter(film.imageRef),
-      contentDescription ="",
-      modifier
-          .fillMaxSize()
-          .clickable {
-              navController.navigate(
-                  Screen.MediaPage.route.replace(
-                      "{movieID}",
-                      film.movieID
-                  )
-              )
-          }, contentScale = ContentScale.Crop,)
 
-}
-data class Section(val title: String, val filmList : List<MovieData>)
-
-
+data class Section(val title: String, val filmList: List<MovieData>)
 
 @Composable
-private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier, navController: NavController) {
-
-        LazyRow {
-            items(filmList) { film ->
-                Spacer(modifier = Modifier.width(10.dp))
-                // Use the appropriate MovieItem function based on your requirements
-                Box(
-                    modifier
-                        .size(150.dp, 190.dp)
-                        .background(colorResource(id = R.color.deep_gray))
-                        .clip(shape = RoundedCornerShape(10.dp))
-                ) {
+private fun VerticalList(
+    filmList: List<MovieData>,
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
+    LazyRow {
+        items(filmList) { film ->
+            Spacer(modifier = Modifier.width(10.dp))
+            // Use the appropriate MovieItem function based on your requirements
+            Box(
+                modifier
+                    .size(150.dp, 190.dp)
+                    .background(colorResource(id = R.color.deep_gray))
+                    .clip(shape = RoundedCornerShape(10.dp))
+            ) {
                 MovieItem3(film = film, navController = navController)
             }
         }
@@ -395,24 +368,22 @@ private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifie
 }
 
 @Composable
-fun verticalListTopHighlight(
-    modifier: Modifier = Modifier,filmList : List<MovieData>,
-    navController: NavController) {
+fun VerticalListTopHighlight(
+    modifier: Modifier = Modifier, filmList: List<MovieData>,
+    navController: NavController
+) {
     LazyRow(modifier = modifier) {
         items(filmList) { film ->
-
-                Spacer(modifier = Modifier.width(10.dp))
-                Box(
-                    modifier
-                        .size(360.dp, 190.dp)
-                        .background(colorResource(id = R.color.deep_gray))
-                        .clip(shape = RoundedCornerShape(10.dp))
-                ) {
-                    MovieItem3(film = film, navController = navController)
-                }
-
+            Spacer(modifier = Modifier.width(10.dp))
+            Box(
+                modifier
+                    .size(360.dp, 190.dp)
+                    .background(colorResource(id = R.color.deep_gray))
+                    .clip(shape = RoundedCornerShape(10.dp))
+            ) {
+                MovieItem3(film = film, navController = navController)
             }
-
+        }
     }
 }
 

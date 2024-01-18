@@ -75,7 +75,6 @@ fun SavedMovieList(
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             route = Screen.Startskaerm.route
-            //tilføj route for navcontroller her
         ),
         NavigationItem(
             title = "Search",
@@ -88,13 +87,7 @@ fun SavedMovieList(
             selectedIcon = Icons.Filled.List,
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
-        ),/*
-        NavigationItem(
-            title = "Your Streaming Services",
-            selectedIcon = Icons.Filled.PlayArrow,
-            unselectedIcon = Icons.Outlined.PlayArrow,
-            route = Screen.GradientButton.route
-        )*/
+        ),
         NavigationItem(
             title = "Challenges",
             selectedIcon = Icons.Filled.LocalPlay,
@@ -123,8 +116,6 @@ fun SavedMovieList(
                             selected = index == selectedItemIndex,
                             onClick = {
                                 navController.navigate(item.route)
-                                //her kan man tilføje navcontroller.navigate(item.route)
-                                //hvor route er gemt i item
                                 selectedItemIndex = index
                                 scope.launch {
                                     drawerState.close()
@@ -142,13 +133,11 @@ fun SavedMovieList(
                                 item.badgeCount?.let {
                                     Text(text = item.badgeCount.toString())
                                 }
-
                             },
                             modifier = Modifier
                                 .padding(NavigationDrawerItemDefaults.ItemPadding)
                         )
                     }
-
                 }
             },
             drawerState = drawerState
@@ -160,12 +149,14 @@ fun SavedMovieList(
                         Topapp(drawerState, navController)
                     }
                     items(savedMovieViewModel.movieList.value) { movie ->
-                        //Spacer(modifier = Modifier.height(100.dp))
                         Spacer(modifier = Modifier.height(16.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically,
-                            //modifier = modifier.background(Color.DarkGray)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            com.example.mediaappniklas2.uiLayer.list.MovieItem4(film = movie, navController = navController)
+                            MovieItem4(
+                                film = movie,
+                                navController = navController
+                            )
                             Spacer(modifier = Modifier.width(16.dp))
                             Column {
                                 Text(
@@ -176,7 +167,6 @@ fun SavedMovieList(
                                 )
                             }
                         }
-
                     }
                 }
             }
@@ -185,12 +175,10 @@ fun SavedMovieList(
 }
 
 @Composable
-fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
-    //Spacer(modifier = Modifier.height(100.dp))
+fun MovieItem4(film: MovieData, modifier: Modifier = Modifier, navController: NavController) {
     Image(
         painter = rememberAsyncImagePainter(film.imageRef),
-        contentDescription ="",
-
+        contentDescription = "",
         modifier
             .size(175.dp, 100.dp)
             .clip(shape = RoundedCornerShape(10.dp))
@@ -201,6 +189,7 @@ fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: N
                         film.movieID
                     )
                 )
-            }, contentScale = ContentScale.Crop,)
-    //Spacer(modifier = Modifier.height(100.dp))
+            },
+        contentScale = ContentScale.Crop,
+    )
 }

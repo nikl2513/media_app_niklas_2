@@ -6,13 +6,13 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class WatchedHistoryManager private constructor(context: Context) {
-    private val preferences: SharedPreferences = context.getSharedPreferences("watched_history_prefs", Context.MODE_PRIVATE)
+    private val preferences: SharedPreferences =
+        context.getSharedPreferences("watched_history_prefs", Context.MODE_PRIVATE)
     private val watchedHistoryKey = "watched_history_list"
 
     companion object {
         @Volatile
         private var instance: WatchedHistoryManager? = null
-
         fun getInstance(context: Context): WatchedHistoryManager {
             return instance ?: synchronized(this) {
                 instance ?: WatchedHistoryManager(context).also { instance = it }
@@ -40,9 +40,10 @@ class WatchedHistoryManager private constructor(context: Context) {
             saveWatchedHistoryList(currentList)
         }
     }
-    fun removeFromWatchedHistory(mediaItem: MovieData){
+
+    fun removeFromWatchedHistory(mediaItem: MovieData) {
         val currentList = getWatchedHistoryList().toMutableList()
-        if (currentList.contains(mediaItem)){
+        if (currentList.contains(mediaItem)) {
             currentList.remove(mediaItem)
             saveWatchedHistoryList(currentList)
         }
