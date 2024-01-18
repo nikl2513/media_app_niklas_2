@@ -261,7 +261,6 @@ fun MediaPage(
                 }
 
                 LaunchedEffect(key1 = movie.movieID) {
-                    // Fetch average rating at startup
                     gennemsnitligRating = filmviewModel.hentGennemsnitligFilmRating(movie.movieID)
                 }
                 Spacer(modifier = Modifier.height(20.dp))
@@ -282,7 +281,6 @@ fun MediaPage(
                         Text("Save Rating", style = TextStyle(color = Color.White))
                     }
                 } else {
-                    // Thank you message for rated movie
                     Text("Thanks for your rating!", style = TextStyle(color = Color.White))
                 }
             }
