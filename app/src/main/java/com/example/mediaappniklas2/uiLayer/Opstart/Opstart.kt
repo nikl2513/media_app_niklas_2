@@ -56,7 +56,7 @@ fun OpstartMedButtonOgBaggrund(
                 .width(300.dp)
         ) {
             Text(
-                stringResource(id = /*R.string.tilmeld*/R.string.Go_find_a_movie),
+                stringResource(id = R.string.Go_find_a_movie),
                 fontSize = 20.sp
             )
         }
