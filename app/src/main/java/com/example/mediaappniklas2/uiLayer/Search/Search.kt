@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -78,7 +79,6 @@ fun SearchBar(
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             route = Screen.Startskaerm.route
-            //tilføj route for navcontroller her
         ),
         NavigationItem(
             title = "Search",
@@ -92,12 +92,6 @@ fun SearchBar(
             unselectedIcon = Icons.Outlined.List,
             route = Screen.SavedMovieList.route
         ),
-        /*NavigationItem(
-            title = "Your Streaming Services",
-            selectedIcon = Icons.Filled.PlayArrow,
-            unselectedIcon = Icons.Outlined.PlayArrow,
-            route = Screen.GradientButton.route
-        )*/
         NavigationItem(
             title = "Challenges",
             selectedIcon = Icons.Filled.LocalPlay,
@@ -125,8 +119,6 @@ fun SearchBar(
                             selected = index == selectedItemIndex,
                             onClick = {
                                 navController.navigate(item.route)
-                                //her kan man tilføje navcontroller.navigate(item.route)
-                                //hvor route er gemt i item
                                 selectedItemIndex = index
                                 scope.launch {
                                     drawerState.close()
@@ -144,25 +136,19 @@ fun SearchBar(
                                 item.badgeCount?.let {
                                     Text(text = item.badgeCount.toString())
                                 }
-
                             },
                             modifier = Modifier
                                 .padding(NavigationDrawerItemDefaults.ItemPadding)
                         )
                     }
-
                 }
             },
             drawerState = drawerState
         ) {
             Column {
-                Topapp(DrawerState = drawerState, navController)
+                Topapp(drawerState = drawerState, navController)
                 Spacer(modifier = Modifier.height(6.dp))
                 Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
-                    /*Icon(Icons.Filled.ArrowBack,
-                        contentDescription = null,
-                        modifier = Modifier.clickable { navController.navigate(Screen.Startskaerm.route) }
-                    )*/
                     TextField(
                         value = text,
                         onValueChange = { text = it },
@@ -173,7 +159,6 @@ fun SearchBar(
                         ),
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier.width(380.dp)
-
                     )
                 }
                 val scope = rememberCoroutineScope()
@@ -187,24 +172,26 @@ fun SearchBar(
                 Spacer(modifier = Modifier.height(5.dp))
                 Row {
                     Spacer(modifier = Modifier.width(5.dp))
-                    verticalList(
+                    VerticalList(
                         filmList = SearchPageViewModel.movieList.value,
                         navController = navController
                     )
                 }
             }
-
         }
     }
 }
 
 
-
 @Composable
-private fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navController: NavController) {
+private fun MovieItem4(
+    film: MovieData,
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     Image(
         painter = rememberAsyncImagePainter(film.imageRef),
-        contentDescription ="",
+        contentDescription = "",
 
         modifier
             .size(175.dp, 100.dp)
@@ -216,25 +203,32 @@ private fun MovieItem4(film : MovieData, modifier: Modifier = Modifier, navContr
                         film.movieID
                     )
                 )
-            }, contentScale = ContentScale.Crop,)
-
+            },
+        contentScale = ContentScale.Crop,
+    )
 }
 
 @Composable
-private fun verticalList(filmList: List<MovieData>, modifier: Modifier = Modifier, navController: NavController) {
-
-    LazyColumn() {
+private fun VerticalList(
+    filmList: List<MovieData>,
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
+    LazyColumn {
         items(filmList) { film ->
-            //
-            Row(verticalAlignment = Alignment.CenterVertically){
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 MovieItem4(film = film, navController = navController)
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
-                    Text(text = film.title, fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Color.White)
+                    Text(
+                        text = film.title,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color.White
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(10.dp))
-            // Use the appropriate MovieItem function based on your requirements
         }
     }
 }

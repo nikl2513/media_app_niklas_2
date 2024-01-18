@@ -6,11 +6,10 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-
-class WatchListManager (context : Context) {
-    private val preferences = context.getSharedPreferences("watch_later_prefs", Context.MODE_PRIVATE)
-        private val watchLaterKey = "watch_later_list"
-
+class WatchListManager(context: Context) {
+    private val preferences =
+        context.getSharedPreferences("watch_later_prefs", Context.MODE_PRIVATE)
+    private val watchLaterKey = "watch_later_list"
     fun getWatchLaterList(): List<MovieData> {
         val jsonString = preferences.getString(watchLaterKey, null)
         return if (jsonString != null) {
