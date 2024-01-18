@@ -39,7 +39,6 @@ class FilmRatingViewModel {
 
         return if (count > 0) upgenRating else 0.0
     }
-    //Help from chatgpt
     fun roundToDecimal(value: Double, decimalPlaces: Int): Double {
         val multiplier = 10.0.pow(decimalPlaces)
         return (value * multiplier).let { roundedValue ->

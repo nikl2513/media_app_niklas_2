@@ -274,9 +274,9 @@ fun MediaPage(
 
                 }
 
-                LaunchedEffect(key1 = movie.title) {
+                LaunchedEffect(key1 = movie.movieID) {
                     // Fetch average rating at startup
-                    gennemsnitligRating = filmviewModel.hentGennemsnitligFilmRating(movie.title)
+                    gennemsnitligRating = filmviewModel.hentGennemsnitligFilmRating(movie.movieID)
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -292,10 +292,10 @@ fun MediaPage(
                     // Save rating button
                     Button(onClick = {
                         scope.launch {
-                            filmviewModel.gemFilmRating(movie.title, rating.toDouble())
+                            filmviewModel.gemFilmRating(movie.movieID, rating.toDouble())
                             isRatingSubmitted = true
                             gennemsnitligRating =
-                                filmviewModel.hentGennemsnitligFilmRating(movie.title)
+                                filmviewModel.hentGennemsnitligFilmRating(movie.movieID)
                         }
                     }) {
                         Text("Save Rating", style = TextStyle(color = Color.White))
