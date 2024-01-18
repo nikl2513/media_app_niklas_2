@@ -7,46 +7,37 @@ import com.example.mediaappniklas2.datalayer.MovieData
 import com.example.mediaappniklas2.datalayer.RecommendationModels
 import com.example.mediaappniklas2.domainLayer.MovieUtils
 
-class HomePageViewModel :  ViewModel() {
+class HomePageViewModel : ViewModel() {
     private val _movieList = mutableStateOf<List<MovieData>>(emptyList())
     private val _featuredfilm = mutableStateOf<List<MovieData>>(emptyList())
     private val _trendingMovies = mutableStateOf<List<MovieData>>(emptyList())
     private val _forYouMovies = mutableStateOf<List<MovieData>>(emptyList())
     private val _mustWatchMovies = mutableStateOf<List<MovieData>>(emptyList())
     val movieList: State<List<MovieData>> get() = _movieList
-
-    val featuredfilm : State<List<MovieData>> get() = _featuredfilm
+    val featuredfilm: State<List<MovieData>> get() = _featuredfilm
     val trendingMovies: State<List<MovieData>> get() = _trendingMovies
     val forYouMovies: State<List<MovieData>> get() = _forYouMovies
-    val mustWatchMovies : State<List<MovieData>> get() = _mustWatchMovies
-
+    val mustWatchMovies: State<List<MovieData>> get() = _mustWatchMovies
     fun updateMovieList(newList: List<MovieData>) {
         _movieList.value = newList
-
     }
-    fun getFeaturedfilm(){
-        val newFilm = MovieUtils.findMovieByName("Planet Gliese",_movieList.value)
+
+    fun getFeaturedfilm() {
+        val newFilm = MovieUtils.findMovieByName("Planet Gliese", _movieList.value)
         newFilm?.let {
             _featuredfilm.value = _featuredfilm.value + listOf(it)
         }
     }
+
     fun calculateTrendingMovies() {
-        // Implement your trending calculation logic here based on _movieList
-        // For example, you can use your existing RecommendationModels.trending method
         _trendingMovies.value = RecommendationModels().trending(_movieList.value)
     }
 
     fun calculateForYouMovies() {
-        // Implement your trending calculation logic here based on _movieList
-        // For example, you can use your existing RecommendationModels.trending method
         _forYouMovies.value = RecommendationModels().forYouPage(_movieList.value)
     }
 
     fun calculateMustWatchMovies() {
-        // Implement your trending calculation logic here based on _movieList
-        // For example, you can use your existing RecommendationModels.trending method
         _mustWatchMovies.value = RecommendationModels().mustWatchMovies(_movieList.value)
     }
-
-
 }

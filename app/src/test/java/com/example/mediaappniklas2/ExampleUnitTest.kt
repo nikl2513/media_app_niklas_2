@@ -13,22 +13,7 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-   /* @Test
-    fun testtitle(){
-        var movieId = "tt0112641"
-        var movieresult = SearchOnMovie(movieId)
-        var movietitlestart = jsonStringToDataClass(movieresult.toString())
-        var titleofmovie = movietitlestart.get(0).Title
-        assertEquals(titleofmovie, "Casino")
-    }
-
-    */
-
     @Test
     fun testDTOList() {
     }
-
-
-
-
 }

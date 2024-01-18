@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -26,12 +25,6 @@ import androidx.navigation.NavController
 import com.example.mediaappniklas2.R
 import com.example.mediaappniklas2.navcontroller.Screen
 
-/*@Preview
-@Composable
-fun Opstartapp() {
-    OpstartMedButtonOgBaggrund()
-}*/
-
 @Composable
 fun OpstartMedButtonOgBaggrund(
     modifier: Modifier = Modifier
@@ -41,30 +34,32 @@ fun OpstartMedButtonOgBaggrund(
         ),
     navController: NavController
 ) {
-    Image(painter = painterResource(id = R.drawable.background1), contentDescription = "", modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+    Image(
+        painter = painterResource(id = R.drawable.background1),
+        contentDescription = "",
+        modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop
+    )
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "")
-        Image(painter = painterResource(id = R.drawable.logotext2), contentDescription = "", modifier = Modifier .size(300.dp))
+        Image(
+            painter = painterResource(id = R.drawable.logotext2),
+            contentDescription = "",
+            modifier = Modifier.size(300.dp)
+        )
         Button(
-            onClick = {navController.navigate(Screen.Startskaerm.route/*Tilmeld.route*/)},
+            onClick = { navController.navigate(Screen.Startskaerm.route) },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue)),
             modifier = Modifier
                 .height(50.dp)
                 .width(300.dp)
         ) {
-            Text(stringResource(id = /*R.string.tilmeld*/R.string.Go_find_a_movie), fontSize = 20.sp)
+            Text(
+                stringResource(id = R.string.Go_find_a_movie),
+                fontSize = 20.sp
+            )
         }
-        /*Spacer(modifier = Modifier.height(30.dp))
-        Button(onClick = {navController.navigate(Screen.Loginform.route)},
-            shape = RoundedCornerShape(5.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
-            modifier = Modifier
-                .height(50.dp)
-                .width(300.dp))
-            {
-            Text(stringResource(id = R.string.logind), fontSize = 20.sp)
-        }*/
         Spacer(modifier = Modifier.height(100.dp))
     }
 }
