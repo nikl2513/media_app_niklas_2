@@ -18,6 +18,7 @@ import com.example.mediaappniklas2.uiLayer.StreamingServices.GradientButton
 import com.example.mediaappniklas2.uiLayer.challenges.Challenges
 import com.example.mediaappniklas2.uiLayer.challenges.ChallengesViewModel
 import com.example.mediaappniklas2.uiLayer.list.SavedMovieList
+import com.example.mediaappniklas2.uiLayer.list.SavedMovieViewModel
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageAPP
 import com.example.mediaappniklas2.uiLayer.mediapage.MediaPageViewModel
 import com.example.mediaappniklas2.uiLayer.startskærm.HomePageViewModel
@@ -30,6 +31,7 @@ fun NavHost() {
     val mediaPageViewModel : MediaPageViewModel = viewModel()
     val watchedHistoryManager = WatchedHistoryManager.getInstance(LocalContext.current)
     val challengesViewModel = ChallengesViewModel(watchedHistoryManager).apply { createList() }
+    val savedMovieViewModel : SavedMovieViewModel = viewModel()
 
 
 
@@ -59,6 +61,13 @@ fun NavHost() {
             mediaPageViewModel.setCurrentMovie(movie)
             MediaPageAPP(navController = navController, movieViewModel = mediaPageViewModel)
         }
+        composable(route = Screen.MediaPage3.route, listOf(navArgument("movieID") { type = NavType.StringType }) ){
+            val movieID = it.arguments?.getString("movieID")
+            val movie = MovieUtils.findMovieById(movieID,savedMovieViewModel.movieList.value)
+            mediaPageViewModel.setCurrentMovie(movie)
+
+            MediaPageAPP(navController = navController,movieViewModel = mediaPageViewModel)
+        }
         composable(route = Screen.GradientButton.route){
             GradientButton(navController = navController)
         }
@@ -68,7 +77,7 @@ fun NavHost() {
         }
 
         composable(route = Screen.SavedMovieList.route){
-            SavedMovieList(navController = navController)
+            SavedMovieList(navController = navController, savedMovieViewModel = savedMovieViewModel)
         }
         composable(route = Screen.Challenges.route){
             challengesViewModel.checkUncompletedChallenges()
