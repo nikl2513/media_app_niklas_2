@@ -48,7 +48,7 @@ fun OpstartMedButtonOgBaggrund(
             modifier = Modifier.size(300.dp)
         )
         Button(
-            onClick = { navController.navigate(Screen.Startskaerm.route/*Tilmeld.route*/) },
+            onClick = { navController.navigate(Screen.Startskaerm.route) },
             shape = RoundedCornerShape(5.dp),
             colors = ButtonDefaults.buttonColors(colorResource(id = R.color.deep_Blue)),
             modifier = Modifier
