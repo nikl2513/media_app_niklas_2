@@ -49,7 +49,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -122,7 +121,7 @@ fun MediaPage(
     val currentMovie = movieViewModel.currentMovie.value
     LaunchedEffect(currentMovie?.imdbID) {
         currentMovie?.imdbID?.let {
-            movieViewModel.fetchImdbRating(currentMovie.imdbID)
+           // movieViewModel.fetchImdbRating(currentMovie.imdbID)
         }
     }
     val currentImdb = MediaPageViewModel.currentImdb
@@ -159,14 +158,14 @@ fun MediaPage(
             }
             LaunchedEffect(currentMovie?.imdbID) {
                 currentMovie?.imdbID?.let {
-                    movieViewModel.fetchImdbRating(currentMovie.imdbID)
+                   // movieViewModel.fetchImdbRating(currentMovie.imdbID)
                     isMovieSaved.value = watchLaterManager.getWatchLaterList()
                         .any { it.movieID == currentMovie.movieID }
                 }
             }
             LaunchedEffect(currentMovie?.imdbID) {
                 currentMovie?.imdbID?.let {
-                    movieViewModel.fetchImdbRating(currentMovie.imdbID)
+                   // movieViewModel.fetchImdbRating(currentMovie.imdbID)
                     hasMovieBeenSeen.value = watchedHistoryManager.getWatchedHistoryList()
                         .any { it.movieID == currentMovie.movieID }
                 }
